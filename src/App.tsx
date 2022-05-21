@@ -1,8 +1,13 @@
+import { BrowserRouter as Router } from "react-router-dom";
+import Main from "./pages/Main";
+
 function App() {
   return (
-    <div className="App">
-      <p className="text-xl text-violet-400 font-bold underline">world been</p>
-    </div>
+    <Router>
+      <div className="App">
+        <Main />
+      </div>
+    </Router>
   );
 }
 
