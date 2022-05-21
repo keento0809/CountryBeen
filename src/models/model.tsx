@@ -1,6 +1,5 @@
 export interface CountryViewObj {
   name: string;
-  nameForLink: string;
   population: string;
   continent: string;
   capital: string;
