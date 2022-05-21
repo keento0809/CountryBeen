@@ -1,7 +1,9 @@
-const Home = () => {
+const Home: React.FC = () => {
   return (
     <div>
-      <p>Add Home soon ??</p>
+      <section className="mapping">
+        <p>Something's wrong with ant design map.</p>
+      </section>
     </div>
   );
 };
