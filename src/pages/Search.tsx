@@ -29,7 +29,6 @@ const Search = () => {
             borders: resData[key].borders,
           });
         }
-        // console.log(loadedData[0]);
         setCountryData(loadedData);
       })
       .catch((error) => console.log(error.message));

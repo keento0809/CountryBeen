@@ -1,6 +1,7 @@
-import { useEffect, useState, Fragment } from "react";
-import { CountryViewObj } from "../models/model";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
+import Wrapper from "../components/UI/Wrapper";
 
 const initialState = {
   name: "",
@@ -17,7 +18,7 @@ const initialState = {
 };
 
 const CountryDetail: React.FC = () => {
-  const [countryData, setCountryData] = useState<any>(initialState);
+  const [countryData, setCountryData] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
 
   function requestCountryData() {
@@ -34,8 +35,6 @@ const CountryDetail: React.FC = () => {
           pathName.length - 3,
           pathName.length
         );
-
-        console.log(currentCCA3);
 
         for (const key in resData) {
           if (resData[key].cca3 === currentCCA3) {
@@ -62,26 +61,93 @@ const CountryDetail: React.FC = () => {
 
   useEffect(() => {
     requestCountryData();
+    console.log();
   }, []);
 
   return (
-    <Fragment>
-      <div>
-        {isLoading && <p>Loading...</p>}
-        {!isLoading && (
-          <div>
-            <p>
-              The info of {`${countryData.name ? countryData.name : ""}`} are
-              below.
-            </p>
-            <p>{`capital: ${countryData.capital}, population: ${countryData.population}, continents: ${countryData.continents}, currencies: ${countryData.currencies}, languages: ${countryData.languages}, flagIcon: ${countryData.flagIcon}, cca3: ${countryData.cca3}, borders: ${countryData.borders}`}</p>
-            <img src={`${countryData.coatOfArms}`} alt="coatOfArms" />
-            <img src={`${countryData.flagImg}`} alt="flag" />
+    <div
+      className="opacity-90"
+      style={{
+        backgroundImage: `url(${countryData.coatOfArms})`,
+        backgroundSize: "cover",
+        backgroundPosition: "50% 50%",
+      }}
+    >
+      <Wrapper>
+        <div className="min-h-screen flex justify-center items-center z-10">
+          <div className="card w-full glass mx-auto">
+            <figure>
+              {/* original */}
+              {/* <img src="https://api.lorem.space/image/car?w=400&h=225" alt="car!" /> */}
+              <img
+                src={`${countryData.flagImg}`}
+                alt="car!"
+                className="w-full"
+              />
+            </figure>
+            <div className="card-body">
+              <h2 className="stat-value">{`${countryData.name}`}</h2>
+              <div>
+                <div className="country-data pt-3">
+                  <div className="stat-title pb-2">Capital City</div>
+                  <div className="font-bold text-2xl">
+                    {countryData.capital}
+                  </div>
+                </div>
+                <div className="country-data pt-3">
+                  <div className="stat-title pb-2">Population</div>
+                  <div className="font-bold text-2xl">
+                    {countryData.population.toLocaleString()}
+                  </div>
+                </div>
+                <div className="country-data pt-3">
+                  <div className="stat-title pb-2">Region</div>
+                  <div className="font-bold text-2xl">
+                    {countryData.continents}
+                  </div>
+                </div>
+                <div className="country-data pt-3">
+                  <div className="stat-title pb-2">Language</div>
+                  <div className="font-bold text-2xl">
+                    {Object.values(countryData.languages)}
+                  </div>
+                </div>
+                <div className="country-data pt-3">
+                  <div className="stat-title pb-2">Currency</div>
+                  <div className="font-bold text-2xl">
+                    {/* {countryData.currencies} */}
+                  </div>
+                </div>
+                <div className="country-data pt-3">
+                  <div className="stat-title pb-2">More Info</div>
+                  <div className="font-normal text-xl">
+                    <a
+                      href={`https://en.wikipedia.org/wiki/${
+                        countryData.name[0]
+                      }${countryData.name.slice(1)}`}
+                    >
+                      →Wikipedia
+                    </a>
+                  </div>
+                </div>
+                <div className="card-actions justify-end">
+                  <button className="btn btn-primary">
+                    <Link to="/search">BACK</Link>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-        )}
-      </div>
-    </Fragment>
+        </div>
+      </Wrapper>
+    </div>
   );
 };
 
 export default CountryDetail;
+
+// // style={{
+//   backgroundImage: `url(${countryData.coatOfArms})`,
+//   backgroundSize: "cover",
+//   backgroundPosition: "50% 50%",
+// }}
