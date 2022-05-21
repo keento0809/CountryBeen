@@ -18,18 +18,18 @@ const Search = () => {
           loadedData.push({
             name: resData[key].name.common,
             population: resData[key].population,
-            continent: resData[key].continents,
+            continents: resData[key].continents,
             capital: resData[key].capital,
             currencies: resData[key].currencies,
             languages: resData[key].languages,
-            coatOfArm: resData[key].coatOfArms.png,
+            coatOfArms: resData[key].coatOfArms.png,
             flagImg: resData[key].flags.png,
             flagIcon: resData[key].flag,
             cca3: resData[key].cca3,
             borders: resData[key].borders,
           });
         }
-        console.log(loadedData[0]);
+        // console.log(loadedData[0]);
         setCountryData(loadedData);
       })
       .catch((error) => console.log(error.message));

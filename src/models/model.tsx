@@ -1,13 +1,17 @@
 export interface CountryViewObj {
   name: string;
   population: string;
-  continent: string;
+  continents: string;
   capital: string;
   currencies: string;
   languages: string;
-  coatOfArm: string;
+  coatOfArms: string;
   flagImg: string;
   flagIcon: string;
   cca3: string;
   borders: string[];
+}
+
+export interface FindMethodType {
+  find: (country: CountryViewObj) => void;
 }
