@@ -1,9 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { CountryViewObj } from "../models/model";
+import Wrapper from "../components/UI/Wrapper";
+import imgUrl from "../assets/test-cardBg.jpg";
 
 const Search = () => {
+  // declare useState
   const [countryData, setCountryData] = useState<CountryViewObj[]>([]);
+
+  // declare useRef
+  const searchInputRef = useRef<HTMLInputElement>(null);
 
   function fetchCountryData() {
     axios
@@ -37,9 +43,33 @@ const Search = () => {
     fetchCountryData();
   }, []);
 
+  function handleCheckValue() {
+    const filteredData = countryData.filter((country) =>
+      country.name.toLowerCase().includes(searchInputRef.current!.value)
+    );
+    console.log(filteredData);
+  }
+
   return (
-    <div>
-      <p>Search</p>
+    <div
+      className="opacity-90"
+      style={{
+        backgroundImage: `url(${imgUrl})`,
+        backgroundSize: "cover",
+        backgroundPosition: "50% 50%",
+      }}
+    >
+      <Wrapper>
+        <div className="py-4">
+          <input
+            ref={searchInputRef}
+            type="text"
+            placeholder="Search Country"
+            className="input input-bordered input-primary w-full max-w-xs outline-none border-0"
+            onChange={handleCheckValue}
+          />
+        </div>
+      </Wrapper>
     </div>
   );
 };
