@@ -4,6 +4,9 @@ module.exports = {
     maxWidth: {
       320: "320px",
     },
+    height: {
+      248: "248px",
+    },
     extend: {},
   },
   plugins: [require("daisyui")],
