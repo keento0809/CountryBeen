@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface CountryViewObj {
   name: string;
   population: string;
@@ -12,6 +14,6 @@ export interface CountryViewObj {
   borders: string[];
 }
 
-export interface FindMethodType {
-  find: (country: CountryViewObj) => void;
+export interface ChildrenType {
+  children: ReactNode;
 }
