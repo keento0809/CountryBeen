@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Wrapper from "../components/UI/Wrapper";
 import Header from "../layouts/Header";
+import { useDispatch } from "react-redux";
+import { favoriteActions } from "../store/favorite-slice";
+import { CountryViewObj } from "../models/model";
 
 const initialState = {
   name: "",
@@ -21,6 +24,9 @@ const initialState = {
 const CountryDetail: React.FC = () => {
   const [countryData, setCountryData] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
+
+  // declare useDispatch
+  const dispatch = useDispatch();
 
   function requestCountryData() {
     setIsLoading(true);
@@ -65,6 +71,10 @@ const CountryDetail: React.FC = () => {
     console.log();
   }, []);
 
+  function handleToggleFavorite() {
+    dispatch(favoriteActions.addFavorite(countryData));
+  }
+
   return (
     <Wrapper>
       <Header />
@@ -82,6 +92,7 @@ const CountryDetail: React.FC = () => {
               <h2 className="stat-value">{`${countryData.name}`}</h2>
               <div className="icons flex flex-row">
                 <svg
+                  onClick={handleToggleFavorite}
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-8 w-8 mr-4"
                   fill="none"
@@ -111,7 +122,6 @@ const CountryDetail: React.FC = () => {
                 </svg>
               </div>
             </div>
-            {/* flex flex-wrap flex-row justify-start items-center */}
             <div className="flex flex-wrap flex-row justify-start items-center">
               <div className="country-data basis-1/2">
                 <div className="stat-title">Capital City</div>

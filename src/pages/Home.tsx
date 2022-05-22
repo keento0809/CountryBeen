@@ -1,19 +1,63 @@
 import Header from "../layouts/Header";
 import Wrapper from "../components/UI/Wrapper";
+import { Link } from "react-router-dom";
 import { Fragment } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../store";
 
 const styling = {
   "--value": 70,
 };
 
 const Home = () => {
+  // declare selector
+  const totalNumber = useSelector((state: RootState) => state.totalNumber);
+
   return (
     <Fragment>
       <Wrapper>
         <Header />
         <div className="pt-16">
-          <section className="mapping">
-            {/* <p>Something's wrong with ant design map.</p> */}
+          <section className="mapping"></section>
+          <section className="to-search flex flex-row items-center">
+            <button className="btn btn-wide basis-1/2">
+              <Link to="/countries" className="flex flex-row items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 mr-1 inline-block"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+                Search
+              </Link>
+            </button>
+            <button className="btn btn-wide basis-1/2">
+              <Link to="/bucket-list" className="flex flex-row items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 mr-1 inline-block"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+                BucketList
+              </Link>
+            </button>
           </section>
           <section className="statistic-data py-4">
             <div className="stats shadow flex flex-col">
@@ -76,7 +120,7 @@ const Home = () => {
                   </svg>
                 </div>
                 <div className="stat-title">Number of Bucket-list</div>
-                <div className="stat-value">30</div>
+                <div className="stat-value">{totalNumber}</div>
                 <div className="stat-desc">Countries</div>
               </div>
             </div>
