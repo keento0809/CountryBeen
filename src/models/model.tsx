@@ -18,6 +18,10 @@ export interface ChildrenType {
   children: ReactNode;
 }
 
+export interface PropsRegion {
+  selectedRegion: string;
+}
+
 export interface InitialS {
   favoriteList: CountryViewObj[];
   totalNumber: number;
@@ -31,4 +35,8 @@ export interface BeenToInitialS {
 export interface TPayload {
   country: CountryViewObj;
   totalNumber: number;
+}
+
+export interface RegionObj {
+  region: string;
 }

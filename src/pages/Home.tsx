@@ -26,8 +26,7 @@ const Home = () => {
   return (
     <Fragment>
       <Wrapper>
-        <Header />
-        <div className="pt-16">
+        <div className="">
           <section className="mapping"></section>
           <section className="to-search flex flex-row items-center">
             <button className="btn btn-wide basis-1/2">

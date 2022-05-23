@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { CountryViewObj } from "../models/model";
+import { CountryViewObj, RegionObj } from "../models/model";
 import Wrapper from "../components/UI/Wrapper";
 import Header from "../layouts/Header";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,6 +13,7 @@ const Search = () => {
   const [defaultData, setDefaultData] = useState<CountryViewObj[]>([]);
   const [countryData, setCountryData] = useState<CountryViewObj[]>([]);
   const [dataLength, setDataLength] = useState(250);
+  const [regionData, setRegionData] = useState<string[]>([]);
 
   // declare useRef
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -29,26 +30,18 @@ const Search = () => {
       .then((res) => {
         if (!res) throw new Error("Request failed.");
         const resData = res.data;
+        console.log(resData);
 
-        const loadedData = [];
+        const loadedRegion = [];
+        const hash: any = {};
         for (const key in resData) {
-          loadedData.push({
-            name: resData[key].name.common,
-            population: resData[key].population,
-            continents: resData[key].continents,
-            capital: resData[key].capital,
-            currencies: resData[key].currencies,
-            languages: resData[key].languages,
-            coatOfArms: resData[key].coatOfArms.png,
-            flagImg: resData[key].flags.png,
-            flagIcon: resData[key].flag,
-            cca3: resData[key].cca3,
-            borders: resData[key].borders,
-          });
+          if (hash[resData[key].continents] === undefined) {
+            hash[resData[key].continents] = resData[key].continents[0];
+            loadedRegion.push(resData[key].continents[0]);
+          }
         }
-        console.log(loadedData);
-        setDefaultData(loadedData);
-        setCountryData(loadedData);
+        console.log(loadedRegion);
+        setRegionData(loadedRegion);
       })
       .catch((error) => console.log(error.message));
   }
@@ -56,18 +49,14 @@ const Search = () => {
     fetchCountryData();
   }, []);
 
-  let listing: any;
-
   function handleCheckValue() {
     // console.log("re-rendering??");
-    const filteredData = defaultData.filter((country) =>
-      country.name.toLowerCase().includes(searchInputRef.current!.value)
-    );
-    setCountryData(filteredData);
-    setDataLength(filteredData.length);
+    // const filteredData = defaultData.filter((country) =>
+    //   country.name.toLowerCase().includes(searchInputRef.current!.value)
+    // );
+    // setCountryData(filteredData);
+    // setDataLength(filteredData.length);
   }
-
-  useEffect(() => {}, [countryData]);
 
   function handleToggleFavorite(e: any) {
     const addingCountryCCA3 = e.target.parentNode.id;
@@ -97,8 +86,7 @@ const Search = () => {
 
   return (
     <Wrapper>
-      <Header />
-      <div className="pt-16">
+      <div className="">
         <section className="py-4">
           <input
             ref={searchInputRef}
@@ -110,64 +98,31 @@ const Search = () => {
         </section>
         <section className="countries py-4">
           <div className="">
-            <p className="font-bold text-xl text-white pb-3">
-              {dataLength} countries matched
-            </p>
-            {countryData.map((country, index) => {
+            {regionData.map((region, index) => {
               return (
-                <div
-                  className="card w-full h-248 bg-base-100 shadow-xl image-full"
-                  key={index}
-                >
-                  <figure>
-                    <img
-                      className="object-cover w-full"
-                      // src="https://api.lorem.space/image/shoes?w=400&h=225"
-                      src={`${country.flagImg}`}
-                      alt="Shoes"
-                    />
-                  </figure>
-                  <div className="card-body">
-                    <Link to={`/countries/${country.cca3}`} key={index}>
-                      <h2 className="font-extrabold text-3xl">
-                        {country.name}
-                      </h2>
-                    </Link>
-                    <p>{country.population.toLocaleString()}</p>
-                    <div className="icons flex flex-row" id={country.cca3}>
-                      <svg
-                        // onClick={handleToggleFavorite}
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-8 w-8 mr-4"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                        />
-                      </svg>
-                      <svg
-                        onClick={handleToggleBeenTo}
-                        xmlns="http://www.w3.org/2000/svg"
-                        className="h-8 w-8"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                        />
-                      </svg>
+                <Link to={`/countries/region/${region}`} key={index}>
+                  <div
+                    className="card w-full h-248 bg-base-100 shadow-xl image-full cursor-pointer"
+                    // key={index}
+                  >
+                    <figure>
+                      <img
+                        className="object-cover w-full"
+                        src="https://api.lorem.space/image/shoes?w=400&h=225"
+                        // src={`${country.flagImg}`}
+                        alt="Shoes"
+                      />
+                    </figure>
+
+                    <div className="card-body flex justify-center items-center">
+                      <div className="card-body__container">
+                        <h2 className="grow font-extrabold text-3xl text-white">
+                          {region}
+                        </h2>
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>

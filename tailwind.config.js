@@ -5,9 +5,14 @@ module.exports = {
       320: "320px",
     },
     height: {
+      40: "40px",
       248: "248px",
     },
-    extend: {},
+    extend: {
+      minHeight: {
+        40: "40px",
+      },
+    },
   },
   plugins: [require("daisyui")],
 };
