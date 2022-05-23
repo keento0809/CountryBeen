@@ -11,6 +11,10 @@ const BeenSlice = createSlice({
   initialState: initialState,
   reducers: {
     addBeenTo(state, { payload }: PayloadAction<CountryViewObj>) {
+      if (payload === undefined) {
+        alert("Somehow this one is undefined.");
+        return;
+      }
       // console.log(payload.cca3);
       // if (
       //   state.beenToList.length > 0 &&

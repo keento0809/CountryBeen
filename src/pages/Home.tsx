@@ -15,6 +15,11 @@ const Home = () => {
     (state: RootState) => state.favoriteReducer.totalNumber
   );
   const totals = useSelector((state: RootState) => state.beenReducer.totals);
+  const beenToList = useSelector(
+    (state: RootState) => state.beenReducer.beenToList
+  );
+
+  console.log(beenToList);
 
   const percentage = (totals / 250) * 100;
 
