@@ -86,8 +86,7 @@ const CountryDetail: React.FC = () => {
 
   return (
     <Wrapper>
-      <Header />
-      <div className="pt-16 flex justify-center items-center z-10">
+      <div className="flex justify-center items-center z-10">
         <div className="card w-full glass mx-auto bg-transparent rounded-3xl">
           <figure className="pb-3">
             <img

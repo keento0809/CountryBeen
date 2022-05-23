@@ -5,8 +5,8 @@ import Wrapper from "../components/UI/Wrapper";
 const NotFound = () => {
   return (
     <Wrapper>
-      <Header />
-      <div className="pt-16">
+      {/* <Header /> */}
+      <div className="">
         <p>Page Not Found</p>
         <Link to="/">BACK</Link>
       </div>

@@ -6,6 +6,7 @@ import Search from "./Search";
 import BucketList from "./BucketList";
 import NotFound from "./NotFound";
 import BeenTo from "./BeenTo";
+import Region from "./Region";
 
 const Main = () => {
   return (
@@ -15,6 +16,7 @@ const Main = () => {
       <Route path="/beento" element={<BeenTo />} />
       <Route path="/bucket-list" element={<BucketList />} />
       <Route path="/countries" element={<Search />} />
+      <Route path="/countries/region/:region" element={<Region />} />
       <Route path="/countries/:id" element={<CountryDetail />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

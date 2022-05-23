@@ -1,3 +1,4 @@
+import Header from "../../layouts/Header";
 import { ChildrenType } from "../../models/model";
 import imgUrl from "../../assets/test-cardBg.jpg";
 
@@ -11,7 +12,11 @@ const Wrapper = ({ children }: ChildrenType) => {
         backgroundPosition: "50% 50%",
       }}
     >
-      <div className="min-h-screen px-5 sm:px-8">{children}</div>;
+      <div className="min-h-screen px-5 sm:px-8">
+        <Header />
+        <div className="pt-16">{children}</div>
+      </div>
+      ;
     </div>
   );
 };
