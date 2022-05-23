@@ -113,7 +113,7 @@ const Search = () => {
           />
         </section> */}
         <section className="countries py-4">
-          <div className="">
+          <div className="countries-container max-h-780 overflow-scroll">
             {regionData.map((region, index) => {
               return (
                 <Link to={`/countries/region/${region}`} key={index}>

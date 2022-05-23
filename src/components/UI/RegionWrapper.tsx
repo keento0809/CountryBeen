@@ -8,8 +8,8 @@ const RegionWrapper = ({ children, imageUrl }: RegionWrapperType) => {
       className="min-h-screen"
       style={{
         backgroundImage: `url(${imageUrl})`,
-        // backgroundSize: "cover",
-        backgroundPosition: "0% 0%",
+        backgroundSize: "cover",
+        backgroundPosition: "50% 50%",
       }}
     >
       <div className="min-h-screen px-5 sm:px-8">

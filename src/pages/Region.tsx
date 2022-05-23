@@ -8,6 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { favoriteActions } from "../store/favorite-slice";
 import { beenActions } from "../store/been-slice";
+import { regionImageArr } from "../data/data";
 
 const Region = () => {
   // declare useState
@@ -32,22 +33,6 @@ const Region = () => {
 
   function checkRegion() {
     let boolRegion = false;
-
-    const regionImageArr: any = {
-      Asia: "https://images.unsplash.com/photo-1464817739973-0128fe77aaa1?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470",
-      Antarctica:
-        "https://images.unsplash.com/photo-1535752385016-16aa049b6a8d?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2123",
-      Africa:
-        "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471",
-      Europe:
-        "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1420",
-      Oceania:
-        "https://images.unsplash.com/photo-1589330273594-fade1ee91647?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470",
-      "North America":
-        "https://images.unsplash.com/photo-1625230793635-9b429b1ff90f?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1467",
-      "South America":
-        "https://images.unsplash.com/photo-1543385426-191664295b58?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1595",
-    };
 
     const pathArr = window.location.pathname.split("/");
     console.log(pathArr);
@@ -188,65 +173,68 @@ const Region = () => {
                 </p>
               )}
             </div>
-            {!isLoading &&
-              countryData.map((country, index) => {
-                return (
-                  <div
-                    className="card mb-4 w-full h-248 bg-base-100 shadow-xl image-full"
-                    key={index}
-                  >
-                    <figure>
-                      <img
-                        className="object-cover w-full"
-                        src={`${country.flagImg}`}
-                        alt="Shoes"
-                      />
-                    </figure>
-                    <div className="card-body">
-                      <Link to={`/countries/${country.cca3}`} key={index}>
-                        <h2 className="font-extrabold text-3xl">
-                          {country.name}
-                        </h2>
-                      </Link>
-                      <p className="invisible">
-                        Population: {country.population.toLocaleString()}
-                      </p>
-                      <div className="icons flex flex-row" id={country.cca3}>
-                        <svg
-                          // onClick={handleToggleFavorite}
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-8 w-8 mr-4"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                          />
-                        </svg>
-                        <svg
-                          onClick={handleToggleBeenTo}
-                          xmlns="http://www.w3.org/2000/svg"
-                          className="h-8 w-8"
-                          fill="none"
-                          viewBox="0 0 24 24"
-                          stroke="currentColor"
-                          strokeWidth={2}
-                        >
-                          <path
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                          />
-                        </svg>
+            {!isLoading && (
+              <div className="region-container max-h-640 overflow-scroll">
+                {countryData.map((country, index) => {
+                  return (
+                    <div
+                      className="card mb-4 w-full h-248 bg-base-100 shadow-xl image-full"
+                      key={index}
+                    >
+                      <figure>
+                        <img
+                          className="object-cover w-full"
+                          src={`${country.flagImg}`}
+                          alt="Shoes"
+                        />
+                      </figure>
+                      <div className="card-body">
+                        <Link to={`/countries/${country.cca3}`} key={index}>
+                          <h2 className="font-extrabold text-3xl">
+                            {country.name}
+                          </h2>
+                        </Link>
+                        <p className="invisible">
+                          Population: {country.population.toLocaleString()}
+                        </p>
+                        <div className="icons flex flex-row" id={country.cca3}>
+                          <svg
+                            // onClick={handleToggleFavorite}
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-8 w-8 mr-4"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                            />
+                          </svg>
+                          <svg
+                            onClick={handleToggleBeenTo}
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="h-8 w-8"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            strokeWidth={2}
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                          </svg>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
+              </div>
+            )}
           </div>
         </section>
       </div>

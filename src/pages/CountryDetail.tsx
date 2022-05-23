@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Wrapper from "../components/UI/Wrapper";
+import RegionWrapper from "../components/UI/RegionWrapper";
 import Header from "../layouts/Header";
 import { useDispatch } from "react-redux";
 import { favoriteActions } from "../store/favorite-slice";
 import { beenActions } from "../store/been-slice";
+import { regionImageArr } from "../data/data";
 
 const initialState = {
   name: "",
@@ -26,6 +28,7 @@ const CountryDetail: React.FC = () => {
   const [countryData, setCountryData] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
   const [currCCA3, setCurrCCA3] = useState("");
+  const [bgImage, setBgImage] = useState("");
 
   // declare dispatch
   const dispatch = useDispatch();
@@ -63,6 +66,7 @@ const CountryDetail: React.FC = () => {
               cca3: resData[key].cca3,
               borders: resData[key].borders,
             });
+            setBgImage(regionImageArr[resData[key].continents]);
             break;
           }
         }
@@ -76,14 +80,6 @@ const CountryDetail: React.FC = () => {
     // test dependencies
   }, [window.location.pathname]);
 
-  // test
-  // useEffect(() => {
-  //   console.log("URL has changed!!");
-  //   const pathName = window.location.pathname.toString();
-  //   const nowCCA3 = pathName.substring(pathName.length - 3, pathName.length);
-  //   setCurrCCA3(nowCCA3);
-  // }, [window.location.pathname]);
-
   function handleToggleFavorite() {
     dispatch(favoriteActions.addFavorite(countryData));
     navigate("/home");
@@ -95,13 +91,13 @@ const CountryDetail: React.FC = () => {
   }
 
   return (
-    <Wrapper>
+    <RegionWrapper imageUrl={bgImage}>
       <div className="flex justify-center items-center z-10">
         <div className="card w-full glass mx-auto bg-transparent rounded-3xl">
           <figure className="pb-3">
             <img
               src={`${countryData.flagImg}`}
-              alt="car!"
+              alt=""
               className="w-full h-248 rounded-3xl"
             />
           </figure>
@@ -196,7 +192,7 @@ const CountryDetail: React.FC = () => {
           </div>
         </div>
       </div>
-    </Wrapper>
+    </RegionWrapper>
   );
 };
 
