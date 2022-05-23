@@ -12,6 +12,7 @@ const Search = () => {
   // declare useState
   const [defaultData, setDefaultData] = useState<CountryViewObj[]>([]);
   const [countryData, setCountryData] = useState<CountryViewObj[]>([]);
+  const [dataLength, setDataLength] = useState(250);
 
   // declare useRef
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -63,6 +64,7 @@ const Search = () => {
       country.name.toLowerCase().includes(searchInputRef.current!.value)
     );
     setCountryData(filteredData);
+    setDataLength(filteredData.length);
   }
 
   useEffect(() => {}, [countryData]);
@@ -108,15 +110,20 @@ const Search = () => {
         </section>
         <section className="countries py-4">
           <div className="">
+            <p className="font-bold text-xl text-white pb-3">
+              {dataLength} countries matched
+            </p>
             {countryData.map((country, index) => {
               return (
                 <div
-                  className="card w-full bg-base-100 shadow-xl image-full"
+                  className="card w-full h-248 bg-base-100 shadow-xl image-full"
                   key={index}
                 >
                   <figure>
                     <img
-                      src="https://api.lorem.space/image/shoes?w=400&h=225"
+                      className="object-cover w-full"
+                      // src="https://api.lorem.space/image/shoes?w=400&h=225"
+                      src={`${country.flagImg}`}
                       alt="Shoes"
                     />
                   </figure>
