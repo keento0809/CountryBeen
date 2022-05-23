@@ -3,7 +3,7 @@ import axios from "axios";
 import { CountryViewObj } from "../models/model";
 import Wrapper from "../components/UI/Wrapper";
 import Header from "../layouts/Header";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { favoriteActions } from "../store/favorite-slice";
 import { beenActions } from "../store/been-slice";
@@ -18,6 +18,9 @@ const Search = () => {
 
   // declare dispatch
   const dispatch = useDispatch();
+
+  // declare navigate
+  const navigate = useNavigate();
 
   function fetchCountryData() {
     axios
@@ -70,15 +73,23 @@ const Search = () => {
     );
     // I gutta add dispatch
     dispatch(favoriteActions.addFavorite(addingCountry!));
+    navigate("/home");
   }
 
   function handleToggleBeenTo(e: any) {
     const addingCountryCCA3 = e.target.parentNode.id;
+    if (addingCountryCCA3 === undefined) {
+      alert("Request failed.");
+      return;
+    }
     const addingCountry = defaultData.find(
       (country) => country.cca3 === addingCountryCCA3
     );
     // I gutta add dispatch
+    console.log("clickされたデェ", addingCountry);
     dispatch(beenActions.addBeenTo(addingCountry!));
+    // test
+    navigate("/home");
   }
 
   return (

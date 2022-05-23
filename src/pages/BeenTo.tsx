@@ -11,11 +11,17 @@ const BeenTo = () => {
   );
   //   console.log(beenToList.length);
 
+  useEffect(() => {
+    beenToList.forEach((con) => console.log(con.cca3));
+  }, []);
+
   return (
     <Wrapper>
       <Header />
       <div className="pt-16">
-        <p>言った事ある国</p>
+        <div className="title text-center text-white">
+          <h2 className="py-6 font-bold text-2xl">Been To</h2>
+        </div>
         {beenToList.map((country, index) => {
           return (
             <div

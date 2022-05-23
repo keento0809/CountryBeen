@@ -15,7 +15,6 @@ const Home = () => {
     (state: RootState) => state.favoriteReducer.totalNumber
   );
   const totals = useSelector((state: RootState) => state.beenReducer.totals);
-  console.log(totals);
 
   const percentage = (totals / 250) * 100;
 
@@ -135,9 +134,9 @@ const Home = () => {
               </div>
             </div>
           </section>
-          <section className="trying">
+          {/* <section className="trying">
             <div className="radial-progress text-white">70%</div>
-          </section>
+          </section> */}
         </div>
       </Wrapper>
     </Fragment>

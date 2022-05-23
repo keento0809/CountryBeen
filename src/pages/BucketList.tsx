@@ -15,6 +15,9 @@ const BucketList = () => {
     <Wrapper>
       <Header />
       <div className="pt-16">
+        <div className="title text-center text-white">
+          <h2 className="py-6 font-bold text-2xl">Bucket List</h2>
+        </div>
         {favoriteList.map((country, index) => {
           return (
             <div
