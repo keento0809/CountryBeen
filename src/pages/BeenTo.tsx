@@ -26,7 +26,9 @@ const BeenTo = () => {
             >
               <figure>
                 <img
-                  src="https://api.lorem.space/image/shoes?w=400&h=225"
+                  // src="https://api.lorem.space/image/shoes?w=400&h=225"
+                  className="object-cover w-full"
+                  src={`${country.flagImg}`}
                   alt="Shoes"
                 />
               </figure>

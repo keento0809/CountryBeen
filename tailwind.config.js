@@ -9,6 +9,9 @@ module.exports = {
       248: "248px",
     },
     extend: {
+      width: {
+        279: "279px",
+      },
       minHeight: {
         40: "40px",
       },

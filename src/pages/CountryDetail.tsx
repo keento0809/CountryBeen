@@ -22,8 +22,10 @@ const initialState = {
 };
 
 const CountryDetail: React.FC = () => {
+  // declare useState
   const [countryData, setCountryData] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
+  const [currCCA3, setCurrCCA3] = useState("");
 
   // declare dispatch
   const dispatch = useDispatch();
@@ -71,8 +73,16 @@ const CountryDetail: React.FC = () => {
 
   useEffect(() => {
     requestCountryData();
-    console.log();
-  }, []);
+    // test dependencies
+  }, [window.location.pathname]);
+
+  // test
+  // useEffect(() => {
+  //   console.log("URL has changed!!");
+  //   const pathName = window.location.pathname.toString();
+  //   const nowCCA3 = pathName.substring(pathName.length - 3, pathName.length);
+  //   setCurrCCA3(nowCCA3);
+  // }, [window.location.pathname]);
 
   function handleToggleFavorite() {
     dispatch(favoriteActions.addFavorite(countryData));
@@ -178,7 +188,9 @@ const CountryDetail: React.FC = () => {
             </div>
             <div className="card-actions justify-end">
               <button className="btn btn-primary">
-                <Link to="/countries">BACK</Link>
+                <Link to={`/countries/region/${countryData.continents}`}>
+                  BACK
+                </Link>
               </button>
             </div>
           </div>
