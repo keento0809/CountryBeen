@@ -40,3 +40,8 @@ export interface TPayload {
 export interface RegionObj {
   region: string;
 }
+
+export interface RegionWrapperType {
+  children: ReactNode;
+  imageUrl: string;
+}
