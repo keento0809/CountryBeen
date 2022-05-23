@@ -11,16 +11,20 @@ const BeenSlice = createSlice({
   initialState: initialState,
   reducers: {
     addBeenTo(state, { payload }: PayloadAction<CountryViewObj>) {
-      const existing = state.beenToList.find(
-        (country) => country.cca3 === payload.cca3
-      );
-      if (existing) {
-        alert("You've already added this country.");
-        return;
-      } else {
-        state.beenToList = [...state.beenToList, payload];
-        state.totals += 1;
-      }
+      // console.log(payload.cca3);
+      // if (
+      //   state.beenToList.length > 0 &&
+      //   state.beenToList.filter((country) => country.cca3 === payload.cca3) !==
+      //     undefined
+      // ) {
+      //   console.log(payload.cca3);
+      //   alert("You've already added this country.");
+      //   return;
+      // }
+      // else {
+      state.beenToList = [...state.beenToList, payload];
+      state.totals += 1;
+      // }
     },
     removeBeenTo(state, { payload }: PayloadAction<CountryViewObj>) {
       state.beenToList = state.beenToList.filter(
