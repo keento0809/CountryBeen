@@ -9,11 +9,7 @@ const BeenTo = () => {
   const beenToList = useSelector(
     (state: RootState) => state.beenReducer.beenToList
   );
-  //   console.log(beenToList.length);
-
-  useEffect(() => {
-    beenToList.forEach((con) => console.log(con.cca3));
-  }, []);
+  console.log(beenToList);
 
   return (
     <Wrapper>

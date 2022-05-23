@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import Wrapper from "../components/UI/Wrapper";
 import Header from "../layouts/Header";
@@ -25,8 +25,11 @@ const CountryDetail: React.FC = () => {
   const [countryData, setCountryData] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
 
-  // declare useDispatch
+  // declare dispatch
   const dispatch = useDispatch();
+
+  // declare navigate
+  const navigate = useNavigate();
 
   function requestCountryData() {
     setIsLoading(true);
@@ -73,10 +76,12 @@ const CountryDetail: React.FC = () => {
 
   function handleToggleFavorite() {
     dispatch(favoriteActions.addFavorite(countryData));
+    navigate("/home");
   }
 
   function handleToggleBeenTo() {
     dispatch(beenActions.addBeenTo(countryData));
+    navigate("/home");
   }
 
   return (

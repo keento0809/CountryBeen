@@ -45,6 +45,7 @@ const Search = () => {
             borders: resData[key].borders,
           });
         }
+        console.log(loadedData);
         setDefaultData(loadedData);
         setCountryData(loadedData);
       })
@@ -77,19 +78,19 @@ const Search = () => {
   }
 
   function handleToggleBeenTo(e: any) {
-    const addingCountryCCA3 = e.target.parentNode.id;
-    if (addingCountryCCA3 === undefined) {
-      alert("Request failed.");
-      return;
-    }
-    const addingCountry = defaultData.find(
-      (country) => country.cca3 === addingCountryCCA3
-    );
-    // I gutta add dispatch
-    console.log("clickされたデェ", addingCountry);
-    dispatch(beenActions.addBeenTo(addingCountry!));
-    // test
-    navigate("/home");
+    const a = e.target.parentNode.id.toString();
+    console.log(a);
+    // const addingCountryCCA3 = e.target.parentNode.id;
+    // console.log(e.target.parentNode.id);
+    // if (addingCountryCCA3 === undefined) {
+    //   alert("Request failed.");
+    //   return;
+    // }
+    // const addingCountry = defaultData.find(
+    //   (country) => country.cca3 === addingCountryCCA3
+    // );
+    // dispatch(beenActions.addBeenTo(addingCountry!));
+    // navigate("/home");
   }
 
   return (
@@ -128,7 +129,7 @@ const Search = () => {
                     <p>{country.population.toLocaleString()}</p>
                     <div className="icons flex flex-row" id={country.cca3}>
                       <svg
-                        onClick={handleToggleFavorite}
+                        // onClick={handleToggleFavorite}
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-8 w-8 mr-4"
                         fill="none"
