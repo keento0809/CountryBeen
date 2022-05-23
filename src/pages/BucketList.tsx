@@ -7,7 +7,9 @@ import { RootState } from "../store";
 import { CountryViewObj } from "../models/model";
 
 const BucketList = () => {
-  const favoriteList = useSelector((state: RootState) => state.favoriteList);
+  const favoriteList = useSelector(
+    (state: RootState) => state.favoriteReducer.favoriteList
+  );
 
   return (
     <Wrapper>
@@ -32,7 +34,6 @@ const BucketList = () => {
                 <p>{country.population.toLocaleString()}</p>
                 <div className="icons flex flex-row">
                   <svg
-                    // onClick={handleToggleFavorite}
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-8 w-8 mr-4"
                     fill="none"

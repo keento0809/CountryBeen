@@ -11,7 +11,11 @@ const styling = {
 
 const Home = () => {
   // declare selector
-  const totalNumber = useSelector((state: RootState) => state.totalNumber);
+  const totalNumber = useSelector(
+    (state: RootState) => state.favoriteReducer.totalNumber
+  );
+  const totals = useSelector((state: RootState) => state.beenReducer.totals);
+  console.log(totals);
 
   return (
     <Fragment>
@@ -78,7 +82,7 @@ const Home = () => {
                   </svg>
                 </div>
                 <div className="stat-title">You've been to</div>
-                <div className="stat-value">25</div>
+                <div className="stat-value">{totals}</div>
                 <div className="stat-desc">Countries</div>
               </div>
 

@@ -6,7 +6,7 @@ import Header from "../layouts/Header";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { favoriteActions } from "../store/favorite-slice";
-// import imgUrl from "../assets/test-cardBg.jpg";
+import { beenActions } from "../store/been-slice";
 
 const Search = () => {
   // declare useState
@@ -25,7 +25,6 @@ const Search = () => {
       .then((res) => {
         if (!res) throw new Error("Request failed.");
         const resData = res.data;
-        console.log(resData);
 
         const loadedData = [];
         for (const key in resData) {
@@ -71,6 +70,15 @@ const Search = () => {
     );
     // I gutta add dispatch
     dispatch(favoriteActions.addFavorite(addingCountry!));
+  }
+
+  function handleToggleBeenTo(e: any) {
+    const addingCountryCCA3 = e.target.parentNode.id;
+    const addingCountry = defaultData.find(
+      (country) => country.cca3 === addingCountryCCA3
+    );
+    // I gutta add dispatch
+    dispatch(beenActions.addBeenTo(addingCountry!));
   }
 
   return (
@@ -124,6 +132,7 @@ const Search = () => {
                         />
                       </svg>
                       <svg
+                        onClick={handleToggleBeenTo}
                         xmlns="http://www.w3.org/2000/svg"
                         className="h-8 w-8"
                         fill="none"
