@@ -5,7 +5,7 @@ import Wrapper from "../components/UI/Wrapper";
 import Header from "../layouts/Header";
 import { useDispatch } from "react-redux";
 import { favoriteActions } from "../store/favorite-slice";
-import { CountryViewObj } from "../models/model";
+import { beenActions } from "../store/been-slice";
 
 const initialState = {
   name: "",
@@ -75,6 +75,10 @@ const CountryDetail: React.FC = () => {
     dispatch(favoriteActions.addFavorite(countryData));
   }
 
+  function handleToggleBeenTo() {
+    dispatch(beenActions.addBeenTo(countryData));
+  }
+
   return (
     <Wrapper>
       <Header />
@@ -107,6 +111,7 @@ const CountryDetail: React.FC = () => {
                   />
                 </svg>
                 <svg
+                  onClick={handleToggleBeenTo}
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-8 w-8"
                   fill="none"

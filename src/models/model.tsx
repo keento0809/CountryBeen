@@ -23,6 +23,11 @@ export interface InitialS {
   totalNumber: number;
 }
 
+export interface BeenToInitialS {
+  beenToList: CountryViewObj[];
+  totals: number;
+}
+
 export interface TPayload {
   country: CountryViewObj;
   totalNumber: number;
