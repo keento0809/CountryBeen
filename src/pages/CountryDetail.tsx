@@ -174,7 +174,7 @@ const CountryDetail: React.FC = () => {
             </div>
             <div className="card-actions justify-end">
               <button className="btn btn-primary">
-                <Link to="/search">BACK</Link>
+                <Link to="/countries">BACK</Link>
               </button>
             </div>
           </div>
