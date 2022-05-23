@@ -21,12 +21,14 @@ const BucketList = () => {
         {favoriteList.map((country, index) => {
           return (
             <div
-              className="card w-full bg-base-100 shadow-xl image-full"
+              className="card mb-4 w-full bg-base-100 shadow-xl image-full"
               key={index}
             >
               <figure>
                 <img
-                  src="https://api.lorem.space/image/shoes?w=400&h=225"
+                  // src="https://api.lorem.space/image/shoes?w=400&h=225"
+                  className="object-cover w-full"
+                  src={`${country.flagImg}`}
                   alt="Shoes"
                 />
               </figure>
