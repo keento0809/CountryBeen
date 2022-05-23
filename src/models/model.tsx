@@ -11,9 +11,19 @@ export interface CountryViewObj {
   flagImg: string;
   flagIcon: string;
   cca3: string;
-  borders: string[];
+  // borders: string[];
 }
 
 export interface ChildrenType {
   children: ReactNode;
+}
+
+export interface InitialS {
+  favoriteList: CountryViewObj[];
+  totalNumber: number;
+}
+
+export interface TPayload {
+  country: CountryViewObj;
+  totalNumber: number;
 }
