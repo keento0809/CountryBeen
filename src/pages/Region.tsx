@@ -184,7 +184,7 @@ const Region = () => {
             <div className="min-h-40">
               {!isLoading && isSet && (
                 <p className="font-bold text-xl text-white pb-3">
-                  Region, {dataLength} countries matched
+                  {dataLength} countries matched
                 </p>
               )}
             </div>
@@ -192,13 +192,12 @@ const Region = () => {
               countryData.map((country, index) => {
                 return (
                   <div
-                    className="card w-full h-248 bg-base-100 shadow-xl image-full"
+                    className="card mb-4 w-full h-248 bg-base-100 shadow-xl image-full"
                     key={index}
                   >
                     <figure>
                       <img
                         className="object-cover w-full"
-                        // src="https://api.lorem.space/image/shoes?w=400&h=225"
                         src={`${country.flagImg}`}
                         alt="Shoes"
                       />
@@ -209,7 +208,9 @@ const Region = () => {
                           {country.name}
                         </h2>
                       </Link>
-                      <p>{country.population.toLocaleString()}</p>
+                      <p className="invisible">
+                        Population: {country.population.toLocaleString()}
+                      </p>
                       <div className="icons flex flex-row" id={country.cca3}>
                         <svg
                           // onClick={handleToggleFavorite}

@@ -57,7 +57,6 @@ const Search = () => {
           }
         }
         const keysArr = Object.keys(regionArr);
-        console.log(keysArr, "どれでっか", loadedRegion);
         setRegionData(loadedRegion);
       })
       .catch((error) => console.log(error.message));
@@ -104,7 +103,7 @@ const Search = () => {
   return (
     <Wrapper>
       <div className="">
-        <section className="py-4">
+        {/* <section className="py-4">
           <input
             ref={searchInputRef}
             type="text"
@@ -112,14 +111,14 @@ const Search = () => {
             className="input input-bordered input-primary w-full max-w-xs outline-none border-0"
             onKeyUp={handleCheckValue}
           />
-        </section>
+        </section> */}
         <section className="countries py-4">
           <div className="">
             {regionData.map((region, index) => {
               return (
                 <Link to={`/countries/region/${region}`} key={index}>
                   <div
-                    className="card w-full h-248 bg-base-100 shadow-xl image-full cursor-pointer"
+                    className="card mb-2 w-full h-248 bg-base-100 shadow-xl image-full cursor-pointer"
                     // key={index}
                   >
                     <figure>
