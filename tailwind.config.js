@@ -20,6 +20,7 @@ module.exports = {
       },
       maxHeight: {
         640: "640px",
+        680: "680px",
         780: "780px",
       },
     },
