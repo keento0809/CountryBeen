@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
+import Alert from "../components/UI/Alert";
 
 const styling = {
   "--value": 70,
@@ -18,6 +19,12 @@ const Home = () => {
   const beenToList = useSelector(
     (state: RootState) => state.beenReducer.beenToList
   );
+  const isAlerting = useSelector(
+    (state: RootState) => state.AlertReducer.isAlerting
+  );
+  const alertText = useSelector(
+    (state: RootState) => state.AlertReducer.alertText
+  );
 
   console.log(beenToList);
 
@@ -27,52 +34,15 @@ const Home = () => {
     <Fragment>
       <Wrapper>
         <div className="">
-          <section className="mapping"></section>
-          <section className="to-search flex flex-row items-center">
-            <button className="btn btn-wide basis-1/2">
-              <Link to="/countries" className="flex flex-row items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 mr-1 inline-block"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
-                Search
-              </Link>
-            </button>
-            <button className="btn btn-wide basis-1/2">
-              <Link to="/bucket-list" className="flex flex-row items-center">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 mr-1 inline-block"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
-                BucketList
-              </Link>
-            </button>
+          <section className="title text-center text-white">
+            <h2 className="py-6 font-bold text-2xl">Home</h2>
           </section>
+          <section className="mapping"></section>
           <section className="statistic-data py-4">
             <div className="stats shadow flex flex-col">
               <div className="stat basis-4/12 pb-3">
                 <div className="stat-figure text-secondary">
-                  <Link to="/beento">
+                  <Link to="/record">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="inline-block w-8 h-8 stroke-current"
@@ -141,6 +111,7 @@ const Home = () => {
           {/* <section className="trying">
             <div className="radial-progress text-white">70%</div>
           </section> */}
+          {isAlerting && <Alert text={alertText} />}
         </div>
       </Wrapper>
     </Fragment>

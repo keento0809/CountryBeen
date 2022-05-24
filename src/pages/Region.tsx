@@ -8,7 +8,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { favoriteActions } from "../store/favorite-slice";
 import { beenActions } from "../store/been-slice";
-import { regionImageArr } from "../data/data";
+import { regionImageArr, regionArr } from "../data/data";
 
 const Region = () => {
   // declare useState
@@ -18,6 +18,7 @@ const Region = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [isSet, setIsSet] = useState(false);
   const [bgImage, setBgImage] = useState("");
+  const [currRegion, setCurrRegion] = useState("");
 
   // declare useRef
   const searchInputRef = useRef<HTMLInputElement>(null);
@@ -35,16 +36,6 @@ const Region = () => {
     let boolRegion = false;
 
     const pathArr = window.location.pathname.split("/");
-    console.log(pathArr);
-    const regionArr = [
-      "Asia",
-      "Antarctica",
-      "Africa",
-      "Europe",
-      "Oceania",
-      "North%20America",
-      "South%20America",
-    ];
 
     pathArr.forEach((text) => {
       for (let i = 0; i < regionArr.length; i++) {
@@ -56,11 +47,11 @@ const Region = () => {
             selectedRegion = "South America";
           } else selectedRegion = regionArr[i];
           setBgImage(regionImageArr[selectedRegion]);
+          setCurrRegion(selectedRegion);
         }
       }
     });
     if (!boolRegion) {
-      // alert("Invalid url.");
       navigate("/home");
     }
   }
@@ -169,7 +160,7 @@ const Region = () => {
             <div className="min-h-40">
               {!isLoading && isSet && (
                 <p className="font-bold text-xl text-white pb-3">
-                  {dataLength} countries matched
+                  {currRegion}: {dataLength} countries matched
                 </p>
               )}
             </div>

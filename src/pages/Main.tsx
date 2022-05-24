@@ -13,7 +13,7 @@ const Main = () => {
     <Routes>
       <Route path="/" element={<Hero />} />
       <Route path="/home" element={<Home />} />
-      <Route path="/beento" element={<BeenTo />} />
+      <Route path="/record" element={<BeenTo />} />
       <Route path="/bucket-list" element={<BucketList />} />
       <Route path="/countries" element={<Search />} />
       <Route path="/countries/region/:region" element={<Region />} />

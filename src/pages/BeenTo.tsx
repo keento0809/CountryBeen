@@ -16,7 +16,7 @@ const BeenTo = () => {
       {/* <Header /> */}
       <div className="">
         <div className="title text-center text-white">
-          <h2 className="py-6 font-bold text-2xl">Been To</h2>
+          <h2 className="py-6 font-bold text-2xl">Record</h2>
         </div>
         <div className="overflow-scroll max-h-680">
           {beenToList.map((country, index) => {
