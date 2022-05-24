@@ -17,11 +17,13 @@ module.exports = {
       },
       minHeight: {
         40: "40px",
+        100: "100px",
       },
       maxHeight: {
         640: "640px",
         680: "680px",
         780: "780px",
+        860: "860px",
       },
     },
   },

@@ -118,7 +118,7 @@ const Header = () => {
               <Link to={"/home"} className="py-5">
                 HOME
               </Link>
-              <Link to={"/beento"} className="py-5">
+              <Link to={"/record"} className="py-5">
                 Record
               </Link>
               <Link to={"/bucket-list"} className="py-5">
@@ -159,9 +159,12 @@ const Header = () => {
                 onKeyUp={handleCheckValue}
               />
             </div>
-            <div className="bg-white w-279 ml-auto rounded-md p-4">
+            <div className="bg-white w-279 max-h-640 overflow-scroll ml-auto rounded-md p-4">
               {!isSearching && (
                 <p className="text-slate-900 text-md">No countries searched.</p>
+              )}
+              {isSearching && countryData.length === 0 && (
+                <p className="text-slate-900 text-xl">No result matched.</p>
               )}
               {isSearching &&
                 countryData.map((country, index) => {

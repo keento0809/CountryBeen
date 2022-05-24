@@ -7,6 +7,7 @@ import Header from "../layouts/Header";
 import { useDispatch } from "react-redux";
 import { favoriteActions } from "../store/favorite-slice";
 import { beenActions } from "../store/been-slice";
+import { AlertActions } from "../store/alert-slice";
 import { regionImageArr } from "../data/data";
 
 const initialState = {
@@ -55,10 +56,12 @@ const CountryDetail: React.FC = () => {
           if (resData[key].cca3 === currentCCA3) {
             setCountryData({
               name: resData[key].name.common,
-              capital: resData[key].capital,
+              capital: resData[key].capital ? resData[key].capital : "",
               population: resData[key].population,
               continents: resData[key].continents,
-              currencies: resData[key].currencies,
+              currencies: resData[key].currencies
+                ? resData[key].currencies
+                : "",
               languages: resData[key].languages,
               coatOfArms: resData[key].coatOfArms.png,
               flagImg: resData[key].flags.png,
@@ -83,17 +86,25 @@ const CountryDetail: React.FC = () => {
   function handleToggleFavorite() {
     dispatch(favoriteActions.addFavorite(countryData));
     navigate("/home");
+    dispatch(AlertActions.turnOnAlert("Country Added to BucketList!"));
+    setTimeout(() => {
+      dispatch(AlertActions.turnOffAlert());
+    }, 1000);
   }
 
   function handleToggleBeenTo() {
     dispatch(beenActions.addBeenTo(countryData));
     navigate("/home");
+    dispatch(AlertActions.turnOnAlert("Country Added to Record!"));
+    setTimeout(() => {
+      dispatch(AlertActions.turnOffAlert());
+    }, 1000);
   }
 
   return (
     <RegionWrapper imageUrl={bgImage}>
       <div className="flex justify-center items-center z-10">
-        <div className="card w-full glass mx-auto bg-transparent rounded-3xl">
+        <div className="card w-full glass mx-auto max-h-780 overflow-scroll bg-transparent rounded-3xl">
           <figure className="pb-3">
             <img
               src={`${countryData.flagImg}`}
@@ -102,9 +113,9 @@ const CountryDetail: React.FC = () => {
             />
           </figure>
           <div className="card-body bg-white opacity-80 rounded-3xl">
-            <div className="flex flex-row items-center justify-between">
+            <div className="flex flex-wrap items-start flex-col overflow-x-scroll">
               <h2 className="stat-value">{`${countryData.name}`}</h2>
-              <div className="icons flex flex-row">
+              <div className="icons flex flex-row py-3">
                 <svg
                   onClick={handleToggleFavorite}
                   xmlns="http://www.w3.org/2000/svg"
@@ -138,46 +149,61 @@ const CountryDetail: React.FC = () => {
               </div>
             </div>
             <div className="flex flex-wrap flex-row justify-start items-center">
-              <div className="country-data basis-1/2">
+              <div className="country-data basis-1/2 min-h-100 pr-2 ">
                 <div className="stat-title">Capital City</div>
                 <div className="font-bold text-2xl tracking-tight">
                   {countryData.capital}
                 </div>
               </div>
-              <div className="country-data basis-1/2">
+              <div className="country-data basis-1/2 min-h-100 pr-2">
                 <div className="stat-title">Population</div>
                 <div className="font-bold text-2xl tracking-tight">
                   {countryData.population.toLocaleString()}
                 </div>
               </div>
-              <div className="country-data basis-1/2">
+              <div className="country-data basis-1/2 min-h-100 pr-2">
                 <div className="stat-title">Region</div>
                 <div className="font-bold text-2xl tracking-tight">
                   {countryData.continents}
                 </div>
               </div>
-              <div className="country-data basis-1/2">
+              <div className="country-data basis-1/2 min-h-100 pr-2">
                 <div className="stat-title">Language</div>
                 <div className="font-bold text-2xl tracking-tight">
                   {Object.values(countryData.languages)}
                 </div>
               </div>
-              <div className="country-data basis-1/2">
+              <div className="country-data basis-1/2 min-h-100 pr-2">
                 <div className="stat-title">Currency</div>
                 <div className="font-bold text-2xl tracking-tight">
-                  {/* {countryData.currencies} */}
-                  JPN
+                  {Object.keys(countryData.currencies)}
+                  {/* JPN */}
                 </div>
               </div>
-              <div className="country-data basis-1/2">
+              <div className="country-data basis-1/2 min-h-100 pr-2">
                 <div className="stat-title">More Info</div>
                 <div className="font-normal text-2xl tracking-tight">
                   <a
                     href={`https://en.wikipedia.org/wiki/${
                       countryData.name[0]
                     }${countryData.name.slice(1)}`}
+                    className="flex flex-row items-center"
                   >
-                    →Wikipedia
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6 inline-block mr-1"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                      />
+                    </svg>
+                    <span>Wikipedia</span>
                   </a>
                 </div>
               </div>

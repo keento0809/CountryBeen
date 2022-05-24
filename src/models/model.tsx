@@ -45,3 +45,7 @@ export interface RegionWrapperType {
   children: ReactNode;
   imageUrl: string;
 }
+
+export interface AlertText {
+  text: string;
+}
