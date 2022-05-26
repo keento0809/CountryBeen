@@ -9,6 +9,9 @@ module.exports = {
       248: "248px",
     },
     extend: {
+      backgroundSize: {
+        150: "150%",
+      },
       width: {
         258: "258px",
         279: "279px",

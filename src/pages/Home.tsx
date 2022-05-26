@@ -26,7 +26,7 @@ const Home = () => {
     (state: RootState) => state.AlertReducer.alertText
   );
 
-  console.log(beenToList);
+  // console.log(beenToList);
 
   const percentage = (totals / 250) * 100;
 

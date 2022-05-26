@@ -92,7 +92,6 @@ const Header = () => {
 
   useEffect(() => {
     fetchCountryData();
-    console.log(window.innerWidth);
   }, []);
 
   return (
