@@ -1,14 +1,15 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { CountryViewObj, PropsRegion } from "../models/model";
-import Wrapper from "../components/UI/Wrapper";
-import RegionWrapper from "../components/UI/RegionWrapper";
+import Wrapper from "../components/UI/Wrapper/Wrapper";
+import RegionWrapper from "../components/UI/Wrapper/RegionWrapper";
 import Header from "../layouts/Header";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { favoriteActions } from "../store/favorite-slice";
 import { beenActions } from "../store/been-slice";
 import { regionImageArr, regionArr } from "../data/data";
+import CountryCard from "../components/UI/Card/CountryCard";
 
 const Region = () => {
   // declare useState
@@ -66,7 +67,6 @@ const Region = () => {
         const resData = res.data;
 
         const loadedData = [];
-        // console.log(selectedRegion);
         for (const key in resData) {
           // I need to change here.
           if (resData[key].continents[0] === selectedRegion) {
@@ -97,8 +97,6 @@ const Region = () => {
     fetchCountryData();
   }, []);
 
-  let listing: any;
-
   function handleCheckValue() {
     const filteredData = defaultData.filter((country) =>
       country.name.toLowerCase().includes(searchInputRef.current!.value)
@@ -106,8 +104,6 @@ const Region = () => {
     setCountryData(filteredData);
     setDataLength(filteredData.length);
   }
-
-  useEffect(() => {}, [countryData]);
 
   function handleToggleFavorite(e: any) {
     const addingCountryCCA3 = e.target.parentNode.id;
@@ -168,60 +164,13 @@ const Region = () => {
               <div className="region-container max-h-640 overflow-scroll md:flex md:flex-wrap md:justify-between">
                 {countryData.map((country, index) => {
                   return (
-                    <div
-                      className="card mb-4 w-full max-w-374 md:max-w-340 lg:max-w-310 xl:max-w-320 md:basis-1/2 h-248 max-h-264 bg-base-100 shadow-xl image-full"
+                    <CountryCard
                       key={index}
-                    >
-                      <figure>
-                        <img
-                          className="object-cover w-full opacity-40 z-10"
-                          src={`${country.flagImg}`}
-                          alt="Shoes"
-                        />
-                      </figure>
-                      <div className="card-body transition-all overflow-hidden">
-                        <Link to={`/countries/${country.cca3}`} key={index}>
-                          <h2 className="font-extrabold text-3xl drop-shadow-md">
-                            {country.name}
-                          </h2>
-                        </Link>
-                        {/* <p className="invisible">
-                          Population: {country.population.toLocaleString()}
-                        </p> */}
-                        <div className="icons flex flex-row" id={country.cca3}>
-                          <svg
-                            // onClick={handleToggleFavorite}
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-8 w-8 mr-4"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth={2}
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                            />
-                          </svg>
-                          <svg
-                            onClick={handleToggleBeenTo}
-                            xmlns="http://www.w3.org/2000/svg"
-                            className="h-8 w-8"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            strokeWidth={2}
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                            />
-                          </svg>
-                        </div>
-                      </div>
-                    </div>
+                      flagImg={`${country.flagImg}`}
+                      countryName={country.name}
+                      cca3={country.cca3}
+                      handleToggleBeenTo={handleToggleBeenTo}
+                    />
                   );
                 })}
               </div>
