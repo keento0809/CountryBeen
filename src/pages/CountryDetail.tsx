@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Wrapper from "../components/UI/Wrapper";
-import RegionWrapper from "../components/UI/RegionWrapper";
+import Wrapper from "../components/UI/Wrapper/Wrapper";
+import RegionWrapper from "../components/UI/Wrapper/RegionWrapper";
 import Header from "../layouts/Header";
 import { useDispatch } from "react-redux";
 import { favoriteActions } from "../store/favorite-slice";
@@ -117,7 +117,7 @@ const CountryDetail: React.FC = () => {
 
   return (
     <RegionWrapper imageUrl={bgImage}>
-      <div className="flex justify-center items-center z-10 md:pt-4 lg:pt-16">
+      <div className="flex justify-center items-center z-10 pt-4 lg:pt-16">
         <div className="card w-full glass mx-auto max-w-374 lg:max-w-960 lg:flex lg:flex-row lg:items-start max-h-780 overflow-scroll bg-transparent rounded-3xl">
           <figure className="pb-3 lg:min-w-374 lg:mr-2">
             <img
@@ -130,7 +130,7 @@ const CountryDetail: React.FC = () => {
             {/* original */}
             {/* <div className="flex flex-wrap items-start flex-col overflow-x-scroll"> */}
             <div className="">
-              <h2 className="stat-value">{`${countryData.name}`}</h2>
+              <h2 className="stat-value overflow-x-auto">{`${countryData.name}`}</h2>
               <div className="icons max-h-32">
                 <svg
                   onClick={handleToggleFavorite}

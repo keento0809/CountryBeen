@@ -1,5 +1,5 @@
-import Header from "../../layouts/Header";
-import { RegionWrapperType } from "../../models/model";
+import Header from "../../../layouts/Header";
+import { RegionWrapperType } from "../../../models/model";
 import imgUrl from "../../assets/test-cardBg.jpg";
 
 const RegionWrapper = ({ children, imageUrl }: RegionWrapperType) => {

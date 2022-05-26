@@ -1,5 +1,5 @@
 import Header from "../layouts/Header";
-import Wrapper from "../components/UI/Wrapper";
+import Wrapper from "../components/UI/Wrapper/Wrapper";
 import { Link } from "react-router-dom";
 import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";

@@ -49,3 +49,15 @@ export interface RegionWrapperType {
 export interface AlertText {
   text: string;
 }
+
+export interface RegionCardProps {
+  imgUrl: string;
+  region: string;
+}
+
+export interface CountryCardProps {
+  flagImg: string;
+  countryName: string;
+  cca3: string;
+  handleToggleBeenTo: (e: any) => void;
+}
