@@ -30,6 +30,7 @@ const CountryDetail: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [currCCA3, setCurrCCA3] = useState("");
   const [bgImage, setBgImage] = useState("");
+  // const [countryLanguage, setCountryLanguage] = useState<string[]>([]);
 
   // declare dispatch
   const dispatch = useDispatch();
@@ -101,6 +102,19 @@ const CountryDetail: React.FC = () => {
     }, 1000);
   }
 
+  useEffect(() => {
+    const languageArr = [];
+    if (Object.values(countryData.languages).length > 0) {
+      // console.log(Object.values(countryData.languages));
+      for (let i = 0; i < Object.values(countryData.languages).length; i++) {
+        languageArr.push(Object.values(countryData.languages)[i]);
+      }
+      // setCountryLanguage(languageArr);
+    }
+  }, []);
+
+  console.log(Object.keys(countryData.currencies));
+
   return (
     <RegionWrapper imageUrl={bgImage}>
       <div className="flex justify-center items-center z-10">
@@ -171,15 +185,20 @@ const CountryDetail: React.FC = () => {
               </div>
               <div className="country-data basis-1/2 min-h-56 pr-2">
                 <div className="stat-title">Language</div>
-                <div className="font-bold text-2xl tracking-tight">
-                  {Object.values(countryData.languages)}
+                <div className="font-bold text-2xl tracking-tight break-words">
+                  {Object.values(countryData.languages)[0]}
+                  {Object.values(countryData.languages)[1] &&
+                    " , " + Object.values(countryData.languages)[1]}
+                  {Object.values(countryData.languages)[2] &&
+                    " , " + Object.values(countryData.languages)[2]}
                 </div>
               </div>
               <div className="country-data basis-1/2 min-h-56 pr-2">
                 <div className="stat-title">Currency</div>
                 <div className="font-bold text-2xl tracking-tight">
-                  {Object.keys(countryData.currencies)}
-                  {/* JPN */}
+                  {Object.keys(countryData.currencies)[0]}{" "}
+                  {Object.keys(countryData.currencies)[1] &&
+                    " , " + Object.keys(countryData.currencies)[1]}
                 </div>
               </div>
               <div className="country-data basis-1/2 min-h-56 pr-2">
