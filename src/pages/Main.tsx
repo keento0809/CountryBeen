@@ -7,6 +7,7 @@ import BucketList from "./BucketList";
 import NotFound from "./NotFound";
 import BeenTo from "./BeenTo";
 import Region from "./Region";
+import Map from "./Map";
 
 const Main = () => {
   return (
@@ -18,6 +19,8 @@ const Main = () => {
       <Route path="/countries" element={<Search />} />
       <Route path="/countries/region/:region" element={<Region />} />
       <Route path="/countries/:id" element={<CountryDetail />} />
+      {/* temporary */}
+      <Route path="/map" element={<Map />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
