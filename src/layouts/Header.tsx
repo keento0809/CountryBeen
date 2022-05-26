@@ -92,6 +92,7 @@ const Header = () => {
 
   useEffect(() => {
     fetchCountryData();
+    console.log(window.innerWidth);
   }, []);
 
   return (
@@ -186,7 +187,7 @@ const Header = () => {
         </Fragment>
       )}
       <header className="fixed top-0 left-0 w-full bg-transparent text-slate-100">
-        <div className="navbar mx-auto md:px-6">
+        <div className="navbar lg:hidden mx-auto md:px-6">
           <div className="navbar-start">
             <div className="dropdown">
               <label tab-index="0" className="btn btn-ghost btn-circle">
@@ -229,7 +230,6 @@ const Header = () => {
           </div>
           <div className="navbar-end">
             <button className="btn btn-ghost btn-circle">
-              {/* <Link to="/countries"> */}
               <svg
                 onClick={handleSearch}
                 xmlns="http://www.w3.org/2000/svg"
@@ -245,12 +245,35 @@ const Header = () => {
                   d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                 />
               </svg>
-              {/* </Link> */}
             </button>
           </div>
         </div>
+        <div className="hidden lg:block mx-auto px-6">
+          <div className="flex flex-row items-center justify-between">
+            <div className="nav-left">
+              <Link to="/home" className="btn btn-ghost normal-case text-xl">
+                CountryBeen
+              </Link>
+            </div>
+            <div className="nav-right flex justify-center items-center min-w-300">
+              <nav className="nav-list grow flex justify-between items-center">
+                {/* <Link to={"/home"} className="py-5">
+                HOME
+              </Link> */}
+                <Link to={"/record"} className="text-md">
+                  Record
+                </Link>
+                <Link to={"/bucket-list"} className="text-md">
+                  BucketList
+                </Link>
+                <Link to={"/countries"} className="text-md">
+                  Countries
+                </Link>
+              </nav>
+            </div>
+          </div>
+        </div>
       </header>
-      {/* )} */}
     </Fragment>
   );
 };

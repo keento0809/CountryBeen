@@ -117,8 +117,8 @@ const CountryDetail: React.FC = () => {
 
   return (
     <RegionWrapper imageUrl={bgImage}>
-      <div className="flex justify-center items-center z-10 md:pt-4">
-        <div className="card w-full glass mx-auto max-w-374 max-h-780 overflow-scroll bg-transparent rounded-3xl">
+      <div className="flex justify-center items-center z-10 md:pt-4 lg:pt-16">
+        <div className="card w-full glass mx-auto max-w-374 lg:max-w-960 lg:flex lg:flex-row lg:items-start max-h-780 overflow-scroll bg-transparent rounded-3xl">
           <figure className="pb-3">
             <img
               src={`${countryData.flagImg}`}
@@ -126,7 +126,7 @@ const CountryDetail: React.FC = () => {
               className="w-full h-248 rounded-3xl"
             />
           </figure>
-          <div className="card-body bg-white opacity-80 rounded-3xl">
+          <div className="card-body bg-white dark:bg-slate-700 opacity-80 rounded-3xl">
             {/* original */}
             {/* <div className="flex flex-wrap items-start flex-col overflow-x-scroll"> */}
             <div className="">
@@ -230,7 +230,7 @@ const CountryDetail: React.FC = () => {
               </div>
             </div>
             <div className="card-actions justify-end">
-              <button className="btn btn-primary">
+              <button className="btn btn-primary btn-outline">
                 <Link to={`/countries/region/${countryData.continents}`}>
                   BACK
                 </Link>
