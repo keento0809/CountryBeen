@@ -66,7 +66,7 @@ const Region = () => {
         const resData = res.data;
 
         const loadedData = [];
-        console.log(selectedRegion);
+        // console.log(selectedRegion);
         for (const key in resData) {
           // I need to change here.
           if (resData[key].continents[0] === selectedRegion) {
@@ -159,7 +159,7 @@ const Region = () => {
             {isLoading && <p className="text-white font-bold">Loading...</p>}
             <div className="min-h-40">
               {!isLoading && isSet && (
-                <p className="font-bold text-xl text-white pb-3">
+                <p className="font-bold text-xl text-slate-800 pb-3">
                   {currRegion}: {dataLength} countries matched
                 </p>
               )}
@@ -174,14 +174,14 @@ const Region = () => {
                     >
                       <figure>
                         <img
-                          className="object-cover w-full"
+                          className="object-cover w-full opacity-40 z-10"
                           src={`${country.flagImg}`}
                           alt="Shoes"
                         />
                       </figure>
-                      <div className="card-body">
+                      <div className="card-body transition-all overflow-hidden">
                         <Link to={`/countries/${country.cca3}`} key={index}>
-                          <h2 className="font-extrabold text-3xl">
+                          <h2 className="font-extrabold text-3xl drop-shadow-md">
                             {country.name}
                           </h2>
                         </Link>
