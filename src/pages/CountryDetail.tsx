@@ -121,7 +121,7 @@ const CountryDetail: React.FC = () => {
                 <svg
                   onClick={handleToggleFavorite}
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-8 w-8 mr-4"
+                  className="h-8 w-8 mr-4 inline-block"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -136,7 +136,7 @@ const CountryDetail: React.FC = () => {
                 <svg
                   onClick={handleToggleBeenTo}
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-8 w-8"
+                  className="h-8 w-8 inline-block"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
