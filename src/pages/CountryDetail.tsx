@@ -117,8 +117,8 @@ const CountryDetail: React.FC = () => {
 
   return (
     <RegionWrapper imageUrl={bgImage}>
-      <div className="flex justify-center items-center z-10">
-        <div className="card w-full glass mx-auto max-h-780 overflow-scroll bg-transparent rounded-3xl">
+      <div className="flex justify-center items-center z-10 md:pt-4">
+        <div className="card w-full glass mx-auto max-w-374 max-h-780 overflow-scroll bg-transparent rounded-3xl">
           <figure className="pb-3">
             <img
               src={`${countryData.flagImg}`}

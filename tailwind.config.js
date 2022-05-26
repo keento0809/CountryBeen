@@ -10,10 +10,14 @@ module.exports = {
     },
     extend: {
       width: {
+        258: "258px",
         279: "279px",
       },
       maxWidth: {
+        258: "258px",
         320: "320px",
+        340: "340px",
+        374: "374px",
       },
       minHeight: {
         40: "40px",
@@ -22,6 +26,7 @@ module.exports = {
       },
       maxHeight: {
         32: "32px",
+        264: "264px",
         640: "640px",
         680: "680px",
         780: "780px",
