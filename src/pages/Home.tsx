@@ -33,7 +33,7 @@ const Home = () => {
   return (
     <Fragment>
       <Wrapper>
-        <div className="">
+        <div className="lg:max-w-400 lg:mx-auto">
           <section className="title text-center text-white">
             <h2 className="py-6 font-bold text-2xl">Dashboard</h2>
           </section>

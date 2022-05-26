@@ -169,7 +169,7 @@ const Region = () => {
                 {countryData.map((country, index) => {
                   return (
                     <div
-                      className="card mb-4 w-full max-w-374 md:max-w-340 md:basis-1/2 h-248 max-h-264 bg-base-100 shadow-xl image-full"
+                      className="card mb-4 w-full max-w-374 md:max-w-340 lg:max-w-310 xl:max-w-320 md:basis-1/2 h-248 max-h-264 bg-base-100 shadow-xl image-full"
                       key={index}
                     >
                       <figure>
@@ -185,9 +185,9 @@ const Region = () => {
                             {country.name}
                           </h2>
                         </Link>
-                        <p className="invisible">
+                        {/* <p className="invisible">
                           Population: {country.population.toLocaleString()}
-                        </p>
+                        </p> */}
                         <div className="icons flex flex-row" id={country.cca3}>
                           <svg
                             // onClick={handleToggleFavorite}

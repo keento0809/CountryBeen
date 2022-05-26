@@ -27,10 +27,14 @@ const Search = () => {
           <h2 className="py-6 font-bold text-2xl">Select Region</h2>
         </div>
         <section className="countries">
-          <div className="countries-container max-h-680 overflow-scroll">
+          <div className="countries-container max-h-680 overflow-scroll lg:flex lg:flex-wrap lg:justify-between">
             {regionData.map((region, index) => {
               return (
-                <Link to={`/countries/region/${region}`} key={index}>
+                <Link
+                  to={`/countries/region/${region}`}
+                  key={index}
+                  className="lg:block lg:max-w-374"
+                >
                   <div className="card mb-2 w-full h-248 bg-base-100 shadow-xl image-full cursor-pointer">
                     <figure>
                       <img
