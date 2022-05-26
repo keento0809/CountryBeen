@@ -115,7 +115,7 @@ const CountryDetail: React.FC = () => {
           <div className="card-body bg-white opacity-80 rounded-3xl">
             <div className="flex flex-wrap items-start flex-col overflow-x-scroll">
               <h2 className="stat-value">{`${countryData.name}`}</h2>
-              <div className="icons flex flex-row py-3">
+              <div className="icons flex flex-row">
                 <svg
                   onClick={handleToggleFavorite}
                   xmlns="http://www.w3.org/2000/svg"
@@ -149,38 +149,38 @@ const CountryDetail: React.FC = () => {
               </div>
             </div>
             <div className="flex flex-wrap flex-row justify-start items-center">
-              <div className="country-data basis-1/2 min-h-100 pr-2 ">
+              <div className="country-data basis-1/2 pr-2 ">
                 <div className="stat-title">Capital City</div>
                 <div className="font-bold text-2xl tracking-tight">
                   {countryData.capital}
                 </div>
               </div>
-              <div className="country-data basis-1/2 min-h-100 pr-2">
+              <div className="country-data basis-1/2 pr-2">
                 <div className="stat-title">Population</div>
                 <div className="font-bold text-2xl tracking-tight">
                   {countryData.population.toLocaleString()}
                 </div>
               </div>
-              <div className="country-data basis-1/2 min-h-100 pr-2">
+              <div className="country-data basis-1/2 pr-2">
                 <div className="stat-title">Region</div>
                 <div className="font-bold text-2xl tracking-tight">
                   {countryData.continents}
                 </div>
               </div>
-              <div className="country-data basis-1/2 min-h-100 pr-2">
+              <div className="country-data basis-1/2 pr-2">
                 <div className="stat-title">Language</div>
                 <div className="font-bold text-2xl tracking-tight">
                   {Object.values(countryData.languages)}
                 </div>
               </div>
-              <div className="country-data basis-1/2 min-h-100 pr-2">
+              <div className="country-data basis-1/2 pr-2">
                 <div className="stat-title">Currency</div>
                 <div className="font-bold text-2xl tracking-tight">
                   {Object.keys(countryData.currencies)}
                   {/* JPN */}
                 </div>
               </div>
-              <div className="country-data basis-1/2 min-h-100 pr-2">
+              <div className="country-data basis-1/2 pr-2">
                 <div className="stat-title">More Info</div>
                 <div className="font-normal text-2xl tracking-tight">
                   <a

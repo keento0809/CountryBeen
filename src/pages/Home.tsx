@@ -35,7 +35,7 @@ const Home = () => {
       <Wrapper>
         <div className="">
           <section className="title text-center text-white">
-            <h2 className="py-6 font-bold text-2xl">Home</h2>
+            <h2 className="py-6 font-bold text-2xl">Dashboard</h2>
           </section>
           <section className="mapping"></section>
           <section className="statistic-data py-4">
