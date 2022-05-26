@@ -117,7 +117,7 @@ const CountryDetail: React.FC = () => {
             {/* <div className="flex flex-wrap items-start flex-col overflow-x-scroll"> */}
             <div className="">
               <h2 className="stat-value">{`${countryData.name}`}</h2>
-              <div className="icons">
+              <div className="icons max-h-32">
                 <svg
                   onClick={handleToggleFavorite}
                   xmlns="http://www.w3.org/2000/svg"

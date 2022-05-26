@@ -21,6 +21,7 @@ module.exports = {
         100: "100px",
       },
       maxHeight: {
+        32: "32px",
         640: "640px",
         680: "680px",
         780: "780px",
