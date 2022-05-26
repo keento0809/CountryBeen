@@ -23,8 +23,11 @@ const Search = () => {
             onKeyUp={handleCheckValue}
           />
         </section> */}
-        <section className="countries py-4">
-          <div className="countries-container max-h-780 overflow-scroll">
+        <div className="title text-center text-white">
+          <h2 className="py-6 font-bold text-2xl">Select Region</h2>
+        </div>
+        <section className="countries">
+          <div className="countries-container max-h-680 overflow-scroll">
             {regionData.map((region, index) => {
               return (
                 <Link to={`/countries/region/${region}`} key={index}>

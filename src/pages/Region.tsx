@@ -154,7 +154,7 @@ const Region = () => {
             onKeyUp={handleCheckValue}
           />
         </section>
-        <section className="countries py-4">
+        <section className="countries py-4 md:pb-0">
           <div className="">
             {isLoading && <p className="text-white font-bold">Loading...</p>}
             <div className="min-h-40">
@@ -165,11 +165,11 @@ const Region = () => {
               )}
             </div>
             {!isLoading && (
-              <div className="region-container max-h-640 overflow-scroll">
+              <div className="region-container max-h-640 overflow-scroll md:flex md:flex-wrap md:justify-between">
                 {countryData.map((country, index) => {
                   return (
                     <div
-                      className="card mb-4 w-full h-248 bg-base-100 shadow-xl image-full"
+                      className="card mb-4 w-full max-w-374 md:max-w-340 md:basis-1/2 h-248 max-h-264 bg-base-100 shadow-xl image-full"
                       key={index}
                     >
                       <figure>

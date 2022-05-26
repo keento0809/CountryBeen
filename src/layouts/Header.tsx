@@ -136,8 +136,8 @@ const Header = () => {
       {isSearchMode && (
         <Fragment>
           <div className="z-30 backdrop fixed top-0 left-0 right-0 bottom-0 w-full bg-slate-900 opacity-80"></div>
-          <section className="z-40 py-4 pr-5 fixed top-0 right-0 w-4/5 mx-auto">
-            <div className="flex flex-row items-center">
+          <section className="z-40 py-4 px-5 md:px-8 fixed top-0 right-0 w-4/5 mx-auto">
+            <div className="flex flex-row items-center justify-end">
               <svg
                 onClick={handleCloseSearch}
                 xmlns="http://www.w3.org/2000/svg"
@@ -157,11 +157,11 @@ const Header = () => {
                 ref={searchInputRef}
                 type="text"
                 placeholder="Search Country"
-                className="bg-white mb-4 input input-bordered input-primary w-full max-w-xs outline-none border-0"
+                className="bg-white mb-4 input input-bordered input-primary w-full max-w-258 md:max-w-320 max-w-xs outline-none border-0"
                 onKeyUp={handleCheckValue}
               />
             </div>
-            <div className="bg-white w-279 max-h-640 overflow-scroll ml-auto rounded-md p-4">
+            <div className="bg-white max-w-258 md:max-w-320 max-h-640 overflow-scroll ml-auto rounded-md p-4">
               {!isSearching && (
                 <p className="text-slate-900 text-md">No countries searched.</p>
               )}
@@ -186,7 +186,7 @@ const Header = () => {
         </Fragment>
       )}
       <header className="fixed top-0 left-0 w-full bg-transparent text-slate-100">
-        <div className="navbar">
+        <div className="navbar mx-auto md:px-6">
           <div className="navbar-start">
             <div className="dropdown">
               <label tab-index="0" className="btn btn-ghost btn-circle">
