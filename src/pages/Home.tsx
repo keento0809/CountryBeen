@@ -113,6 +113,41 @@ const Home = () => {
               </div>
             </div>
           </section>
+          <section className="buttons text-center">
+            <button className="btn btn-outline btn-secondary gap-2">
+              <Link to="/countries" className="flex flex-row items-center">
+                {/* <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5 inline-block"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                  />
+                </svg> */}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-5 w-5"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M17 8l4 4m0 0l-4 4m4-4H3"
+                  />
+                </svg>
+                Explore World
+              </Link>
+            </button>
+          </section>
           {/* <section className="trying">
             <div className="radial-progress text-white">70%</div>
           </section> */}

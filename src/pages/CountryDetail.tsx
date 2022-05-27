@@ -116,7 +116,7 @@ const CountryDetail: React.FC = () => {
     }
   }, []);
 
-  console.log(Object.keys(countryData.currencies));
+  console.log(countryData.cca3);
 
   return (
     <RegionWrapper imageUrl={bgImage}>
@@ -138,7 +138,7 @@ const CountryDetail: React.FC = () => {
                 <svg
                   onClick={handleToggleFavorite}
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-8 w-8 mr-4 inline-block"
+                  className="h-8 w-8 mr-4 inline-block cursor-pointer"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -153,7 +153,7 @@ const CountryDetail: React.FC = () => {
                 <svg
                   onClick={handleToggleBeenTo}
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-8 w-8 inline-block"
+                  className="h-8 w-8 inline-block cursor-pointer"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -215,7 +215,7 @@ const CountryDetail: React.FC = () => {
                   >
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
-                      className="h-6 w-6 inline-block mr-1"
+                      className="h-6 w-6 inline-block mr-1 cursor-pointer"
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -227,13 +227,13 @@ const CountryDetail: React.FC = () => {
                         d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
                       />
                     </svg>
-                    <span>Wikipedia</span>
+                    <span className="cursor-pointer">Wikipedia</span>
                   </a>
                 </div>
               </div>
             </div>
             <div className="card-actions justify-end">
-              <button className="btn btn-primary btn-outline">
+              <button className="btn btn-secondary btn-outline">
                 <Link to={`/countries/region/${countryData.continents}`}>
                   BACK
                 </Link>

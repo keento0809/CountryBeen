@@ -254,7 +254,7 @@ const Header = () => {
                 CountryBeen
               </Link>
             </div>
-            <div className="nav-right flex justify-center items-center min-w-300">
+            <div className="nav-right flex justify-center items-center min-w-350 xl:min-w-400">
               <nav className="nav-list grow flex justify-between items-center">
                 {/* <Link to={"/home"} className="py-5">
                 HOME

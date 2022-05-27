@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import imgLink from "../assets/heroBg.jpg";
+import imgLink from "../assets/revisedHeroBg.jpg";
 
 const Hero = () => {
   return (
@@ -9,19 +9,19 @@ const Hero = () => {
         style={{
           backgroundImage: `url(${imgLink})`,
           backgroundSize: "cover",
-          backgroundPosition: "80% 50%",
+          // backgroundPosition: "50% 50%",s
         }}
       >
         <div className="hero-overlay bg-opacity-60"></div>
-        <div className="hero-content text-center text-neutral-content">
+        <div className="hero-content rounded-lg bg-slate-800 bg-opacity-70 text-center text-neutral-content p-8">
           <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold">Hello there</h1>
-            <p className="mb-5">
-              Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-              excepturi exercitationem quasi. In deleniti eaque aut repudiandae
-              et a id nisi.
+            <h1 className="mb-5 text-5xl font-bold">CountryBeen</h1>
+            <p className="mb-5 text-slate-300">
+              Have you ever consider how many countries you've been to so far
+              and analyzing it visually? Here's the best tool making that
+              request happen. Start a brand new adventure here!
             </p>
-            <button className="btn btn-primary">
+            <button className="btn btn-secondary btn-outline">
               <Link to="/home">Get Started</Link>
             </button>
           </div>

@@ -6,7 +6,11 @@ const RegionCard = ({ imgUrl, region }: RegionCardProps) => {
     <Fragment>
       <div className="card mb-2 w-full h-248 bg-base-100 shadow-xl image-full cursor-pointer">
         <figure>
-          <img className="object-cover w-full" src={imgUrl} alt="" />
+          <img
+            className="object-cover w-full opacity-40 z-10"
+            src={imgUrl}
+            alt=""
+          />
         </figure>
 
         <div className="card-body flex justify-center items-center">

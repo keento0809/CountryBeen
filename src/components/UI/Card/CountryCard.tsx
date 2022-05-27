@@ -10,7 +10,7 @@ const CountryCard = ({
 }: CountryCardProps) => {
   return (
     <div
-      className="card mx-auto mb-4 w-full max-w-374 md:max-w-340 lg:max-w-310 xl:max-w-320 md:basis-1/2 h-248 max-h-264 bg-base-100 shadow-xl image-full"
+      className="card mr-auto mb-4 w-full max-w-374 md:max-w-340 lg:max-w-310 xl:max-w-320 md:basis-1/2 h-248 max-h-264 bg-base-100 shadow-xl image-full"
       //   key={index}
     >
       <figure>
@@ -30,10 +30,10 @@ const CountryCard = ({
           <svg
             // onClick={handleToggleFavorite}
             xmlns="http://www.w3.org/2000/svg"
-            className="h-8 w-8 mr-4"
+            className="h-8 w-8 mr-4 cursor-pointer"
             fill="none"
             viewBox="0 0 24 24"
-            stroke="currentColor"
+            stroke="currentColor" // #ff8ce4
             strokeWidth={2}
           >
             <path
@@ -45,7 +45,7 @@ const CountryCard = ({
           <svg
             onClick={handleToggleBeenTo}
             xmlns="http://www.w3.org/2000/svg"
-            className="h-8 w-8"
+            className="h-8 w-8 cursor-pointer"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
