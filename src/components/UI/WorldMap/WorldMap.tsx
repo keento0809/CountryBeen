@@ -1,16 +1,28 @@
-import React from "react";
-import ReactDOM from "react-dom";
 import { ComposableMap, Geographies, Geography } from "react-simple-maps";
-
-// import "../../../reactMap.css";
+import { useSelector } from "react-redux";
+import { RootState } from "../../../store";
+import { useEffect, useState } from "react";
 
 const geoUrl =
   "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
 
 const WorldMap = () => {
-  const cca3s = ["JPN", "THA", "VNM", "MMR", "AUS", "ITA"];
+  // declare useState
+  const [cca3List, setCca3List] = useState<string[]>([]);
+  // declare useSelector
+  const beenToList = useSelector(
+    (state: RootState) => state.beenReducer.beenToList
+  );
+  let cca3Arr: string[] = [];
+  useEffect(() => {
+    beenToList.map((country) => {
+      cca3Arr.push(country.cca3);
+    });
+    setCca3List(cca3Arr);
+  }, [beenToList.length]);
 
-  // style={{ background: "#333" }}
+  // test
+  // const cca3s = ["JPN", "THA", "VNM", "AUS", "ITA"];
 
   return (
     <div className="bg-transparent">
@@ -21,8 +33,8 @@ const WorldMap = () => {
               // cca3
               // console.log(geo.properties.NAME, geo.properties.ISO_A3);
               let boolBeen = false;
-              for (let i = 0; i < cca3s.length; i++) {
-                if (geo.properties.ISO_A3 == cca3s[i]) {
+              for (let i = 0; i < cca3List.length; i++) {
+                if (geo.properties.ISO_A3 == cca3List[i]) {
                   boolBeen = true;
                 }
               }
@@ -31,7 +43,7 @@ const WorldMap = () => {
                 <Geography
                   key={geo.rsmKey}
                   geography={geo}
-                  fill={boolBeen ? "#FF0000" : ""}
+                  fill={boolBeen ? "#F000B8" : ""}
                 />
               );
             })

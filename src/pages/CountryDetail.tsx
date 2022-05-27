@@ -116,8 +116,6 @@ const CountryDetail: React.FC = () => {
     }
   }, []);
 
-  console.log(countryData.cca3);
-
   return (
     <RegionWrapper imageUrl={bgImage}>
       <div className="flex justify-center items-center z-10 pt-4 lg:pt-16">
