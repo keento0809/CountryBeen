@@ -6,6 +6,7 @@ import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import Alert from "../components/UI/Alert";
+import WorldMap from "../components/UI/WorldMap/WorldMap";
 
 const styling = {
   "--value": 70,
@@ -42,8 +43,10 @@ const Home = () => {
           <section className="title text-center text-white">
             <h2 className="py-6 font-bold text-2xl">Dashboard</h2>
           </section>
-          <section className="mapping"></section>
-          <section className="statistic-data py-4">
+          <section className="mapping bg-slate-700 rounded-2xl">
+            <WorldMap />
+          </section>
+          <section className="statistic-data pt-2 pb-5">
             <div className="stats shadow flex flex-col">
               <div className="stat basis-4/12 pb-3">
                 <div className="stat-figure text-secondary">
