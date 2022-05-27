@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Wrapper from "../components/UI/Wrapper/Wrapper";
+import DisplayWrapper from "../components/UI/Wrapper/DisplayWrapper";
 import Header from "../layouts/Header";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
@@ -17,7 +17,7 @@ const BucketList = () => {
   }
 
   return (
-    <Wrapper>
+    <DisplayWrapper>
       <div className="">
         <div className="title text-center text-white">
           <h2 className="py-6 font-bold text-2xl">Bucket List</h2>
@@ -36,7 +36,7 @@ const BucketList = () => {
           })}
         </div>
       </div>
-    </Wrapper>
+    </DisplayWrapper>
   );
 };
 

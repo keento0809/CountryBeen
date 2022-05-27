@@ -30,6 +30,7 @@ export interface InitialS {
 export interface BeenToInitialS {
   beenToList: CountryViewObj[];
   totals: number;
+  isSuccessToAdd: boolean;
 }
 
 export interface TPayload {

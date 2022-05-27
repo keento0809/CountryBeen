@@ -10,7 +10,7 @@ const CountryCard = ({
 }: CountryCardProps) => {
   return (
     <div
-      className="card mx-auto lg:mr-auto mb-4 w-full max-w-374 md:max-w-340 lg:max-w-310 xl:max-w-320 md:basis-1/2 h-248 max-h-264 bg-base-100 shadow-xl image-full"
+      className="card ml-auto mr-auto md:ml-0 mb-4 w-full max-w-374 md:max-w-340 lg:max-w-310 xl:max-w-320 md:basis-1/2 h-248 max-h-264 bg-base-100 shadow-xl image-full"
       //   key={index}
     >
       <figure>
