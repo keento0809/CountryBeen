@@ -11,17 +11,15 @@ const favoriteSlice = createSlice({
   initialState: initialState,
   reducers: {
     addFavorite(state, { payload }: PayloadAction<CountryViewObj>) {
-      // if (
-      //   state.favoriteList.find((country) => country.cca3 === payload.cca3) !==
-      //   undefined
-      // ) {
-      //   alert("This country already exists in BucketList.");
-      //   return;
-      // }
-      // else {
+      if (
+        state.favoriteList.find((country) => country.cca3 === payload.cca3) !==
+        undefined
+      ) {
+        alert("You've already added this country.");
+        return;
+      }
       state.favoriteList = [...state.favoriteList, payload];
       state.totalNumber += 1;
-      // }
     },
     removeFavorite(state, { payload }: PayloadAction<CountryViewObj>) {
       const removingCCA3 = payload.cca3;

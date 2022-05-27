@@ -36,6 +36,9 @@ const CountryDetail: React.FC = () => {
   const beenToList = useSelector(
     (state: RootState) => state.beenReducer.beenToList
   );
+  const isSuccessToAdd = useSelector(
+    (state: RootState) => state.beenReducer.isSuccessToAdd
+  );
 
   // declare dispatch
   const dispatch = useDispatch();
@@ -101,7 +104,9 @@ const CountryDetail: React.FC = () => {
   function handleToggleBeenTo() {
     dispatch(beenActions.addBeenTo(countryData));
     navigate("/home");
-    dispatch(AlertActions.turnOnAlert("Country Added to Record!"));
+    console.log(isSuccessToAdd);
+    isSuccessToAdd &&
+      dispatch(AlertActions.turnOnAlert("Country Added to Record!"));
     setTimeout(() => {
       dispatch(AlertActions.turnOffAlert());
     }, 1000);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import Wrapper from "../components/UI/Wrapper/Wrapper";
+import DisplayWrapper from "../components/UI/Wrapper/DisplayWrapper";
 import Header from "../layouts/Header";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
@@ -27,12 +27,12 @@ const BeenTo = () => {
   }
 
   return (
-    <Wrapper>
+    <DisplayWrapper>
       <div className="">
         <div className="title text-center text-white">
           <h2 className="py-6 font-bold text-2xl">Record</h2>
         </div>
-        <div className="overflow-scroll max-h-680 md:max-h-640">
+        <div className="overflow-scroll max-h-680 md:max-h-640 md:flex flex-wrap">
           {beenToList.map((country, index) => {
             return (
               <CountryCard
@@ -46,7 +46,7 @@ const BeenTo = () => {
           })}
         </div>
       </div>
-    </Wrapper>
+    </DisplayWrapper>
   );
 };
 

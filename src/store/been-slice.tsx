@@ -1,9 +1,12 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { BeenToInitialS, CountryViewObj } from "../models/model";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 const initialState: BeenToInitialS = {
   beenToList: [],
   totals: 0,
+  isSuccessToAdd: false,
 };
 
 const BeenSlice = createSlice({
@@ -15,20 +18,18 @@ const BeenSlice = createSlice({
         alert("Somehow this one is undefined.");
         return;
       }
-      // console.log(payload.cca3);
-      // if (
-      //   state.beenToList.length > 0 &&
-      //   state.beenToList.filter((country) => country.cca3 === payload.cca3) !==
-      //     undefined
-      // ) {
-      //   console.log(payload.cca3);
-      //   alert("You've already added this country.");
-      //   return;
-      // }
-      // else {
-      state.beenToList = [...state.beenToList, payload];
-      state.totals += 1;
-      // }
+      if (
+        state.beenToList.find((country) => country.cca3 === payload.cca3) !==
+        undefined
+      ) {
+        alert("You've already added this country.");
+        state.isSuccessToAdd = false;
+        return;
+      } else {
+        state.beenToList = [...state.beenToList, payload];
+        state.totals += 1;
+        state.isSuccessToAdd = true;
+      }
     },
     removeBeenTo(state, { payload }: PayloadAction<CountryViewObj>) {
       state.beenToList = state.beenToList.filter(

@@ -28,6 +28,9 @@ const Home = () => {
   const alertText = useSelector(
     (state: RootState) => state.AlertReducer.alertText
   );
+  const isSuccessToAdd = useSelector(
+    (state: RootState) => state.beenReducer.isSuccessToAdd
+  );
 
   // console.log(beenToList);
 
@@ -36,6 +39,11 @@ const Home = () => {
   useEffect(() => {
     localStorage.setItem("beenTo", JSON.stringify(beenToList));
   }, [beenToList.length]);
+
+  useEffect(() => {
+    console.log("Re=rendering!!", isSuccessToAdd);
+    console.log(isAlerting, isSuccessToAdd);
+  }, [isSuccessToAdd]);
 
   return (
     <Fragment>
@@ -140,7 +148,9 @@ const Home = () => {
               </button>
             </section>
           </div>
+          {/* original */}
           {isAlerting && <Alert text={alertText} />}
+          {/* {isSuccessToAdd && <Alert text={alertText} />} */}
         </div>
       </HomeWrapper>
     </Fragment>
