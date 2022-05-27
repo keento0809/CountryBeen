@@ -116,7 +116,7 @@ const Region = () => {
   }
 
   function handleToggleBeenTo(e: any) {
-    const a = e.target.parentNode.id.toString();
+    const a = e.target.parentNode.className.baseVal;
     console.log(a);
     // const addingCountryCCA3 = e.target.parentNode.id;
     // console.log(e.target.parentNode.id);
@@ -155,7 +155,7 @@ const Region = () => {
             {isLoading && <p className="text-white font-bold">Loading...</p>}
             <div className="min-h-40">
               {!isLoading && isSet && (
-                <p className="font-bold text-xl text-slate-800 pb-3">
+                <p className="font-bold text-xl text-slate-100 pb-3">
                   {currRegion}: {dataLength} countries matched
                 </p>
               )}
