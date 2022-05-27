@@ -94,8 +94,8 @@ const CountryDetail: React.FC = () => {
 
   function handleToggleFavorite() {
     dispatch(favoriteActions.addFavorite(countryData));
-    navigate("/home");
     dispatch(AlertActions.turnOnAlert("Country Added to BucketList!"));
+    navigate("/home");
     setTimeout(() => {
       dispatch(AlertActions.turnOffAlert());
     }, 1000);
@@ -103,10 +103,8 @@ const CountryDetail: React.FC = () => {
 
   function handleToggleBeenTo() {
     dispatch(beenActions.addBeenTo(countryData));
+    dispatch(AlertActions.turnOnAlert("Country Added to Record!"));
     navigate("/home");
-    console.log(isSuccessToAdd);
-    isSuccessToAdd &&
-      dispatch(AlertActions.turnOnAlert("Country Added to Record!"));
     setTimeout(() => {
       dispatch(AlertActions.turnOffAlert());
     }, 1000);
