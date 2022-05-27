@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Header from "../layouts/Header";
 import Wrapper from "../components/UI/Wrapper/Wrapper";
 import { Link } from "react-router-dom";
@@ -29,6 +30,10 @@ const Home = () => {
   // console.log(beenToList);
 
   const percentage = (totals / 250) * 100;
+
+  useEffect(() => {
+    localStorage.setItem("beenTo", JSON.stringify(beenToList));
+  }, [beenToList.length]);
 
   return (
     <Fragment>

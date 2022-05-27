@@ -4,11 +4,12 @@ import axios from "axios";
 import Wrapper from "../components/UI/Wrapper/Wrapper";
 import RegionWrapper from "../components/UI/Wrapper/RegionWrapper";
 import Header from "../layouts/Header";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { favoriteActions } from "../store/favorite-slice";
-import { beenActions } from "../store/been-slice";
+import { beenActions, beenReducer } from "../store/been-slice";
 import { AlertActions } from "../store/alert-slice";
 import { regionImageArr } from "../data/data";
+import { RootState } from "../store";
 
 const initialState = {
   name: "",
@@ -30,7 +31,11 @@ const CountryDetail: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [currCCA3, setCurrCCA3] = useState("");
   const [bgImage, setBgImage] = useState("");
-  // const [countryLanguage, setCountryLanguage] = useState<string[]>([]);
+
+  // declare selector
+  const beenToList = useSelector(
+    (state: RootState) => state.beenReducer.beenToList
+  );
 
   // declare dispatch
   const dispatch = useDispatch();
@@ -105,11 +110,9 @@ const CountryDetail: React.FC = () => {
   useEffect(() => {
     const languageArr = [];
     if (Object.values(countryData.languages).length > 0) {
-      // console.log(Object.values(countryData.languages));
       for (let i = 0; i < Object.values(countryData.languages).length; i++) {
         languageArr.push(Object.values(countryData.languages)[i]);
       }
-      // setCountryLanguage(languageArr);
     }
   }, []);
 
