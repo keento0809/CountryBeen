@@ -31,6 +31,9 @@ const Home = () => {
   const isSuccessToAdd = useSelector(
     (state: RootState) => state.beenReducer.isSuccessToAdd
   );
+  const isSuccessToAddBucketList = useSelector(
+    (state: RootState) => state.favoriteReducer.isSuccessToAddBucketList
+  );
 
   // console.log(beenToList);
 
@@ -41,9 +44,8 @@ const Home = () => {
   }, [beenToList.length]);
 
   useEffect(() => {
-    console.log("Re=rendering!!", isSuccessToAdd);
-    console.log(isAlerting, isSuccessToAdd);
-  }, [isSuccessToAdd]);
+    console.log();
+  }, []);
 
   return (
     <Fragment>
@@ -149,8 +151,10 @@ const Home = () => {
             </section>
           </div>
           {/* original */}
-          {isAlerting && <Alert text={alertText} />}
-          {/* {isSuccessToAdd && <Alert text={alertText} />} */}
+          {(isAlerting && isSuccessToAdd) ||
+            (isAlerting && isSuccessToAddBucketList && (
+              <Alert text={alertText} />
+            ))}
         </div>
       </HomeWrapper>
     </Fragment>

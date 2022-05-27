@@ -25,6 +25,7 @@ export interface PropsRegion {
 export interface InitialS {
   favoriteList: CountryViewObj[];
   totalNumber: number;
+  isSuccessToAddBucketList: boolean;
 }
 
 export interface BeenToInitialS {

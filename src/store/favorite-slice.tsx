@@ -4,6 +4,7 @@ import { InitialS, CountryViewObj } from "../models/model";
 const initialState: InitialS = {
   favoriteList: [],
   totalNumber: 0,
+  isSuccessToAddBucketList: false,
 };
 
 const favoriteSlice = createSlice({
@@ -16,8 +17,10 @@ const favoriteSlice = createSlice({
         undefined
       ) {
         alert("You've already added this country.");
+        state.isSuccessToAddBucketList = false;
         return;
       }
+      state.isSuccessToAddBucketList = true;
       state.favoriteList = [...state.favoriteList, payload];
       state.totalNumber += 1;
     },

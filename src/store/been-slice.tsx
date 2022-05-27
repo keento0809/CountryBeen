@@ -26,9 +26,9 @@ const BeenSlice = createSlice({
         state.isSuccessToAdd = false;
         return;
       } else {
+        state.isSuccessToAdd = true;
         state.beenToList = [...state.beenToList, payload];
         state.totals += 1;
-        state.isSuccessToAdd = true;
       }
     },
     removeBeenTo(state, { payload }: PayloadAction<CountryViewObj>) {
