@@ -71,7 +71,7 @@ const Home = () => {
           <section className="title text-center text-white">
             <h2 className="py-6 font-bold text-2xl">Dashboard</h2>
           </section>
-          <div className="md:max-h-620 overflow-scroll">
+          <div className="max-h-640 md:max-h-620 overflow-scroll">
             <section className="mapping bg-slate-700 rounded-2xl lg:mx-0">
               <WorldMap />
             </section>

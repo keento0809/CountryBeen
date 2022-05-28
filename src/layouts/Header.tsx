@@ -98,7 +98,7 @@ const Header = () => {
     <Fragment>
       {isMenuOpen && (
         <Fragment>
-          <div className="z-30 backdrop fixed top-0 left-0 right-0 bottom-0 w-full bg-slate-900 opacity-90"></div>
+          <div className="z-30 backdrop fixed top-0 left-0 right-0 bottom-0 w-full bg-slate-900 opacity-95"></div>
           <section className="z-40 py-4 px-5 fixed top-0 right-0 w-full mx-auto">
             {/* <p className="text-white">Menu is open now.</p> */}
             <svg
