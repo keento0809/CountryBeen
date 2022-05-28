@@ -117,11 +117,10 @@ const Home = () => {
                         ></path>
                       </svg>
                     </div>
-                    <div className="stat-title">Percentage</div>
-                    <div className="stat-value">{percentage}%</div>
-                    <div className="stat-desc">{totals}/250</div>
+                    <div className="stat-title">Achievement rate</div>
+                    <div className="stat-value">{percentage.toFixed(1)}%</div>
+                    <div className="stat-desc">{totals} / 245</div>
                   </div>
-
                   <div className="stat basis-4/12">
                     <div className="stat-figure text-secondary">
                       <Link to="/bucket-list">
@@ -170,10 +169,8 @@ const Home = () => {
             </div>
           </div>
           {/* original */}
-          {(isAlerting && isSuccessToAdd) ||
-            (isAlerting && isSuccessToAddBucketList && (
-              <Alert text={alertText} />
-            ))}
+          {isAlerting && isSuccessToAdd && <Alert text={alertText} />}
+          {isAlerting && isSuccessToAddBucketList && <Alert text={alertText} />}
         </div>
       </HomeWrapper>
     </Fragment>

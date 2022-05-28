@@ -28,7 +28,24 @@ const CountryCard = ({
               {countryName}
             </h2>
             {/* </Link> */}
-            <div className="icons flex flex-row" id={cca3}>
+            <div className="flex flex-row items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-6 w-6 inline-block"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+              <span className="text-lg font-bold text-white">See Detail</span>
+            </div>
+            {/* <div className="icons flex flex-row" id={cca3}>
               <svg
                 // onClick={handleToggleFavorite}
                 xmlns="http://www.w3.org/2000/svg"
@@ -59,7 +76,7 @@ const CountryCard = ({
                   d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                 />
               </svg>
-            </div>
+            </div> */}
           </div>
         </div>
       </Link>

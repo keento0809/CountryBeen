@@ -26,7 +26,7 @@ export const regionArr = [
 
 export const regionArrFixed = [
   "Asia",
-  "Antarctica",
+  // "Antarctica",
   "Africa",
   "Europe",
   "Oceania",

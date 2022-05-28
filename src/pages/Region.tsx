@@ -102,6 +102,7 @@ const Region = () => {
   function utilizeCountriesData() {
     const resData: any = countriesData;
     const loadedData = [];
+
     for (const key in resData) {
       // I need to change here.
       if (resData[key].continents[0] === selectedRegion) {
@@ -127,7 +128,8 @@ const Region = () => {
 
   useEffect(() => {
     checkRegion();
-    if (countriesData === undefined) {
+    console.log(countriesData);
+    if (countriesData.length === 0) {
       fetchCountryData();
     } else {
       utilizeCountriesData();
@@ -153,8 +155,8 @@ const Region = () => {
   }
 
   function handleToggleBeenTo(e: any) {
-    const a = e.target.parentNode.className.baseVal;
-    console.log(a);
+    // const a = e.target.parentNode.className.baseVal;
+    console.log("clickされたデー");
     // const addingCountryCCA3 = e.target.parentNode.id;
     // console.log(e.target.parentNode.id);
     // if (addingCountryCCA3 === undefined) {
