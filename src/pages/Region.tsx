@@ -128,7 +128,6 @@ const Region = () => {
 
   useEffect(() => {
     checkRegion();
-    console.log(countriesData);
     if (countriesData.length === 0) {
       fetchCountryData();
     } else {

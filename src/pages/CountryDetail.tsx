@@ -29,7 +29,6 @@ const CountryDetail: React.FC = () => {
   // declare useState
   const [countryData, setCountryData] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
-  const [currCCA3, setCurrCCA3] = useState("");
   const [bgImage, setBgImage] = useState("");
 
   // declare selector
@@ -120,13 +119,6 @@ const CountryDetail: React.FC = () => {
     }
   }
 
-  useEffect(() => {
-    if (countriesData.length === 0) {
-      requestCountryData();
-    } else utilizeCountriesData();
-    // test dependencies
-  }, [window.location.pathname]);
-
   function handleToggleFavorite() {
     dispatch(favoriteActions.addFavorite(countryData));
     dispatch(AlertActions.turnOnAlert("Country Added to BucketList!"));
@@ -146,13 +138,11 @@ const CountryDetail: React.FC = () => {
   }
 
   useEffect(() => {
-    const languageArr = [];
-    if (Object.values(countryData.languages).length > 0) {
-      for (let i = 0; i < Object.values(countryData.languages).length; i++) {
-        languageArr.push(Object.values(countryData.languages)[i]);
-      }
-    }
-  }, []);
+    if (countriesData.length === 0) {
+      requestCountryData();
+    } else utilizeCountriesData();
+    // test dependencies
+  }, [window.location.pathname]);
 
   return (
     <RegionWrapper imageUrl={bgImage}>
@@ -170,40 +160,57 @@ const CountryDetail: React.FC = () => {
             {/* <div className="flex flex-wrap items-start flex-col overflow-x-scroll"> */}
             <div className="">
               <h2 className="stat-value overflow-x-auto">{`${countryData.name}`}</h2>
-              <div className="icons max-h-32">
-                <svg
-                  onClick={handleToggleFavorite}
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-8 w-8 mr-4 inline-block cursor-pointer"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                  />
-                </svg>
-                <svg
-                  onClick={handleToggleBeenTo}
+              <div className="icons max-h-32 my-2">
+                <div className="tooltip tooltip-left" data-tip="Add BucketList">
+                  <svg
+                    onClick={handleToggleFavorite}
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-8 w-8 mr-4 inline-block cursor-pointer"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="#f92fca"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                    />
+                  </svg>
+                </div>
+                <div className="tooltip tooltip-right" data-tip="Add Record">
+                  <svg
+                    onClick={handleToggleBeenTo}
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-8 w-8 inline-block cursor-pointer"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="#f92fca"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
+                </div>
+                {/* temporary */}
+                {/* <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-8 w-8 inline-block cursor-pointer"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                  strokeWidth={2}
+                  viewBox="0 0 20 20"
+                  fill="#f92fca"
                 >
                   <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
                   />
-                </svg>
+                </svg> */}
               </div>
             </div>
-            <div className="flex flex-wrap flex-row justify-start items-start">
+            <div className="flex flex-wrap flex-row justify-start items-start pb-3">
               <div className="country-data basis-1/2 min-h-56 pr-2 ">
                 <div className="stat-title">Capital City</div>
                 <div className="font-bold text-2xl tracking-tight">
@@ -225,19 +232,27 @@ const CountryDetail: React.FC = () => {
               <div className="country-data basis-1/2 min-h-56 pr-2">
                 <div className="stat-title">Language</div>
                 <div className="font-bold text-2xl tracking-tight break-words">
-                  {Object.values(countryData.languages)[0]}
+                  {/* original */}
+                  {Object.values(countryData.languages)[0]}{" "}
                   {Object.values(countryData.languages)[1] &&
                     " , " + Object.values(countryData.languages)[1]}
                   {Object.values(countryData.languages)[2] &&
                     " , " + Object.values(countryData.languages)[2]}
+                  {Object.values(countryData.languages)[3] &&
+                    " , " + Object.values(countryData.languages)[3]}
+                  {Object.values(countryData.languages)[4] &&
+                    " , " + Object.values(countryData.languages)[4]}
+                  {/* {languageArr} */}
                 </div>
               </div>
               <div className="country-data basis-1/2 min-h-56 pr-2">
                 <div className="stat-title">Currency</div>
                 <div className="font-bold text-2xl tracking-tight">
+                  {/* original */}
                   {Object.keys(countryData.currencies)[0]}{" "}
                   {Object.keys(countryData.currencies)[1] &&
                     " , " + Object.keys(countryData.currencies)[1]}
+                  {/* {currencyArray} */}
                 </div>
               </div>
               <div className="country-data basis-1/2 min-h-56 pr-2">
