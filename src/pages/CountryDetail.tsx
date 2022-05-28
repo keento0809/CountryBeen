@@ -121,7 +121,7 @@ const CountryDetail: React.FC = () => {
   }
 
   useEffect(() => {
-    if (countriesData === []) {
+    if (countriesData.length === 0) {
       requestCountryData();
     } else utilizeCountriesData();
     // test dependencies
@@ -157,7 +157,7 @@ const CountryDetail: React.FC = () => {
   return (
     <RegionWrapper imageUrl={bgImage}>
       <div className="flex justify-center items-center z-10 pt-4 lg:pt-16">
-        <div className="card w-full glass mx-auto max-w-374 lg:max-w-960 lg:flex lg:flex-row lg:items-start max-h-780 overflow-scroll bg-transparent rounded-3xl">
+        <div className="card w-full glass mx-auto max-w-374 md:max-h-680 lg:max-w-960 lg:flex lg:flex-row lg:items-start max-h-780 overflow-scroll bg-transparent rounded-3xl">
           <figure className="pb-3 lg:min-w-374 lg:mr-2">
             <img
               src={`${countryData.flagImg}`}
