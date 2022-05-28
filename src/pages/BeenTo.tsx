@@ -13,14 +13,6 @@ const BeenTo = () => {
   const beenToList = useSelector(
     (state: RootState) => state.beenReducer.beenToList
   );
-  console.log(beenToList);
-
-  // declare useState
-  // const [record, setRecord] = useState<any[]>([]);
-
-  // useEffect(() => {}, []);
-  // let result = useMapCountries(beenToList);
-  // setRecord(result);
 
   function handleToggleBeenTo() {
     console.log("Been too ~~~");

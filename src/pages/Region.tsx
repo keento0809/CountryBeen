@@ -5,11 +5,12 @@ import Wrapper from "../components/UI/Wrapper/Wrapper";
 import RegionWrapper from "../components/UI/Wrapper/RegionWrapper";
 import Header from "../layouts/Header";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { favoriteActions } from "../store/favorite-slice";
 import { beenActions } from "../store/been-slice";
 import { regionImageArr, regionArr } from "../data/data";
 import CountryCard from "../components/UI/Card/CountryCard";
+import { RootState } from "../store";
 
 const Region = () => {
   // declare useState
@@ -17,12 +18,17 @@ const Region = () => {
   const [countryData, setCountryData] = useState<CountryViewObj[]>([]);
   const [dataLength, setDataLength] = useState(defaultData.length);
   const [isLoading, setIsLoading] = useState(false);
-  const [isSet, setIsSet] = useState(false);
+  // const [isSet, setIsSet] = useState(false);
   const [bgImage, setBgImage] = useState("");
   const [currRegion, setCurrRegion] = useState("");
 
   // declare useRef
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  // declare useSelector
+  const countriesData = useSelector(
+    (state: RootState) => state.countriesReducer.countries
+  );
 
   // declare dispatch
   const dispatch = useDispatch();
@@ -92,9 +98,42 @@ const Region = () => {
       .catch((error) => console.log(error.message));
     setIsLoading(false);
   }
+
+  function utilizeCountriesData() {
+    const resData: any = countriesData;
+    const loadedData = [];
+
+    for (const key in resData) {
+      // I need to change here.
+      if (resData[key].continents[0] === selectedRegion) {
+        loadedData.push({
+          name: resData[key].name.common,
+          population: resData[key].population,
+          continents: resData[key].continents,
+          capital: resData[key].capital,
+          currencies: resData[key].currencies,
+          languages: resData[key].languages,
+          coatOfArms: resData[key].coatOfArms.png,
+          flagImg: resData[key].flags.png,
+          flagIcon: resData[key].flag,
+          cca3: resData[key].cca3,
+          borders: resData[key].borders,
+        });
+      }
+    }
+    setDefaultData(loadedData);
+    setCountryData(loadedData);
+    setDataLength(loadedData.length);
+  }
+
   useEffect(() => {
     checkRegion();
-    fetchCountryData();
+    console.log(countriesData);
+    if (countriesData.length === 0) {
+      fetchCountryData();
+    } else {
+      utilizeCountriesData();
+    }
   }, []);
 
   function handleCheckValue() {
@@ -116,8 +155,8 @@ const Region = () => {
   }
 
   function handleToggleBeenTo(e: any) {
-    const a = e.target.parentNode.className.baseVal;
-    console.log(a);
+    // const a = e.target.parentNode.className.baseVal;
+    console.log("clickされたデー");
     // const addingCountryCCA3 = e.target.parentNode.id;
     // console.log(e.target.parentNode.id);
     // if (addingCountryCCA3 === undefined) {
@@ -131,11 +170,11 @@ const Region = () => {
     // navigate("/home");
   }
 
-  useEffect(() => {
-    setTimeout(() => {
-      setIsSet(true);
-    }, 800);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setIsSet(true);
+  //   }, 800);
+  // }, []);
 
   return (
     <RegionWrapper imageUrl={bgImage}>
@@ -151,10 +190,14 @@ const Region = () => {
           />
         </section>
         <section className="countries py-4 md:pb-0">
-          <div className="">
-            {isLoading && <p className="text-white font-bold">Loading...</p>}
+          <div className="regionCountries">
             <div className="min-h-40">
-              {!isLoading && isSet && (
+              {isLoading && (
+                <h2 className="text-slate-200 font-bold text-xl block">
+                  Loading...
+                </h2>
+              )}
+              {!isLoading && (
                 <p className="font-bold text-xl text-slate-100 pb-3">
                   {currRegion}: {dataLength} countries matched
                 </p>

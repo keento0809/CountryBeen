@@ -41,6 +41,7 @@ module.exports = {
       maxHeight: {
         32: "32px",
         264: "264px",
+        620: "620px",
         640: "640px",
         680: "680px",
         780: "780px",
