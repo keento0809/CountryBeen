@@ -39,6 +39,9 @@ const CountryDetail: React.FC = () => {
   const isSuccessToAdd = useSelector(
     (state: RootState) => state.beenReducer.isSuccessToAdd
   );
+  const countriesData = useSelector(
+    (state: RootState) => state.countriesReducer.countries
+  );
 
   // declare dispatch
   const dispatch = useDispatch();
@@ -87,8 +90,40 @@ const CountryDetail: React.FC = () => {
     setIsLoading(false);
   }
 
+  function utilizeCountriesData() {
+    const resData: any = countriesData;
+
+    const pathName = window.location.pathname.toString();
+    const currentCCA3 = pathName.substring(
+      pathName.length - 3,
+      pathName.length
+    );
+
+    for (const key in resData) {
+      if (resData[key].cca3 === currentCCA3) {
+        setCountryData({
+          name: resData[key].name.common,
+          capital: resData[key].capital ? resData[key].capital : "",
+          population: resData[key].population,
+          continents: resData[key].continents,
+          currencies: resData[key].currencies ? resData[key].currencies : "",
+          languages: resData[key].languages,
+          coatOfArms: resData[key].coatOfArms.png,
+          flagImg: resData[key].flags.png,
+          flagIcon: resData[key].flag,
+          cca3: resData[key].cca3,
+          borders: resData[key].borders,
+        });
+        setBgImage(regionImageArr[resData[key].continents]);
+        break;
+      }
+    }
+  }
+
   useEffect(() => {
-    requestCountryData();
+    if (countriesData === []) {
+      requestCountryData();
+    } else utilizeCountriesData();
     // test dependencies
   }, [window.location.pathname]);
 
