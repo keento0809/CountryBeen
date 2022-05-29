@@ -10,6 +10,7 @@ import { beenActions, beenReducer } from "../store/been-slice";
 import { AlertActions } from "../store/alert-slice";
 import { regionImageArr } from "../data/data";
 import { RootState } from "../store";
+import { CountryViewObj } from "../models/model";
 
 const initialState = {
   name: "",
@@ -214,7 +215,13 @@ const CountryDetail: React.FC = () => {
               <div className="country-data basis-1/2 min-h-56 pr-2 ">
                 <div className="stat-title">Capital City</div>
                 <div className="font-bold text-2xl tracking-tight">
-                  {countryData.capital}
+                  {/* original */}
+                  {/* {countryData.capital} */}
+                  {Object.values(countryData.capital)[0]}
+                  {Object.values(countryData.capital)[1] &&
+                    ", " + Object.values(countryData.capital)[1]}
+                  {Object.values(countryData.capital)[2] &&
+                    ", " + Object.values(countryData.capital)[2]}
                 </div>
               </div>
               <div className="country-data basis-1/2 min-h-56 pr-2">
@@ -233,15 +240,25 @@ const CountryDetail: React.FC = () => {
                 <div className="stat-title">Language</div>
                 <div className="font-bold text-2xl tracking-tight break-words">
                   {/* original */}
-                  {Object.values(countryData.languages)[0]}{" "}
+                  {Object.values(countryData.languages)[0]}
                   {Object.values(countryData.languages)[1] &&
-                    " , " + Object.values(countryData.languages)[1]}
+                    ", " + Object.values(countryData.languages)[1]}
                   {Object.values(countryData.languages)[2] &&
-                    " , " + Object.values(countryData.languages)[2]}
+                    ", " + Object.values(countryData.languages)[2]}
                   {Object.values(countryData.languages)[3] &&
-                    " , " + Object.values(countryData.languages)[3]}
+                    ", " + Object.values(countryData.languages)[3]}
                   {Object.values(countryData.languages)[4] &&
-                    " , " + Object.values(countryData.languages)[4]}
+                    ", " + Object.values(countryData.languages)[4]}
+                  {Object.values(countryData.languages)[5] &&
+                    ", " + Object.values(countryData.languages)[5]}
+                  {Object.values(countryData.languages)[6] &&
+                    ", " + Object.values(countryData.languages)[6]}
+                  {Object.values(countryData.languages)[7] &&
+                    ", " + Object.values(countryData.languages)[7]}
+                  {Object.values(countryData.languages)[8] &&
+                    ", " + Object.values(countryData.languages)[8]}
+                  {Object.values(countryData.languages)[9] &&
+                    ", " + Object.values(countryData.languages)[9]}
                   {/* {languageArr} */}
                 </div>
               </div>
@@ -249,9 +266,9 @@ const CountryDetail: React.FC = () => {
                 <div className="stat-title">Currency</div>
                 <div className="font-bold text-2xl tracking-tight">
                   {/* original */}
-                  {Object.keys(countryData.currencies)[0]}{" "}
+                  {Object.keys(countryData.currencies)[0]}
                   {Object.keys(countryData.currencies)[1] &&
-                    " , " + Object.keys(countryData.currencies)[1]}
+                    ", " + Object.keys(countryData.currencies)[1]}
                   {/* {currencyArray} */}
                 </div>
               </div>
