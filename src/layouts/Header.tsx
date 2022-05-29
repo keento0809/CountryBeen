@@ -82,7 +82,6 @@ const Header = () => {
   }
 
   function handleOpenMenu() {
-    console.log("testing menu...");
     setIsMenuOpen(true);
   }
 

@@ -2,9 +2,6 @@ import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { CountryCardProps } from "../../../models/model";
 
-// ml-auto mr-auto md:ml-0 mb-4
-console.log(window.location.pathname);
-
 const CountryCard = ({
   flagImg,
   countryName,
