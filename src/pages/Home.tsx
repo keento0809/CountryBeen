@@ -32,9 +32,9 @@ const Home = () => {
   const isSuccessToAddBucketList = useSelector(
     (state: RootState) => state.favoriteReducer.isSuccessToAddBucketList
   );
-  const countries = useSelector(
-    (state: RootState) => state.countriesReducer.countries
-  );
+  // const countries = useSelector(
+  //   (state: RootState) => state.countriesReducer.countries
+  // );
 
   // declare dispatch
   const dispatch = useDispatch();
