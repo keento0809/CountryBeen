@@ -62,6 +62,5 @@ export interface CountryCardProps {
   flagImg: string;
   countryName: string;
   cca3: string;
-  // handleToggleBeenTo: (e: any) => void;
   isBeenTo: boolean;
 }

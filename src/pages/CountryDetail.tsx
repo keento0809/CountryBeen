@@ -153,7 +153,7 @@ const CountryDetail: React.FC = () => {
             <img
               src={`${countryData.flagImg}`}
               alt=""
-              className="w-full h-248 rounded-3xl"
+              className="w-full max-w-374 h-248 rounded-3xl"
             />
           </figure>
           <div className="card-body bg-white dark:bg-slate-700 opacity-80 rounded-3xl">
