@@ -37,7 +37,7 @@ const Listing = ({ name }: ListingName) => {
                   flagImg={`${country.flagImg}`}
                   countryName={country.name}
                   cca3={country.cca3}
-                  handleToggleBeenTo={handleToggleBeenTo}
+                  isBeenTo={name === "Record" ? true : false}
                 />
               );
             }

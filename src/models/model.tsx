@@ -11,7 +11,8 @@ export interface CountryViewObj {
   flagImg: string;
   flagIcon: string;
   cca3: string;
-  // borders: string[];
+  // test
+  // beenTo: boolean;
 }
 
 export interface ChildrenType {
@@ -61,5 +62,6 @@ export interface CountryCardProps {
   flagImg: string;
   countryName: string;
   cca3: string;
-  handleToggleBeenTo: (e: any) => void;
+  // handleToggleBeenTo: (e: any) => void;
+  isBeenTo: boolean;
 }

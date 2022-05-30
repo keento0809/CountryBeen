@@ -13,17 +13,19 @@ const Hero = () => {
         }}
       >
         <div className="hero-overlay bg-opacity-60"></div>
-        <div className="hero-content rounded-lg bg-slate-800 bg-opacity-70 text-center text-neutral-content p-8">
-          <div className="max-w-md">
-            <h1 className="mb-5 text-5xl font-bold">CountryBeen</h1>
-            <p className="mb-5 text-slate-300">
-              Have you ever consider how many countries you've been to so far
-              and analyzing it visually? Here's the best tool making that
-              request happen. Start a brand new adventure here!
-            </p>
-            <button className="btn btn-secondary btn-outline">
-              <Link to="/home">Get Started</Link>
-            </button>
+        <div className="w-11/12 mx-auto md:w-7/12">
+          <div className="hero-content rounded-lg bg-slate-800 bg-opacity-70 text-center text-neutral-content p-8">
+            <div className="max-w-md">
+              <h1 className="mb-5 text-5xl font-bold">CountryBeen</h1>
+              <p className="mb-5 text-slate-300">
+                Have you ever consider how many countries you've been to so far
+                and analyzing it visually? Here's the best tool making that
+                request happen. Start a brand new adventure here!
+              </p>
+              <button className="btn btn-secondary btn-outline">
+                <Link to="/home">Get Started</Link>
+              </button>
+            </div>
           </div>
         </div>
       </div>
