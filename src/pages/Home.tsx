@@ -11,10 +11,6 @@ import Alert from "../components/UI/Alert";
 import WorldMap from "../components/UI/WorldMap/WorldMap";
 import axios from "axios";
 
-const styling = {
-  "--value": 70,
-};
-
 const Home = () => {
   // declare selector
   const totalNumber = useSelector(

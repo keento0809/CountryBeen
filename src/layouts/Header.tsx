@@ -41,10 +41,11 @@ const Header = () => {
             flagIcon: resData[key].flag,
             cca3: resData[key].cca3,
             borders: resData[key].borders,
+            // test
+            // beenTo: false,
           });
         }
         setDefaultData(loadedData);
-        // setCountryData(loadedData);
       })
       .catch((error) => console.log(error.message));
     setIsLoading(false);

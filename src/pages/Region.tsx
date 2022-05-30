@@ -143,38 +143,6 @@ const Region = () => {
     setDataLength(filteredData.length);
   }
 
-  function handleToggleFavorite(e: any) {
-    const addingCountryCCA3 = e.target.parentNode.id;
-    const addingCountry = defaultData.find(
-      (country) => country.cca3 === addingCountryCCA3
-    );
-    // I gutta add dispatch
-    dispatch(favoriteActions.addFavorite(addingCountry!));
-    navigate("/home");
-  }
-
-  function handleToggleBeenTo(e: any) {
-    // const a = e.target.parentNode.className.baseVal;
-    console.log("clickされたデー");
-    // const addingCountryCCA3 = e.target.parentNode.id;
-    // console.log(e.target.parentNode.id);
-    // if (addingCountryCCA3 === undefined) {
-    //   alert("Request failed.");
-    //   return;
-    // }
-    // const addingCountry = defaultData.find(
-    //   (country) => country.cca3 === addingCountryCCA3
-    // );
-    // dispatch(beenActions.addBeenTo(addingCountry!));
-    // navigate("/home");
-  }
-
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setIsSet(true);
-  //   }, 800);
-  // }, []);
-
   return (
     <RegionWrapper imageUrl={bgImage}>
       {/* <Header /> */}
@@ -211,7 +179,7 @@ const Region = () => {
                       flagImg={`${country.flagImg}`}
                       countryName={country.name}
                       cca3={country.cca3}
-                      handleToggleBeenTo={handleToggleBeenTo}
+                      isBeenTo={false}
                     />
                   );
                 })}
