@@ -31,6 +31,8 @@ const CountryDetail: React.FC = () => {
   const [countryData, setCountryData] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
   const [bgImage, setBgImage] = useState("");
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isBeenTo, setIsBeenTo] = useState(false);
 
   // declare selector
   const beenToList = useSelector(
@@ -41,6 +43,9 @@ const CountryDetail: React.FC = () => {
   );
   const countriesData = useSelector(
     (state: RootState) => state.countriesReducer.countries
+  );
+  const favoriteList = useSelector(
+    (state: RootState) => state.favoriteReducer.favoriteList
   );
 
   // declare dispatch
@@ -99,6 +104,18 @@ const CountryDetail: React.FC = () => {
       pathName.length
     );
 
+    function checkInFavorite(cca3Val: string) {
+      favoriteList.forEach((country) => {
+        country.cca3 === cca3Val && setIsFavorite(true);
+      });
+    }
+
+    function checkInBeenTo(cca3Val: string) {
+      beenToList.forEach((country) => {
+        country.cca3 === cca3Val && setIsBeenTo(true);
+      });
+    }
+
     for (const key in resData) {
       if (resData[key].cca3 === currentCCA3) {
         setCountryData({
@@ -115,6 +132,8 @@ const CountryDetail: React.FC = () => {
           borders: resData[key].borders,
         });
         setBgImage(regionImageArr[resData[key].continents]);
+        checkInFavorite(resData[key].cca3);
+        checkInBeenTo(resData[key].cca3);
         break;
       }
     }
@@ -163,52 +182,72 @@ const CountryDetail: React.FC = () => {
               <h2 className="stat-value overflow-x-auto">{`${countryData.name}`}</h2>
               <div className="icons max-h-32 my-2">
                 <div className="tooltip tooltip-left" data-tip="Add BucketList">
-                  <svg
-                    onClick={handleToggleFavorite}
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 mr-4 inline-block cursor-pointer"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="#f92fca"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                    />
-                  </svg>
+                  {!isFavorite && (
+                    <svg
+                      onClick={handleToggleFavorite}
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-8 w-8 mr-4 inline-block cursor-pointer"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="#f92fca"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                      />
+                    </svg>
+                  )}
+                  {/* temporary */}
+                  {isFavorite && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-8 w-8 mr-4 inline-block cursor-pointer"
+                      viewBox="0 0 20 20"
+                      fill="#f92fca"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  )}
                 </div>
                 <div className="tooltip tooltip-right" data-tip="Add Record">
-                  <svg
-                    onClick={handleToggleBeenTo}
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-8 w-8 inline-block cursor-pointer"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="#f92fca"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
+                  {!isBeenTo && (
+                    <svg
+                      onClick={handleToggleBeenTo}
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-8 w-8 inline-block cursor-pointer"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="#f92fca"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                      />
+                    </svg>
+                  )}
+                  {isBeenTo && (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-8 w-8 inline-block cursor-pointer"
+                      viewBox="0 0 20 20"
+                      fill="#f92fca"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  )}
                 </div>
-                {/* temporary */}
-                {/* <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-8 w-8 inline-block cursor-pointer"
-                  viewBox="0 0 20 20"
-                  fill="#f92fca"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
-                </svg> */}
               </div>
             </div>
             <div className="flex flex-wrap flex-row justify-start items-start pb-3">
