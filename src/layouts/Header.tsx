@@ -94,6 +94,10 @@ const Header = () => {
     fetchCountryData();
   }, []);
 
+  useEffect(() => {
+    handleCloseMenu();
+  }, [window.location.pathname]);
+
   return (
     <Fragment>
       {isMenuOpen && (

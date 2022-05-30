@@ -18,9 +18,10 @@ const Listing = ({ name }: ListingName) => {
     (state: RootState) => state.beenReducer.beenToList
   );
 
-  function handleToggleBeenTo() {
-    console.log("I need to change something.");
-  }
+  // function handleToggleBeenTo() {
+  //   console.log("I need to change something.");
+  // }
+  // console.log(name === "Record" ? "aa" : "bb");
 
   return (
     <DisplayWrapper>
