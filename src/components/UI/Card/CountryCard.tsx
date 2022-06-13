@@ -24,7 +24,7 @@ const CountryCard = ({
             />
           </figure>
           <div className="card-body transition-all overflow-hidden">
-            <h2 className="font-extrabold text-3xl drop-shadow-md">
+            <h2 className="font-extrabold text-3xl drop-shadow-md dark:text-slate-50">
               {countryName}
             </h2>
             {/* <div className="tooltip tooltip-right" data-tip="Add Record">

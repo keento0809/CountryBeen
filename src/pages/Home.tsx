@@ -93,7 +93,9 @@ const Home = () => {
                       </Link>
                     </div>
                     <div className="stat-title">You've been to</div>
-                    <div className="stat-value">{totals}</div>
+                    <div className="stat-value dark:text-slate-50">
+                      {totals}
+                    </div>
                     <div className="stat-desc">Countries</div>
                   </div>
 
@@ -114,7 +116,9 @@ const Home = () => {
                       </svg>
                     </div>
                     <div className="stat-title">Achievement rate</div>
-                    <div className="stat-value">{percentage.toFixed(1)}%</div>
+                    <div className="stat-value dark:text-slate-50">
+                      {percentage.toFixed(1)}%
+                    </div>
                     <div className="stat-desc">{totals} / 245</div>
                   </div>
                   <div className="stat basis-4/12">
@@ -136,7 +140,9 @@ const Home = () => {
                       </Link>
                     </div>
                     <div className="stat-title">Number of Bucket-list</div>
-                    <div className="stat-value">{totalNumber}</div>
+                    <div className="stat-value dark:text-slate-50">
+                      {totalNumber}
+                    </div>
                     <div className="stat-desc">Countries</div>
                   </div>
                 </div>

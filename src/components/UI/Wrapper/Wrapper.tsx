@@ -16,7 +16,6 @@ const Wrapper = ({ children }: ChildrenType) => {
         <Header />
         <div className="pt-16 mx-auto max-w-374 lg:max-w-780">{children}</div>
       </div>
-      ;
     </div>
   );
 };

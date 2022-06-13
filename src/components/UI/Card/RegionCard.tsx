@@ -15,7 +15,7 @@ const RegionCard = ({ imgUrl, region }: RegionCardProps) => {
 
         <div className="card-body flex justify-center items-center">
           <div className="card-body__container">
-            <h2 className="grow font-extrabold text-3xl text-white">
+            <h2 className="grow font-extrabold text-3xl text-white dark:text-gray-300">
               {region}
             </h2>
           </div>

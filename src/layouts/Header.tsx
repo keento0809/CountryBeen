@@ -161,7 +161,7 @@ const Header = () => {
                 ref={searchInputRef}
                 type="text"
                 placeholder="Search Country"
-                className="bg-white mb-4 input input-bordered input-primary w-full max-w-258 md:max-w-320 max-w-xs outline-none border-0"
+                className="bg-white dark:text-slate-600 mb-4 input input-bordered input-primary w-full max-w-258 md:max-w-320 max-w-xs outline-none border-0"
                 onKeyUp={handleCheckValue}
               />
             </div>
