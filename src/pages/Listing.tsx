@@ -24,7 +24,7 @@ const Listing = ({ name }: ListingName) => {
         <div className="title text-center text-white">
           <h2 className="py-6 font-bold text-2xl">{name}</h2>
         </div>
-        <div className="overflow-scroll max-h-680 md:max-h-640 md:flex flex-wrap">
+        <div className="overflow-scroll rounded-2xl max-h-680 md:max-h-640 md:flex flex-wrap">
           {(name === "Record" ? beenToList : favoriteList).map(
             (country, index) => {
               return (

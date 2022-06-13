@@ -1,16 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Wrapper from "../components/UI/Wrapper/Wrapper";
 import RegionWrapper from "../components/UI/Wrapper/RegionWrapper";
-import Header from "../layouts/Header";
 import { useDispatch, useSelector } from "react-redux";
 import { favoriteActions } from "../store/favorite-slice";
 import { beenActions, beenReducer } from "../store/been-slice";
 import { AlertActions } from "../store/alert-slice";
 import { regionImageArr } from "../data/data";
 import { RootState } from "../store";
-import { CountryViewObj } from "../models/model";
 
 const initialState = {
   name: "",
@@ -179,7 +176,7 @@ const CountryDetail: React.FC = () => {
             {/* original */}
             {/* <div className="flex flex-wrap items-start flex-col overflow-x-scroll"> */}
             <div className="">
-              <h2 className="stat-value overflow-x-auto">{`${countryData.name}`}</h2>
+              <h2 className="stat-value overflow-x-auto dark:text-slate-100">{`${countryData.name}`}</h2>
               <div className="icons max-h-32 my-2">
                 <div className="tooltip tooltip-left" data-tip="Add BucketList">
                   {!isFavorite && (
@@ -253,7 +250,7 @@ const CountryDetail: React.FC = () => {
             <div className="flex flex-wrap flex-row justify-start items-start pb-3">
               <div className="country-data basis-1/2 min-h-56 pr-2 ">
                 <div className="stat-title">Capital City</div>
-                <div className="font-bold text-2xl tracking-tight">
+                <div className="font-bold text-2xl tracking-tight dark:text-slate-100">
                   {/* original */}
                   {/* {countryData.capital} */}
                   {Object.values(countryData.capital)[0]}
@@ -264,20 +261,20 @@ const CountryDetail: React.FC = () => {
                 </div>
               </div>
               <div className="country-data basis-1/2 min-h-56 pr-2">
-                <div className="stat-title">Population</div>
-                <div className="font-bold text-2xl tracking-tight">
+                <div className="stat-title dark:text-slate-100">Population</div>
+                <div className="font-bold text-2xl tracking-tight dark:text-slate-100">
                   {countryData.population.toLocaleString()}
                 </div>
               </div>
               <div className="country-data basis-1/2 min-h-56 pr-2">
                 <div className="stat-title">Region</div>
-                <div className="font-bold text-2xl tracking-tight">
+                <div className="font-bold text-2xl tracking-tight dark:text-slate-100">
                   {countryData.continents}
                 </div>
               </div>
               <div className="country-data basis-1/2 min-h-56 pr-2">
                 <div className="stat-title">Language</div>
-                <div className="font-bold text-2xl tracking-tight break-words">
+                <div className="font-bold text-2xl tracking-tight break-words dark:text-slate-100">
                   {/* original */}
                   {Object.values(countryData.languages)[0]}
                   {Object.values(countryData.languages)[1] &&
@@ -303,7 +300,7 @@ const CountryDetail: React.FC = () => {
               </div>
               <div className="country-data basis-1/2 min-h-56 pr-2">
                 <div className="stat-title">Currency</div>
-                <div className="font-bold text-2xl tracking-tight">
+                <div className="font-bold text-2xl tracking-tight dark:text-slate-100">
                   {/* original */}
                   {Object.keys(countryData.currencies)[0]}
                   {Object.keys(countryData.currencies)[1] &&
@@ -313,7 +310,7 @@ const CountryDetail: React.FC = () => {
               </div>
               <div className="country-data basis-1/2 min-h-56 pr-2">
                 <div className="stat-title">More Info</div>
-                <div className="font-normal text-2xl tracking-tight">
+                <div className="font-normal text-2xl tracking-tight dark:text-slate-100">
                   <a
                     href={`https://en.wikipedia.org/wiki/${
                       countryData.name[0]

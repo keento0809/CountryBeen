@@ -137,7 +137,9 @@ const Region = () => {
 
   function handleCheckValue() {
     const filteredData = defaultData.filter((country) =>
-      country.name.toLowerCase().includes(searchInputRef.current!.value)
+      country.name
+        .toLowerCase()
+        .includes(searchInputRef.current!.value.toLowerCase())
     );
     setCountryData(filteredData);
     setDataLength(filteredData.length);
