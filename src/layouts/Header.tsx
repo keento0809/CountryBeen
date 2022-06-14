@@ -210,20 +210,6 @@ const Header = () => {
                   />
                 </svg>
               </label>
-              <ul
-                tab-index="0"
-                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-              >
-                <li>
-                  <a>Homepage</a>
-                </li>
-                <li>
-                  <a>Portfolio</a>
-                </li>
-                <li>
-                  <a>About</a>
-                </li>
-              </ul>
             </div>
           </div>
           <div className="navbar-center">
