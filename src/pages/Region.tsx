@@ -147,7 +147,6 @@ const Region = () => {
 
   return (
     <RegionWrapper imageUrl={bgImage}>
-      {/* <Header /> */}
       <div className="">
         <section className="py-4">
           <input

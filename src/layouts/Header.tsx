@@ -281,13 +281,22 @@ const Header = () => {
                   </svg>
                 </button>
                 {/* test */}
-                <Link to={"/record"} className="text-sm btn-ghost">
+                <Link
+                  to={"/record"}
+                  className="text-sm btn-ghost py-1 px-3 rounded-lg"
+                >
                   Record
                 </Link>
-                <Link to={"/bucket-list"} className="text-sm btn-ghost">
+                <Link
+                  to={"/bucket-list"}
+                  className="text-sm btn-ghost py-1 px-3 rounded-lg"
+                >
                   BucketList
                 </Link>
-                <Link to={"/countries"} className="text-sm btn-ghost">
+                <Link
+                  to={"/countries"}
+                  className="text-sm btn-ghost py-1 px-3 rounded-lg"
+                >
                   Countries
                 </Link>
               </nav>
