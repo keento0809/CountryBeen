@@ -25,6 +25,13 @@ const Listing = ({ name }: ListingName) => {
           <h2 className="py-6 font-bold text-2xl">{name}</h2>
         </div>
         <div className="overflow-scroll rounded-2xl max-h-680 md:max-h-640 md:flex flex-wrap">
+          {(beenToList.length === 0 || favoriteList.length === 0) && (
+            <div className="text-center">
+              <p className="text-white dark:text-slate-100">
+                No countries added.
+              </p>
+            </div>
+          )}
           {(name === "Record" ? beenToList : favoriteList).map(
             (country, index) => {
               return (

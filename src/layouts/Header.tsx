@@ -210,20 +210,6 @@ const Header = () => {
                   />
                 </svg>
               </label>
-              <ul
-                tab-index="0"
-                className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
-              >
-                <li>
-                  <a>Homepage</a>
-                </li>
-                <li>
-                  <a>Portfolio</a>
-                </li>
-                <li>
-                  <a>About</a>
-                </li>
-              </ul>
             </div>
           </div>
           <div className="navbar-center">
@@ -281,13 +267,22 @@ const Header = () => {
                   </svg>
                 </button>
                 {/* test */}
-                <Link to={"/record"} className="text-sm btn-ghost">
+                <Link
+                  to={"/record"}
+                  className="text-sm btn-ghost py-1 px-3 rounded-lg"
+                >
                   Record
                 </Link>
-                <Link to={"/bucket-list"} className="text-sm btn-ghost">
+                <Link
+                  to={"/bucket-list"}
+                  className="text-sm btn-ghost py-1 px-3 rounded-lg"
+                >
                   BucketList
                 </Link>
-                <Link to={"/countries"} className="text-sm btn-ghost">
+                <Link
+                  to={"/countries"}
+                  className="text-sm btn-ghost py-1 px-3 rounded-lg"
+                >
                   Countries
                 </Link>
               </nav>

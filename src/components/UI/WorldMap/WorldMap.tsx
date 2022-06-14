@@ -25,9 +25,14 @@ const WorldMap = () => {
   // const cca3s = ["JPN", "THA", "VNM", "AUS", "ITA"];
 
   return (
-    <div className="bg-transparent">
+    <div className="bg-transparent xl:max-w-780 xl:max-h-532">
       <ComposableMap>
-        <Geographies geography={geoUrl} fill="#F7F7F7" stroke="#888888">
+        <Geographies
+          geography={geoUrl}
+          fill="#F7F7F7"
+          stroke="#888888"
+          className="max-h-500"
+        >
           {({ geographies }) =>
             geographies.map((geo) => {
               // cca3

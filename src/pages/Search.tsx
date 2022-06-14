@@ -20,7 +20,7 @@ const Search = () => {
             Select Region
           </h2>
         </div>
-        <section className="countries">
+        <section className="countries lg:pb-6">
           <div className="countries-container max-h-680 overflow-scroll lg:flex lg:flex-wrap lg:justify-between">
             {regionData.map((region, index) => {
               return (

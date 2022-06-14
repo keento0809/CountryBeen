@@ -176,7 +176,7 @@ const CountryDetail: React.FC = () => {
             {/* original */}
             {/* <div className="flex flex-wrap items-start flex-col overflow-x-scroll"> */}
             <div className="">
-              <h2 className="stat-value overflow-x-auto dark:text-slate-100">{`${countryData.name}`}</h2>
+              <h2 className="stat-value overflow-x-auto overflow-y-hidden dark:text-slate-100">{`${countryData.name}`}</h2>
               <div className="icons max-h-32 my-2">
                 <div className="tooltip tooltip-left" data-tip="Add BucketList">
                   {!isFavorite && (
