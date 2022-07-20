@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import Header from "../layouts/Header";
 // import Wrapper from "../components/UI/Wrapper/Wrapper";
-import HomeWrapper from "../components/UI/Wrapper/HomeWrapper";
+import HomeWrapper from "../components/Wrapper/HomeWrapper";
 import { Link } from "react-router-dom";
 import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { countriesActions } from "../store/countries-slice";
 import { RootState } from "../store";
-import Alert from "../components/UI/Alert";
-import WorldMap from "../components/UI/WorldMap/WorldMap";
+import Alert from "../components/UI/Alert/Alert";
+import WorldMap from "../components/WorldMap/WorldMap";
 import axios from "axios";
 
 const Home = () => {
@@ -119,7 +119,7 @@ const Home = () => {
                     <div className="stat-value dark:text-slate-50">
                       {percentage.toFixed(1)}%
                     </div>
-                    <div className="stat-desc">{totals} / 245</div>
+                    <div className="stat-desc">{totals} / 245 Countries</div>
                   </div>
                   <div className="stat basis-4/12">
                     <div className="stat-figure text-secondary">

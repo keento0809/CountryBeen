@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Header from "../layouts/Header";
-import Wrapper from "../components/UI/Wrapper/Wrapper";
+import Wrapper from "../components/Wrapper/Wrapper";
 
 const NotFound = () => {
   return (

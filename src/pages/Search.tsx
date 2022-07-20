@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from "react";
-import Wrapper from "../components/UI/Wrapper/Wrapper";
+import Wrapper from "../components/Wrapper/Wrapper";
 import { Link } from "react-router-dom";
 import { regionArrFixed, regionImageArr } from "../data/data";
 import RegionCard from "../components/UI/Card/RegionCard";

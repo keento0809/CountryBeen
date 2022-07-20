@@ -1,6 +1,6 @@
-import Header from "../../../layouts/Header";
-import { ChildrenType } from "../../../models/model";
-import imgUrl from "../../../assets/test-cardBg.jpg";
+import Header from "../../layouts/Header";
+import { ChildrenType } from "../../models/model";
+import imgUrl from "../../assets/test-cardBg.jpg";
 
 const Wrapper = ({ children }: ChildrenType) => {
   return (
