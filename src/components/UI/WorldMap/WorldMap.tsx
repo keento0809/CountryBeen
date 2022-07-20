@@ -4,7 +4,7 @@ import { RootState } from "../../../store";
 import { useEffect, useState } from "react";
 
 const geoUrl =
-  "https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json";
+  "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
 
 const WorldMap = () => {
   // declare useState
@@ -21,14 +21,14 @@ const WorldMap = () => {
     setCca3List(cca3Arr);
   }, [beenToList.length]);
 
-  // test
-  // const cca3s = ["JPN", "THA", "VNM", "AUS", "ITA"];
+  console.log(cca3List);
 
   return (
     <div className="bg-transparent xl:max-w-780 xl:max-h-532">
       <ComposableMap>
         <Geographies
           geography={geoUrl}
+          // original
           fill="#F7F7F7"
           stroke="#888888"
           className="max-h-500"
@@ -36,10 +36,9 @@ const WorldMap = () => {
           {({ geographies }) =>
             geographies.map((geo) => {
               // cca3
-              // console.log(geo.properties.NAME, geo.properties.ISO_A3);
               let boolBeen = false;
               for (let i = 0; i < cca3List.length; i++) {
-                if (geo.properties.ISO_A3 == cca3List[i]) {
+                if (geo.id == cca3List[i]) {
                   boolBeen = true;
                 }
               }
