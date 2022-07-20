@@ -1,8 +1,8 @@
-import { AlertText } from "../../models/model";
+import { AlertText } from "../../../models/model";
 
 const Alert = ({ text }: AlertText) => {
   return (
-    <div className="px-5 mx-auto fixed bottom-10 left-0 w-full z-50">
+    <div className="px-5 mx-auto fixed bottom-10 left-0 w-full md:w-2/3 lg:w-1/2 xl:w-1/3 z-50">
       <div className="alert shadow-lg items-start bg-slate-600 text-white">
         <div className="">
           <svg

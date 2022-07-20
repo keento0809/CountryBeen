@@ -1,4 +1,4 @@
-import DisplayWrapper from "../components/UI/Wrapper/DisplayWrapper";
+import DisplayWrapper from "../components/Wrapper/DisplayWrapper";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import { CountryViewObj } from "../models/model";
@@ -24,7 +24,8 @@ const Listing = ({ name }: ListingName) => {
         <div className="title text-center text-white">
           <h2 className="py-6 font-bold text-2xl">{name}</h2>
         </div>
-        {(beenToList.length === 0 || favoriteList.length === 0) && (
+        {((name === "Record" && beenToList.length === 0) ||
+          (name !== "Record" && favoriteList.length === 0)) && (
           <div className="text-center">
             <p className="text-white dark:text-slate-100">
               No countries added.

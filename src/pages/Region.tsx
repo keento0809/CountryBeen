@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import { CountryViewObj, PropsRegion } from "../models/model";
-import Wrapper from "../components/UI/Wrapper/Wrapper";
-import RegionWrapper from "../components/UI/Wrapper/RegionWrapper";
+import Wrapper from "../components/Wrapper/Wrapper";
+import RegionWrapper from "../components/Wrapper/RegionWrapper";
 import Header from "../layouts/Header";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
