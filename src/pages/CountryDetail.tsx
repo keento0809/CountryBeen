@@ -8,6 +8,9 @@ import { beenActions, beenReducer } from "../store/been-slice";
 import { AlertActions } from "../store/alert-slice";
 import { regionImageArr } from "../data/data";
 import { RootState } from "../store";
+import { collection, addDoc } from "firebase/firestore";
+import { db } from "../services/firebase";
+import { CountryViewObj } from "../models/model";
 
 const initialState = {
   name: "",
@@ -136,8 +139,19 @@ const CountryDetail: React.FC = () => {
     }
   }
 
+  async function postToFirebase(params: string, dataObj: CountryViewObj) {
+    try {
+      const docRef = await addDoc(collection(db, params), dataObj);
+      console.log("Doc written with ID: ", docRef.id);
+    } catch (e) {
+      console.error("Error adding doc: ", e);
+    }
+  }
+
   function handleAddFavorite() {
     dispatch(favoriteActions.addFavorite(countryData));
+    // test
+    postToFirebase("bucketlist", countryData);
     dispatch(AlertActions.turnOnAlert("Country Added to BucketList!"));
     navigate("/home");
     setTimeout(() => {

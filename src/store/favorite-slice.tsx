@@ -11,6 +11,10 @@ const favoriteSlice = createSlice({
   name: "favorite",
   initialState: initialState,
   reducers: {
+    fetchFavorite(state, { payload }: PayloadAction<CountryViewObj[]>) {
+      state.favoriteList = [...payload];
+      state.totalNumber = payload.length;
+    },
     addFavorite(state, { payload }: PayloadAction<CountryViewObj>) {
       if (
         state.favoriteList.find((country) => country.cca3 === payload.cca3) !==
