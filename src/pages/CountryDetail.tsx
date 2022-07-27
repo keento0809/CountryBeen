@@ -136,7 +136,7 @@ const CountryDetail: React.FC = () => {
     }
   }
 
-  function handleToggleFavorite() {
+  function handleAddFavorite() {
     dispatch(favoriteActions.addFavorite(countryData));
     dispatch(AlertActions.turnOnAlert("Country Added to BucketList!"));
     navigate("/home");
@@ -145,9 +145,27 @@ const CountryDetail: React.FC = () => {
     }, 1000);
   }
 
-  function handleToggleBeenTo() {
+  function handleRemoveFavorite() {
+    dispatch(favoriteActions.removeFavorite(countryData));
+    dispatch(AlertActions.turnOnAlert("Country deleted from BucketList!"));
+    navigate("/home");
+    setTimeout(() => {
+      dispatch(AlertActions.turnOffAlert());
+    }, 1000);
+  }
+
+  function handleAddBeenTo() {
     dispatch(beenActions.addBeenTo(countryData));
     dispatch(AlertActions.turnOnAlert("Country Added to Record!"));
+    navigate("/home");
+    setTimeout(() => {
+      dispatch(AlertActions.turnOffAlert());
+    }, 1000);
+  }
+
+  function handleRemoveBeenTo() {
+    dispatch(beenActions.removeBeenTo(countryData));
+    dispatch(AlertActions.turnOnAlert("Country deleted from Record!"));
     navigate("/home");
     setTimeout(() => {
       dispatch(AlertActions.turnOffAlert());
@@ -173,15 +191,13 @@ const CountryDetail: React.FC = () => {
             />
           </figure>
           <div className="card-body bg-white dark:bg-slate-700 opacity-80 rounded-3xl">
-            {/* original */}
-            {/* <div className="flex flex-wrap items-start flex-col overflow-x-scroll"> */}
             <div className="">
               <h2 className="stat-value overflow-x-auto overflow-y-hidden dark:text-slate-100">{`${countryData.name}`}</h2>
               <div className="icons max-h-32 my-2">
                 <div className="tooltip tooltip-left" data-tip="Add BucketList">
                   {!isFavorite && (
                     <svg
-                      onClick={handleToggleFavorite}
+                      onClick={handleAddFavorite}
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-8 w-8 mr-4 inline-block cursor-pointer"
                       fill="none"
@@ -196,9 +212,9 @@ const CountryDetail: React.FC = () => {
                       />
                     </svg>
                   )}
-                  {/* temporary */}
                   {isFavorite && (
                     <svg
+                      onClick={handleRemoveFavorite}
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-8 w-8 mr-4 inline-block cursor-pointer"
                       viewBox="0 0 20 20"
@@ -215,7 +231,7 @@ const CountryDetail: React.FC = () => {
                 <div className="tooltip tooltip-right" data-tip="Add Record">
                   {!isBeenTo && (
                     <svg
-                      onClick={handleToggleBeenTo}
+                      onClick={handleAddBeenTo}
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-8 w-8 inline-block cursor-pointer"
                       fill="none"
@@ -232,6 +248,7 @@ const CountryDetail: React.FC = () => {
                   )}
                   {isBeenTo && (
                     <svg
+                      onClick={handleRemoveBeenTo}
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-8 w-8 inline-block cursor-pointer"
                       viewBox="0 0 20 20"
