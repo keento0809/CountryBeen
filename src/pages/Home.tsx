@@ -6,10 +6,15 @@ import { Link } from "react-router-dom";
 import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { countriesActions } from "../store/countries-slice";
+import { favoriteActions } from "../store/favorite-slice";
 import { RootState } from "../store";
 import Alert from "../components/UI/Alert/Alert";
 import WorldMap from "../components/WorldMap/WorldMap";
 import axios from "axios";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../services/firebase";
+import { beenActions } from "../store/been-slice";
+import { useFetchCountriesFromDB } from "../hooks/useFetchCountriesFromDB";
 
 const Home = () => {
   // declare selector
@@ -32,9 +37,6 @@ const Home = () => {
   const isSuccessToAddBucketList = useSelector(
     (state: RootState) => state.favoriteReducer.isSuccessToAddBucketList
   );
-  // const countries = useSelector(
-  //   (state: RootState) => state.countriesReducer.countries
-  // );
 
   // declare dispatch
   const dispatch = useDispatch();
@@ -52,6 +54,34 @@ const Home = () => {
       .catch((error) => console.log(error.message));
   }
 
+  async function fetchDataFromDB(isRecords: boolean) {
+    const querySnapshot = isRecords
+      ? await getDocs(collection(db, "records"))
+      : await getDocs(collection(db, "bucketlist"));
+    const resultData: any = [];
+    querySnapshot.forEach((doc) => {
+      const resData = doc.data();
+      resultData.push({
+        name: resData.name,
+        capital: resData.capital ? resData.capital : "",
+        population: resData.population,
+        continents: resData.continents,
+        currencies: resData.currencies ? resData.currencies : "",
+        languages: resData.languages,
+        coatOfArms: resData.coatOfArms.png,
+        flagImg: resData.flagImg,
+        flagIcon: resData.flag,
+        cca3: resData.cca3,
+        borders: resData.borders,
+      });
+    });
+    dispatch(
+      isRecords
+        ? beenActions.fetchBeenTo(resultData)
+        : favoriteActions.fetchFavorite(resultData)
+    );
+  }
+
   useEffect(() => {
     localStorage.setItem("beenTo", JSON.stringify(beenToList));
   }, [beenToList.length]);
@@ -60,6 +90,8 @@ const Home = () => {
 
   useEffect(() => {
     fetchCountryData();
+    fetchDataFromDB(true);
+    fetchDataFromDB(false);
   }, []);
 
   return (

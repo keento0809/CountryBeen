@@ -13,6 +13,10 @@ const BeenSlice = createSlice({
   name: "beenTo",
   initialState: initialState,
   reducers: {
+    fetchBeenTo(state, { payload }: PayloadAction<CountryViewObj[]>) {
+      state.beenToList = [...payload];
+      state.totals = payload.length;
+    },
     addBeenTo(state, { payload }: PayloadAction<CountryViewObj>) {
       if (payload === undefined) {
         alert("Somehow this one is undefined.");
