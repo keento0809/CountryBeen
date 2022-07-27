@@ -8,7 +8,7 @@ import { beenActions, beenReducer } from "../store/been-slice";
 import { AlertActions } from "../store/alert-slice";
 import { regionImageArr } from "../data/data";
 import { RootState } from "../store";
-import { collection, addDoc } from "firebase/firestore";
+import { setDoc, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { CountryViewObj } from "../models/model";
 
@@ -72,19 +72,31 @@ const CountryDetail: React.FC = () => {
         for (const key in resData) {
           if (resData[key].cca3 === currentCCA3) {
             setCountryData({
-              name: resData[key].name.common,
-              capital: resData[key].capital ? resData[key].capital : "",
-              population: resData[key].population,
-              continents: resData[key].continents,
+              name: resData[key].name.common
+                ? resData[key].name.common
+                : "No data",
+              capital: resData[key].capital ? resData[key].capital : "No data",
+              population: resData[key].population
+                ? resData[key].population
+                : "No data",
+              continents: resData[key].continents
+                ? resData[key].continents
+                : "No data",
               currencies: resData[key].currencies
                 ? resData[key].currencies
-                : "",
-              languages: resData[key].languages,
-              coatOfArms: resData[key].coatOfArms.png,
-              flagImg: resData[key].flags.png,
-              flagIcon: resData[key].flag,
-              cca3: resData[key].cca3,
-              borders: resData[key].borders,
+                : "No data",
+              languages: resData[key].languages
+                ? resData[key].languages
+                : "No data",
+              coatOfArms: resData[key].coatOfArms.png
+                ? resData[key].coatOfArms.png
+                : "No data",
+              flagImg: resData[key].flags.png
+                ? resData[key].flags.png
+                : "No data",
+              flagIcon: resData[key].flag ? resData[key].flag : "No data",
+              cca3: resData[key].cca3 ? resData[key].cca3 : "No data",
+              borders: resData[key].borders ? resData[key].borders : "No data",
             });
             setBgImage(regionImageArr[resData[key].continents]);
             break;
@@ -119,17 +131,27 @@ const CountryDetail: React.FC = () => {
     for (const key in resData) {
       if (resData[key].cca3 === currentCCA3) {
         setCountryData({
-          name: resData[key].name.common,
-          capital: resData[key].capital ? resData[key].capital : "",
-          population: resData[key].population,
-          continents: resData[key].continents,
-          currencies: resData[key].currencies ? resData[key].currencies : "",
-          languages: resData[key].languages,
-          coatOfArms: resData[key].coatOfArms.png,
-          flagImg: resData[key].flags.png,
-          flagIcon: resData[key].flag,
-          cca3: resData[key].cca3,
-          borders: resData[key].borders,
+          name: resData[key].name.common ? resData[key].name.common : "No data",
+          capital: resData[key].capital ? resData[key].capital : "No data",
+          population: resData[key].population
+            ? resData[key].population
+            : "No data",
+          continents: resData[key].continents
+            ? resData[key].continents
+            : "No data",
+          currencies: resData[key].currencies
+            ? resData[key].currencies
+            : "No data",
+          languages: resData[key].languages
+            ? resData[key].languages
+            : "No data",
+          coatOfArms: resData[key].coatOfArms.png
+            ? resData[key].coatOfArms.png
+            : "No data",
+          flagImg: resData[key].flags.png ? resData[key].flags.png : "No data",
+          flagIcon: resData[key].flag ? resData[key].flag : "No data",
+          cca3: resData[key].cca3 ? resData[key].cca3 : "No data",
+          borders: resData[key].borders ? resData[key].borders : "No data",
         });
         setBgImage(regionImageArr[resData[key].continents]);
         checkInFavorite(resData[key].cca3);
@@ -139,19 +161,27 @@ const CountryDetail: React.FC = () => {
     }
   }
 
-  async function postToFirebase(params: string, dataObj: CountryViewObj) {
+  async function postToFirebase(
+    params: string,
+    cca3: string,
+    dataObj: CountryViewObj
+  ) {
     try {
-      const docRef = await addDoc(collection(db, params), dataObj);
-      console.log("Doc written with ID: ", docRef.id);
+      await setDoc(doc(db, params, cca3), dataObj);
     } catch (e) {
       console.error("Error adding doc: ", e);
     }
   }
 
+  async function deleteToFirebase(params: string, cca3: string) {
+    console.log("Is it working??");
+    await deleteDoc(doc(db, params, cca3));
+  }
+
   function handleAddFavorite() {
+    console.log(countryData);
     dispatch(favoriteActions.addFavorite(countryData));
-    // test
-    postToFirebase("bucketlist", countryData);
+    postToFirebase("bucketlist", countryData.cca3, countryData);
     dispatch(AlertActions.turnOnAlert("Country Added to BucketList!"));
     navigate("/home");
     setTimeout(() => {
@@ -161,6 +191,8 @@ const CountryDetail: React.FC = () => {
 
   function handleRemoveFavorite() {
     dispatch(favoriteActions.removeFavorite(countryData));
+    deleteToFirebase("bucketlist", countryData.cca3);
+    dispatch(favoriteActions.fetchFavorite(favoriteList));
     dispatch(AlertActions.turnOnAlert("Country deleted from BucketList!"));
     navigate("/home");
     setTimeout(() => {
@@ -170,6 +202,7 @@ const CountryDetail: React.FC = () => {
 
   function handleAddBeenTo() {
     dispatch(beenActions.addBeenTo(countryData));
+    postToFirebase("records", countryData.cca3, countryData);
     dispatch(AlertActions.turnOnAlert("Country Added to Record!"));
     navigate("/home");
     setTimeout(() => {
@@ -179,6 +212,8 @@ const CountryDetail: React.FC = () => {
 
   function handleRemoveBeenTo() {
     dispatch(beenActions.removeBeenTo(countryData));
+    deleteToFirebase("records", countryData.cca3);
+    dispatch(beenActions.fetchBeenTo(beenToList));
     dispatch(AlertActions.turnOnAlert("Country deleted from Record!"));
     navigate("/home");
     setTimeout(() => {
