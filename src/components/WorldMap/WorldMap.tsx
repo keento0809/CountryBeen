@@ -21,8 +21,6 @@ const WorldMap = () => {
     setCca3List(cca3Arr);
   }, [beenToList.length]);
 
-  console.log(cca3List);
-
   return (
     <div className="bg-transparent xl:max-w-780 xl:max-h-532">
       <ComposableMap>
