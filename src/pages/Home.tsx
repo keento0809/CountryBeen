@@ -68,7 +68,7 @@ const Home = () => {
             <h2 className="py-6 font-bold text-2xl">Dashboard</h2>
           </section>
           <div className="max-h-640 md:max-h-620 overflow-scroll">
-            <section className="mapping bg-slate-700 rounded-2xl lg:mx-0 なぜ消えたんや">
+            <section className="mapping bg-slate-700 rounded-2xl lg:mx-0">
               <WorldMap />
             </section>
             <div className="md:flex flex-row items-start justify-center">
