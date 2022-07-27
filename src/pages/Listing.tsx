@@ -1,15 +1,20 @@
 import DisplayWrapper from "../components/Wrapper/DisplayWrapper";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store";
 import { CountryViewObj } from "../models/model";
 import CountryCard from "../components/UI/Card/CountryCard";
 import { useEffect, useState } from "react";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../services/firebase";
+import { favoriteActions } from "../store/favorite-slice";
 
 interface ListingName {
   name: string;
 }
 
 const Listing = ({ name }: ListingName) => {
+  // declare dispatch
+  const dispatch = useDispatch();
   // declare selector
   const favoriteList = useSelector(
     (state: RootState) => state.favoriteReducer.favoriteList
@@ -17,6 +22,32 @@ const Listing = ({ name }: ListingName) => {
   const beenToList = useSelector(
     (state: RootState) => state.beenReducer.beenToList
   );
+
+  async function getCountryData() {
+    const querySnapshot = await getDocs(collection(db, "bucketlist"));
+    const bucketListDb: any = [];
+    querySnapshot.forEach((doc) => {
+      const resData = doc.data();
+      bucketListDb.push({
+        name: resData.name,
+        capital: resData.capital ? resData.capital : "",
+        population: resData.population,
+        continents: resData.continents,
+        currencies: resData.currencies ? resData.currencies : "",
+        languages: resData.languages,
+        coatOfArms: resData.coatOfArms.png,
+        flagImg: resData.flagImg,
+        flagIcon: resData.flag,
+        cca3: resData.cca3,
+        borders: resData.borders,
+      });
+    });
+    dispatch(favoriteActions.fetchFavorite(bucketListDb));
+  }
+
+  useEffect(() => {
+    getCountryData();
+  }, []);
 
   return (
     <DisplayWrapper>

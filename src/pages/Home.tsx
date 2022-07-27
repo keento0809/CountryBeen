@@ -56,6 +56,8 @@ const Home = () => {
     localStorage.setItem("beenTo", JSON.stringify(beenToList));
   }, [beenToList.length]);
 
+  console.log("rendered");
+
   useEffect(() => {
     fetchCountryData();
   }, []);

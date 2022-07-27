@@ -19,19 +19,15 @@ Access this project at [CountryBeen](https://country-been.vercel.app/)!
 
 ## About The App
 
-- General Information
-
 [CountryBeen](https://country-been.vercel.app/) is one of my personal projects focusing on taking advantage of REST API (Country REST API), using React with Typescript to strictly check every variables in my projects to make the development more smoothly. Also, I adopt managing state by Redux-toolkit.
 
-This application introduces react-simple-app, a library for React helping users to showcase world-map with easy setups. Plus, when it comes to the styling part, introducing Tailwind CSS and DaisyUI, a third-party library for Tailwind CSS makes the design better a lot.
+Users can search countries and add them to BucketList (favorite list) and Record (countries where users have been to), and once a country added to Record, react-simple-map showcases it on the map enabling users to check which countries they've been to visually.
 
-- What I've struggled with creating this project?
-
-- What I'm going to improve
+What I'm going to improve is to fix layouts of components later on.
 
 ## Screenshots
 
-![poke-app](https://user-images.githubusercontent.com/65790344/177622366-63d2ca57-c8b1-46f7-9d2e-88adacf84cbe.png)
+![CountryBeen](https://user-images.githubusercontent.com/65790344/181345386-feb6a6d5-04d7-401c-ad3f-d30f44687ad4.png)
 
 ## Technologies
 
@@ -58,8 +54,6 @@ This application introduces react-simple-app, a library for React helping users 
 [CountryBeen](https://country-been.vercel.app/) is still in progress (adding more features). Currently I'm adding database (firebase) to store the records efficiently to enhance the quality of the application.
 
 ## Credits
-
-<!-- List of contriubutors: -->
 
 - [Kento Honda](https://github.com/keento0809)
 
