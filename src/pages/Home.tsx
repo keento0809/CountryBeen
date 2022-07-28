@@ -14,7 +14,6 @@ import axios from "axios";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { beenActions } from "../store/been-slice";
-import { useFetchCountriesFromDB } from "../hooks/useFetchCountriesFromDB";
 
 const Home = () => {
   // declare selector
