@@ -23,27 +23,10 @@ const CountryCard = ({
               alt="Shoes"
             />
           </figure>
-          <div className="card-body transition-all overflow-hidden">
+          <div className="card-body rounded-2xl transition-all overflow-hidden">
             <h2 className="font-extrabold text-3xl drop-shadow-md dark:text-slate-50">
               {countryName}
             </h2>
-            {/* <div className="tooltip tooltip-right" data-tip="Add Record">
-              <svg
-                onClick={handleClick}
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-8 w-8 inline-block cursor-pointer z-20"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="#f92fca"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                />
-              </svg>
-            </div> */}
             <div className="flex flex-row items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
