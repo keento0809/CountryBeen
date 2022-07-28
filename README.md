@@ -21,9 +21,9 @@ Access this project at [CountryBeen](https://country-been.vercel.app/)!
 
 [CountryBeen](https://country-been.vercel.app/) is one of my personal projects focusing on taking advantage of REST API (Country REST API), using React with Typescript to strictly check every variables in my projects to make the development more smoothly. Also, I adopt managing state by Redux-toolkit.
 
-Users can search countries and add them to BucketList (favorite list) and Record (countries where users have been to), and once a country added to Record, react-simple-map showcases it on the map enabling users to check which countries they've been to visually.
+Users can search countries and add them to BucketList (list of countries where users want to visit someday) and Record (list of countries where users have been to), and once a country added to Record, react-simple-map showcases it on the map enabling users to check which countries they've been to visually and easily.
 
-What I'm going to improve is to fix layouts of components later on.
+What I'm working on now to improve is to fix layouts of components later on.
 
 ## Screenshots
 
@@ -44,14 +44,15 @@ What I'm going to improve is to fix layouts of components later on.
 
 ## Approach
 
-- Utilize Next.js to simplify compositions of application as well as maximize powerful features of Next.js such as Server-Side Rendering
-- Introducing `next-theme` that is a library for next.js, automatically toggling light mode and dark mode based on users' screen modes
-- Restricted the initial number of pokemons showcased in home page considering about the workloads of server and performances of the application
-- Tried to make design simplify but have good-looking styles by taking advantage of `TailWind CSS` and UI components provided by `flowbite`.
+- Utilize React.js and Redux with Typescript to make the state management easier and improve the efficiency of developing the application thanks to the power of Typescript.
+- Introducing `react-simple-map`, a library for React.js showcasing the world map with countries filled with colors where users have been to before.
+- Users can search countries using search bar on nav section or looking for them from regions via the 'countries' link on the home page.
+- Adding features as registrations to add countries to the bucket list (list of countries where users would like to visit in their future) and to the records (list of countries where users have been to) respectively utilizing the cloud firestore (firebase) as the database.
+- Being considered having a good user interface and designed by `TailWind CSS` and `DaisyUI`, a third-party library for Tailwind CSS.
 
 ## Status
 
-[CountryBeen](https://country-been.vercel.app/) is still in progress (adding more features). Currently I'm adding database (firebase) to store the records efficiently to enhance the quality of the application.
+[CountryBeen](https://country-been.vercel.app/) is still in progress (cleaning up components). Currently I'm creating additional components for improving the structures of codes much simpler than now.
 
 ## Credits
 
