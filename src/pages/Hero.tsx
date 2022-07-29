@@ -1,11 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthSignupForm from "../components/form/AuthSignupForm";
 import AuthLoginForm from "../components/form/AuthLoginForm";
 import imgLink from "../assets/revisedHeroBg.jpg";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const Hero = () => {
   const [isSignup, setIsSignup] = useState(false);
+  useEffect(() => {
+    const auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      user ? console.log("User logged in") : console.log("No user here");
+    });
+  }, []);
   return (
     <div className="overflow-hidden">
       <div

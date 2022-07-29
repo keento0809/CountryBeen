@@ -1,20 +1,43 @@
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 const AuthForm = () => {
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
   });
-  const handleChange = (e: any) => {
+
+  const auth = getAuth();
+
+  const navigate = useNavigate();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUserInfo({
       ...userInfo,
       [e.target.name]: e.target.value,
     });
   };
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
     console.log(userInfo);
+
+    if (userInfo.email === "" || userInfo.password === "") {
+      alert("Invalid credentials");
+      return;
+    }
+
+    signInWithEmailAndPassword(auth, userInfo.email, userInfo.password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        navigate("/home");
+      })
+      .catch((error: any) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
   };
   return (
     <Fragment>
