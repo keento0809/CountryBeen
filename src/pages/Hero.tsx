@@ -9,7 +9,6 @@ const Hero = () => {
         style={{
           backgroundImage: `url(${imgLink})`,
           backgroundSize: "cover",
-          // backgroundPosition: "50% 50%",s
         }}
       >
         <div className="hero-overlay bg-opacity-60"></div>
