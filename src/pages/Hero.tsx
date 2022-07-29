@@ -7,12 +7,14 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const Hero = () => {
   const [isSignup, setIsSignup] = useState(false);
+
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       user ? console.log("User logged in") : console.log("No user here");
     });
   }, []);
+
   return (
     <div className="overflow-hidden">
       <div
@@ -45,16 +47,8 @@ const Hero = () => {
                 </span>{" "}
                 here!
               </p>
-              {/* <button className="btn btn-secondary btn-outline">
-                <Link to="/home">Get Started</Link>
-              </button> */}
-              {/* test */}
               {isSignup && <AuthSignupForm />}
               {!isSignup && <AuthLoginForm />}
-              {/* <div>
-                Need an account?
-                <Link to={}>Signup</Link> here! `
-              </div> */}
             </div>
           </div>
         </div>

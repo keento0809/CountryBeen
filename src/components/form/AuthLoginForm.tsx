@@ -18,6 +18,7 @@ const AuthForm = () => {
       [e.target.name]: e.target.value,
     });
   };
+
   const handleSubmit = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
     console.log(userInfo);
@@ -39,6 +40,11 @@ const AuthForm = () => {
         console.log(errorCode, errorMessage);
       });
   };
+
+  const handleGuestLogin = () => {
+    console.log("clicked");
+  };
+
   return (
     <Fragment>
       <section className="max-w-4xl p-6 mx-auto bg-white rounded-md shadow-md dark:bg-gray-800">
@@ -81,15 +87,17 @@ const AuthForm = () => {
           <div className="flex justify-end mt-6">
             <button className="btn btn-secondary btn-outline">
               Get Started
-              {/* <Link to="/home">Get Started</Link> */}
             </button>
           </div>
-          <div className="">
-            <span className="inline-block mt-6 text-xs">
-              Login as guest user
-            </span>
-          </div>
         </form>
+        <div className="">
+          <span
+            className="inline-block mt-6 text-xs"
+            onClick={handleGuestLogin}
+          >
+            Login as guest user
+          </span>
+        </div>
       </section>
     </Fragment>
   );

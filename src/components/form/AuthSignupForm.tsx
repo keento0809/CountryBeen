@@ -22,7 +22,6 @@ const AuthForm = () => {
   };
   const handleSubmit = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
-    console.log(userInfo);
 
     if (
       userInfo.username === "" ||
@@ -125,7 +124,6 @@ const AuthForm = () => {
           <div className="flex justify-end mt-6">
             <button className="btn btn-secondary btn-outline">
               Get Started
-              {/* <Link to="/home">Get Started</Link> */}
             </button>
           </div>
         </form>
