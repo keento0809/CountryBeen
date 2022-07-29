@@ -174,12 +174,10 @@ const CountryDetail: React.FC = () => {
   }
 
   async function deleteToFirebase(params: string, cca3: string) {
-    console.log("Is it working??");
     await deleteDoc(doc(db, params, cca3));
   }
 
   function handleAddFavorite() {
-    console.log(countryData);
     dispatch(favoriteActions.addFavorite(countryData));
     postToFirebase("bucketlist", countryData.cca3, countryData);
     dispatch(AlertActions.turnOnAlert("Country Added to BucketList!"));
