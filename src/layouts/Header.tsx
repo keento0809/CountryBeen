@@ -2,6 +2,7 @@ import { useState, Fragment, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { CountryViewObj } from "../models/model";
+import { getAuth, signOut } from "firebase/auth";
 
 const Header = () => {
   // declare useState
@@ -17,6 +18,8 @@ const Header = () => {
 
   // declare useNavigate
   const navigate = useNavigate();
+
+  const auth = getAuth();
 
   function fetchCountryData() {
     setIsLoading(true);
@@ -90,6 +93,15 @@ const Header = () => {
     setIsMenuOpen(false);
   }
 
+  function handleSignout() {
+    signOut(auth)
+      .then(() => {
+        console.log("Sign-out successful");
+        navigate("/");
+      })
+      .catch((error) => console.log(error));
+  }
+
   useEffect(() => {
     fetchCountryData();
   }, []);
@@ -104,7 +116,6 @@ const Header = () => {
         <Fragment>
           <div className="z-30 backdrop fixed top-0 left-0 right-0 bottom-0 w-full bg-slate-900 opacity-95"></div>
           <section className="z-40 py-4 px-5 fixed top-0 right-0 w-full mx-auto">
-            {/* <p className="text-white">Menu is open now.</p> */}
             <svg
               onClick={handleCloseMenu}
               xmlns="http://www.w3.org/2000/svg"
@@ -133,6 +144,9 @@ const Header = () => {
               <Link to={"/countries"} className="py-5">
                 Countries
               </Link>
+              <span className="inline-block py-5" onClick={handleSignout}>
+                Sign out
+              </span>
             </div>
           </section>
         </Fragment>

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Header from "../layouts/Header";
 // import Wrapper from "../components/UI/Wrapper/Wrapper";
 import HomeWrapper from "../components/Wrapper/HomeWrapper";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { countriesActions } from "../store/countries-slice";
@@ -14,6 +14,7 @@ import axios from "axios";
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { beenActions } from "../store/been-slice";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const Home = () => {
   // declare selector
@@ -39,6 +40,12 @@ const Home = () => {
 
   // declare dispatch
   const dispatch = useDispatch();
+
+  // declare auth
+  const auth = getAuth();
+
+  // declare navigate
+  const navigate = useNavigate();
 
   const percentage = (totals / 250) * 100;
 
@@ -81,13 +88,24 @@ const Home = () => {
     );
   }
 
+  const checkAuth = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        console.log(uid);
+      } else {
+        navigate("/");
+      }
+    });
+  };
+  checkAuth();
+
   useEffect(() => {
     localStorage.setItem("beenTo", JSON.stringify(beenToList));
   }, [beenToList.length]);
 
-  console.log("rendered");
-
   useEffect(() => {
+    // checkAuth();
     fetchCountryData();
     fetchDataFromDB(true);
     fetchDataFromDB(false);
