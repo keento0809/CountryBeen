@@ -1,7 +1,11 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import AuthSignupForm from "../components/form/AuthSignupForm";
+import AuthLoginForm from "../components/form/AuthLoginForm";
 import imgLink from "../assets/revisedHeroBg.jpg";
 
 const Hero = () => {
+  const [isSignup, setIsSignup] = useState(false);
   return (
     <div className="overflow-hidden">
       <div
@@ -24,9 +28,27 @@ const Hero = () => {
                 and analyzing it visually? Here's the best tool making that
                 request happen. Start a brand new adventure here!
               </p>
-              <button className="btn btn-secondary btn-outline">
+              {/* <Link to="/home">Get Started</Link> */}
+              <p className="mb-2 text-sm">
+                {isSignup ? "Have an account?" : "Need an account?"}{" "}
+                <span
+                  onClick={() => setIsSignup(!isSignup)}
+                  className="text-secondary"
+                >
+                  {isSignup ? "Login" : "Signup"}
+                </span>{" "}
+                here!
+              </p>
+              {/* <button className="btn btn-secondary btn-outline">
                 <Link to="/home">Get Started</Link>
-              </button>
+              </button> */}
+              {/* test */}
+              {isSignup && <AuthSignupForm />}
+              {!isSignup && <AuthLoginForm />}
+              {/* <div>
+                Need an account?
+                <Link to={}>Signup</Link> here! `
+              </div> */}
             </div>
           </div>
         </div>
