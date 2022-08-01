@@ -84,7 +84,7 @@ const AuthForm = () => {
             </div>
           </div>
 
-          <div className="flex justify-end mt-6">
+          <div className="flex justify-end md:justify-center mt-6 md:mt-12">
             <button className="btn btn-secondary btn-outline">
               Get Started
             </button>

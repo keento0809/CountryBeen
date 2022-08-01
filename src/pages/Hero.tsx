@@ -25,9 +25,9 @@ const Hero = () => {
         }}
       >
         <div className="hero-overlay bg-opacity-60"></div>
-        <div className="w-11/12 mx-auto md:w-7/12">
-          <div className="hero-content rounded-lg bg-slate-800 bg-opacity-70 text-center text-neutral-content p-8 lg:p-12 max-w-600 mx-auto">
-            <div className="max-w-md">
+        <div className="w-11/12 mx-auto">
+          <div className="hero-content rounded-lg bg-slate-800 bg-opacity-70 text-center text-neutral-content p-8 lg:p-12 max-w-600 lg:max-w-700 mx-auto">
+            <div className="max-w-md lg:max-w-500">
               <h1 className="mb-5 text-4xl lg:text-5xl font-bold text-white">
                 CountryBeen
               </h1>
