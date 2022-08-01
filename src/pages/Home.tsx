@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import Header from "../layouts/Header";
-// import Wrapper from "../components/UI/Wrapper/Wrapper";
 import HomeWrapper from "../components/Wrapper/HomeWrapper";
 import { Link, useNavigate } from "react-router-dom";
 import { Fragment } from "react";
