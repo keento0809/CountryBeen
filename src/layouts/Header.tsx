@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { CountryViewObj } from "../models/model";
 import { getAuth, signOut } from "firebase/auth";
+import { AlertActions } from "../store/alert-slice";
+import { useDispatch } from "react-redux";
 
 const Header = () => {
   // declare useState
@@ -18,6 +20,8 @@ const Header = () => {
 
   // declare useNavigate
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
 
   const auth = getAuth();
 
@@ -97,7 +101,11 @@ const Header = () => {
     signOut(auth)
       .then(() => {
         console.log("Sign-out successful");
+        dispatch(AlertActions.turnOnAlert("Successfully signed out!"));
         navigate("/");
+        setTimeout(() => {
+          dispatch(AlertActions.turnOffAlert());
+        }, 1500);
       })
       .catch((error) => console.log(error));
   }

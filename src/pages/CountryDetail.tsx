@@ -4,7 +4,7 @@ import axios from "axios";
 import RegionWrapper from "../components/Wrapper/RegionWrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { favoriteActions } from "../store/favorite-slice";
-import { beenActions, beenReducer } from "../store/been-slice";
+import { beenActions } from "../store/been-slice";
 import { AlertActions } from "../store/alert-slice";
 import { regionImageArr } from "../data/data";
 import { RootState } from "../store";
@@ -177,7 +177,6 @@ const CountryDetail: React.FC = () => {
   }
 
   async function deleteToFirebase(params: string, cca3: string) {
-    console.log("Is it working??");
     await deleteDoc(doc(db, params, cca3));
   }
 
@@ -185,8 +184,8 @@ const CountryDetail: React.FC = () => {
     console.log(countryData);
     dispatch(favoriteActions.addFavorite(countryData));
     // original
-    // postToFirebase("bucketlist", countryData.cca3, countryData);
-    postToFirebase(`${currUserId}/bucketlist`, countryData.cca3, countryData);
+    postToFirebase("bucketlist", countryData.cca3, countryData);
+    // postToFirebase(`${currUserId}/bucketlist`, countryData.cca3, countryData);
     dispatch(AlertActions.turnOnAlert("Country Added to BucketList!"));
     navigate("/home");
     setTimeout(() => {

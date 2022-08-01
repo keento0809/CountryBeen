@@ -4,9 +4,19 @@ import AuthSignupForm from "../components/form/AuthSignupForm";
 import AuthLoginForm from "../components/form/AuthLoginForm";
 import imgLink from "../assets/revisedHeroBg.jpg";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import Alert from "../components/UI/Alert/Alert";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
 
 const Hero = () => {
   const [isSignup, setIsSignup] = useState(false);
+
+  const isAlerting = useSelector(
+    (state: RootState) => state.AlertReducer.isAlerting
+  );
+  const alertText = useSelector(
+    (state: RootState) => state.AlertReducer.alertText
+  );
 
   useEffect(() => {
     const auth = getAuth();
@@ -52,6 +62,7 @@ const Hero = () => {
             </div>
           </div>
         </div>
+        {isAlerting && <Alert text={alertText} />}
       </div>
     </div>
   );

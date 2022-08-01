@@ -1,6 +1,8 @@
 import React, { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { AlertActions } from "../../store/alert-slice";
 
 const AuthForm = () => {
   const [userInfo, setUserInfo] = useState({
@@ -9,6 +11,8 @@ const AuthForm = () => {
   });
 
   const auth = getAuth();
+
+  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -31,8 +35,11 @@ const AuthForm = () => {
     signInWithEmailAndPassword(auth, userInfo.email, userInfo.password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
+        dispatch(AlertActions.turnOnAlert("Successfully logged in!"));
         navigate("/home");
+        setTimeout(() => {
+          dispatch(AlertActions.turnOffAlert());
+        }, 1500);
       })
       .catch((error: any) => {
         const errorCode = error.code;

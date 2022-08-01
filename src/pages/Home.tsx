@@ -223,6 +223,9 @@ const Home = () => {
           </div>
           {isAlerting && isSuccessToAdd && <Alert text={alertText} />}
           {isAlerting && isSuccessToAddBucketList && <Alert text={alertText} />}
+          {isAlerting && !isSuccessToAddBucketList && !isSuccessToAdd && (
+            <Alert text={alertText} />
+          )}
         </div>
       </HomeWrapper>
     </Fragment>
