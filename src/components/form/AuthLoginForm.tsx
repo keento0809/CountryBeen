@@ -9,7 +9,6 @@ const AuthForm = () => {
     email: "",
     password: "",
   });
-
   const auth = getAuth();
 
   const dispatch = useDispatch();
@@ -23,20 +22,17 @@ const AuthForm = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent<EventTarget>) => {
-    e.preventDefault();
-    console.log(userInfo);
-
-    if (userInfo.email === "" || userInfo.password === "") {
+  const authentication = (email: string, password: string) => {
+    if (email === "" || password === "") {
       alert("Invalid credentials");
       return;
     }
-
-    signInWithEmailAndPassword(auth, userInfo.email, userInfo.password)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        dispatch(AlertActions.turnOnAlert("Successfully logged in!"));
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => {
         navigate("/home");
+        setTimeout(() => {
+          dispatch(AlertActions.turnOnAlert("Successfully logged in!"));
+        }, 200);
         setTimeout(() => {
           dispatch(AlertActions.turnOffAlert());
         }, 1500);
@@ -48,8 +44,17 @@ const AuthForm = () => {
       });
   };
 
+  const handleSubmit = (e: React.FormEvent<EventTarget>) => {
+    e.preventDefault();
+    console.log(userInfo);
+    authentication(userInfo.email, userInfo.password);
+  };
+
   const handleGuestLogin = () => {
-    console.log("clicked");
+    const guestUserEmail: string = process.env.REACT_APP_GUEST_USER_EMAIL!;
+    const guestUserPass: string = process.env.REACT_APP_GUEST_USER_PASS!;
+
+    authentication(guestUserEmail, guestUserPass);
   };
 
   return (
