@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "../layouts/Header";
 import HomeWrapper from "../components/Wrapper/HomeWrapper";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,7 +10,7 @@ import { RootState } from "../store";
 import Alert from "../components/UI/Alert/Alert";
 import WorldMap from "../components/WorldMap/WorldMap";
 import axios from "axios";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { beenActions } from "../store/been-slice";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -21,6 +21,9 @@ const Home = () => {
     (state: RootState) => state.favoriteReducer.totalNumber
   );
   const totals = useSelector((state: RootState) => state.beenReducer.totals);
+  const favoriteList = useSelector(
+    (state: RootState) => state.favoriteReducer.favoriteList
+  );
   const beenToList = useSelector(
     (state: RootState) => state.beenReducer.beenToList
   );
@@ -36,6 +39,8 @@ const Home = () => {
   const isSuccessToAddBucketList = useSelector(
     (state: RootState) => state.favoriteReducer.isSuccessToAddBucketList
   );
+
+  const [currUserId, setCurrUserId] = useState("");
 
   // declare dispatch
   const dispatch = useDispatch();
@@ -60,6 +65,21 @@ const Home = () => {
   }
 
   async function fetchDataFromDB(isRecords: boolean) {
+    // test
+    // const currUserRef = doc(db, "users", `${currUserId}`);
+    // const currUserSnap = await getDoc(currUserRef);
+    // const currUserData = currUserSnap.data();
+    // if (currUserSnap.exists()) {
+    //   console.log(currUserSnap.data());
+    // }
+    // currUserSnap.forEach((user) => console.log(user.data()));
+
+    // fetchedUsers.forEach((user) => {
+    //   const userData = user.data();
+    //   console.log(userData.id, userData.email, userData.bucketList);
+    // });
+
+    // original do not delete!!!
     const querySnapshot = isRecords
       ? await getDocs(collection(db, "records"))
       : await getDocs(collection(db, "bucketlist"));
@@ -90,8 +110,7 @@ const Home = () => {
   const checkAuth = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const uid = user.uid;
-        console.log(uid);
+        setCurrUserId(user.uid);
       } else {
         navigate("/");
       }
