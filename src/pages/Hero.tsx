@@ -41,7 +41,7 @@ const Hero = () => {
                 {isSignup ? "Have an account?" : "Need an account?"}{" "}
                 <span
                   onClick={() => setIsSignup(!isSignup)}
-                  className="text-secondary"
+                  className="text-secondary cursor-pointer"
                 >
                   {isSignup ? "Login" : "Signup"}
                 </span>{" "}
