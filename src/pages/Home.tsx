@@ -221,7 +221,6 @@ const Home = () => {
               </section>
             </div>
           </div>
-          {/* original */}
           {isAlerting && isSuccessToAdd && <Alert text={alertText} />}
           {isAlerting && isSuccessToAddBucketList && <Alert text={alertText} />}
         </div>

@@ -11,6 +11,8 @@ import { RootState } from "../store";
 import { setDoc, deleteDoc, doc } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { CountryViewObj } from "../models/model";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { auth } from "../services/firebase";
 
 const initialState = {
   name: "",
@@ -33,6 +35,7 @@ const CountryDetail: React.FC = () => {
   const [bgImage, setBgImage] = useState("");
   const [isFavorite, setIsFavorite] = useState(false);
   const [isBeenTo, setIsBeenTo] = useState(false);
+  const [currUserId, setCurrUserId] = useState("");
 
   // declare selector
   const beenToList = useSelector(
@@ -179,7 +182,9 @@ const CountryDetail: React.FC = () => {
 
   function handleAddFavorite() {
     dispatch(favoriteActions.addFavorite(countryData));
-    postToFirebase("bucketlist", countryData.cca3, countryData);
+    // original
+    // postToFirebase("bucketlist", countryData.cca3, countryData);
+    postToFirebase(`${currUserId}/bucketlist`, countryData.cca3, countryData);
     dispatch(AlertActions.turnOnAlert("Country Added to BucketList!"));
     navigate("/home");
     setTimeout(() => {
@@ -218,6 +223,17 @@ const CountryDetail: React.FC = () => {
       dispatch(AlertActions.turnOffAlert());
     }, 1000);
   }
+
+  const checkAuth = () => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        setCurrUserId(uid);
+      } else {
+        navigate("/");
+      }
+    });
+  };
 
   useEffect(() => {
     if (countriesData.length === 0) {

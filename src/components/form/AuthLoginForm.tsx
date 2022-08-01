@@ -92,7 +92,7 @@ const AuthForm = () => {
         </form>
         <div className="">
           <span
-            className="inline-block mt-6 text-xs"
+            className="inline-block mt-6 text-xs cursor-pointer"
             onClick={handleGuestLogin}
           >
             Login as guest user
