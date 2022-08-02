@@ -100,8 +100,10 @@ const Header = () => {
   function handleSignout() {
     signOut(auth)
       .then(() => {
-        console.log("Sign-out successful");
-        dispatch(AlertActions.turnOnAlert("Successfully signed out!"));
+        localStorage.removeItem("currUser");
+        setTimeout(() => {
+          dispatch(AlertActions.turnOnAlert("Successfully signed out!"));
+        }, 200);
         navigate("/");
         setTimeout(() => {
           dispatch(AlertActions.turnOffAlert());

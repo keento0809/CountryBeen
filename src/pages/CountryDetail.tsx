@@ -8,11 +8,22 @@ import { beenActions } from "../store/been-slice";
 import { AlertActions } from "../store/alert-slice";
 import { regionImageArr } from "../data/data";
 import { RootState } from "../store";
-import { setDoc, deleteDoc, doc } from "firebase/firestore";
+import {
+  setDoc,
+  getDoc,
+  deleteDoc,
+  doc,
+  updateDoc,
+  arrayUnion,
+  arrayRemove,
+  query,
+  where,
+  collection,
+  FieldValue,
+  deleteField,
+} from "firebase/firestore";
 import { db } from "../services/firebase";
 import { CountryViewObj } from "../models/model";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { auth } from "../services/firebase";
 
 const initialState = {
   name: "",
@@ -35,7 +46,9 @@ const CountryDetail: React.FC = () => {
   const [bgImage, setBgImage] = useState("");
   const [isFavorite, setIsFavorite] = useState(false);
   const [isBeenTo, setIsBeenTo] = useState(false);
-  const [currUserId, setCurrUserId] = useState("");
+  const [currUserId, setCurrUserId] = useState(
+    localStorage.getItem("currUser") ? localStorage.getItem("currUser") : ""
+  );
 
   // declare selector
   const beenToList = useSelector(
@@ -164,27 +177,36 @@ const CountryDetail: React.FC = () => {
     }
   }
 
-  async function postToFirebase(
-    params: string,
-    cca3: string,
-    dataObj: CountryViewObj
-  ) {
-    try {
-      await setDoc(doc(db, params, cca3), dataObj);
-    } catch (e) {
-      console.error("Error adding doc: ", e);
-    }
+  async function postToFirebase(type: string, data: any) {
+    const currUserRef = doc(db, "users", `${currUserId && currUserId}`);
+    await updateDoc(currUserRef, {
+      // original
+      [type]: arrayUnion(data),
+    });
   }
 
-  async function deleteToFirebase(params: string, cca3: string) {
-    await deleteDoc(doc(db, params, cca3));
+  async function deleteToFirebase(type: string, countryData: CountryViewObj) {
+    const currUserRef = doc(db, "users", `${currUserId}`);
+    const currUserSnap = await getDoc(currUserRef);
+    const currUserData = currUserSnap.data();
+    const dataArray =
+      type === "record" ? currUserData!.record : currUserData!.bucketList;
+    const updatedDataArray = dataArray.filter(
+      (data: CountryViewObj) => data.cca3 !== countryData.cca3
+    );
+    console.log(updatedDataArray);
+
+    await updateDoc(currUserRef, {
+      [type]: updatedDataArray,
+    });
+    const getSnap = await getDoc(currUserRef);
+    const gettingData = getSnap.data();
+    console.log(gettingData!.record);
   }
 
   function handleAddFavorite() {
     dispatch(favoriteActions.addFavorite(countryData));
-    // original
-    postToFirebase("bucketlist", countryData.cca3, countryData);
-    // postToFirebase(`${currUserId}/bucketlist`, countryData.cca3, countryData);
+    postToFirebase("bucketList", countryData);
     dispatch(AlertActions.turnOnAlert("Country Added to BucketList!"));
     navigate("/home");
     setTimeout(() => {
@@ -192,10 +214,9 @@ const CountryDetail: React.FC = () => {
     }, 1000);
   }
 
-  function handleRemoveFavorite() {
+  async function handleRemoveFavorite() {
     dispatch(favoriteActions.removeFavorite(countryData));
-    deleteToFirebase("bucketlist", countryData.cca3);
-    dispatch(favoriteActions.fetchFavorite(favoriteList));
+    await deleteToFirebase("bucketList", countryData);
     dispatch(AlertActions.turnOnAlert("Country deleted from BucketList!"));
     navigate("/home");
     setTimeout(() => {
@@ -205,7 +226,7 @@ const CountryDetail: React.FC = () => {
 
   function handleAddBeenTo() {
     dispatch(beenActions.addBeenTo(countryData));
-    postToFirebase("records", countryData.cca3, countryData);
+    postToFirebase("record", countryData);
     dispatch(AlertActions.turnOnAlert("Country Added to Record!"));
     navigate("/home");
     setTimeout(() => {
@@ -213,27 +234,15 @@ const CountryDetail: React.FC = () => {
     }, 1000);
   }
 
-  function handleRemoveBeenTo() {
+  async function handleRemoveBeenTo() {
     dispatch(beenActions.removeBeenTo(countryData));
-    deleteToFirebase("records", countryData.cca3);
-    dispatch(beenActions.fetchBeenTo(beenToList));
+    await deleteToFirebase("record", countryData);
     dispatch(AlertActions.turnOnAlert("Country deleted from Record!"));
     navigate("/home");
     setTimeout(() => {
       dispatch(AlertActions.turnOffAlert());
     }, 1000);
   }
-
-  const checkAuth = () => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const uid = user.uid;
-        setCurrUserId(uid);
-      } else {
-        navigate("/");
-      }
-    });
-  };
 
   useEffect(() => {
     if (countriesData.length === 0) {

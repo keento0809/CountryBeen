@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Header from "../layouts/Header";
 import HomeWrapper from "../components/Wrapper/HomeWrapper";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,10 +10,11 @@ import { RootState } from "../store";
 import Alert from "../components/UI/Alert/Alert";
 import WorldMap from "../components/WorldMap/WorldMap";
 import axios from "axios";
-import { collection, getDocs } from "firebase/firestore";
+import { doc, getDoc, DocumentData } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { beenActions } from "../store/been-slice";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { CountryViewObj } from "../models/model";
 
 const Home = () => {
   // declare selector
@@ -21,6 +22,9 @@ const Home = () => {
     (state: RootState) => state.favoriteReducer.totalNumber
   );
   const totals = useSelector((state: RootState) => state.beenReducer.totals);
+  const favoriteList = useSelector(
+    (state: RootState) => state.favoriteReducer.favoriteList
+  );
   const beenToList = useSelector(
     (state: RootState) => state.beenReducer.beenToList
   );
@@ -36,6 +40,12 @@ const Home = () => {
   const isSuccessToAddBucketList = useSelector(
     (state: RootState) => state.favoriteReducer.isSuccessToAddBucketList
   );
+
+  const [currUserId, setCurrUserId] = useState(
+    localStorage.getItem("currUser")
+  );
+  const [isFavoriteLoading, setIsFavoriteLoading] = useState(false);
+  const [isBeenLoading, setIsBeenLoading] = useState(false);
 
   // declare dispatch
   const dispatch = useDispatch();
@@ -59,25 +69,37 @@ const Home = () => {
       .catch((error) => console.log(error.message));
   }
 
+  interface currUserType {
+    id: string;
+    email: string;
+    bucketList: CountryViewObj[];
+    record: CountryViewObj[];
+  }
+
   async function fetchDataFromDB(isRecords: boolean) {
-    const querySnapshot = isRecords
-      ? await getDocs(collection(db, "records"))
-      : await getDocs(collection(db, "bucketlist"));
+    isRecords ? setIsBeenLoading(true) : setIsFavoriteLoading(true);
+    const currUserRef = doc(db, "users", `${currUserId}`);
+    const currUserSnap = await getDoc(currUserRef);
+    const currUserData: DocumentData | undefined = currUserSnap.data();
+
     const resultData: any = [];
-    querySnapshot.forEach((doc) => {
-      const resData = doc.data();
+    const dataArray = isRecords
+      ? currUserData!.record
+      : currUserData!.bucketList;
+
+    dataArray.forEach((resData: any) => {
       resultData.push({
-        name: resData.name,
+        name: resData.name ? resData.name : "",
         capital: resData.capital ? resData.capital : "",
-        population: resData.population,
-        continents: resData.continents,
+        population: resData.population ? resData.population : "",
+        continents: resData.continents ? resData.continents : "",
         currencies: resData.currencies ? resData.currencies : "",
-        languages: resData.languages,
-        coatOfArms: resData.coatOfArms.png,
-        flagImg: resData.flagImg,
-        flagIcon: resData.flag,
-        cca3: resData.cca3,
-        borders: resData.borders,
+        languages: resData.languages ? resData.languages : "",
+        coatOfArms: resData.coatOfArms?.png ? resData.coatOfArms.png : "",
+        flagImg: resData.flagImg ? resData.flagImg : "",
+        flagIcon: resData.flag ? resData.flag : "",
+        cca3: resData.cca3 ? resData.cca3 : "",
+        borders: resData.borders ? resData.borders : "",
       });
     });
     dispatch(
@@ -85,26 +107,14 @@ const Home = () => {
         ? beenActions.fetchBeenTo(resultData)
         : favoriteActions.fetchFavorite(resultData)
     );
+    isRecords ? setIsBeenLoading(false) : setIsFavoriteLoading(false);
   }
-
-  const checkAuth = () => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const uid = user.uid;
-        console.log(uid);
-      } else {
-        navigate("/");
-      }
-    });
-  };
-  checkAuth();
 
   useEffect(() => {
     localStorage.setItem("beenTo", JSON.stringify(beenToList));
   }, [beenToList.length]);
 
   useEffect(() => {
-    // checkAuth();
     fetchCountryData();
     fetchDataFromDB(true);
     fetchDataFromDB(false);
@@ -143,8 +153,21 @@ const Home = () => {
                       </Link>
                     </div>
                     <div className="stat-title">You've been to</div>
-                    <div className="stat-value dark:text-slate-50">
-                      {totals}
+                    <div className="stat-value">
+                      <span
+                        className={`${
+                          (isFavoriteLoading || isBeenLoading) && "hidden"
+                        } dark:text-slate-50`}
+                      >
+                        {totals}
+                      </span>
+                      <span
+                        className={`${
+                          (!isFavoriteLoading || !isBeenLoading) && "hidden"
+                        } dark:text-slate-50 text-2xl`}
+                      >
+                        Loading...
+                      </span>
                     </div>
                     <div className="stat-desc">Countries</div>
                   </div>
@@ -166,8 +189,21 @@ const Home = () => {
                       </svg>
                     </div>
                     <div className="stat-title">Achievement rate</div>
-                    <div className="stat-value dark:text-slate-50">
-                      {percentage.toFixed(1)}%
+                    <div className="stat-value">
+                      <span
+                        className={`${
+                          (isFavoriteLoading || isBeenLoading) && "hidden"
+                        } dark:text-slate-50`}
+                      >
+                        {percentage.toFixed(1)}%
+                      </span>
+                      <span
+                        className={`${
+                          (!isFavoriteLoading || !isBeenLoading) && "hidden"
+                        } dark:text-slate-50 text-2xl`}
+                      >
+                        Loading...
+                      </span>
                     </div>
                     <div className="stat-desc">{totals} / 245 Countries</div>
                   </div>
@@ -190,8 +226,21 @@ const Home = () => {
                       </Link>
                     </div>
                     <div className="stat-title">Number of Bucket-list</div>
-                    <div className="stat-value dark:text-slate-50">
-                      {totalNumber}
+                    <div className="stat-value">
+                      <span
+                        className={`${
+                          (isFavoriteLoading || isBeenLoading) && "hidden"
+                        } dark:text-slate-50`}
+                      >
+                        {totalNumber}
+                      </span>
+                      <span
+                        className={`${
+                          (!isFavoriteLoading || !isBeenLoading) && "hidden"
+                        } dark:text-slate-50 text-2xl`}
+                      >
+                        Loading...
+                      </span>
                     </div>
                     <div className="stat-desc">Countries</div>
                   </div>

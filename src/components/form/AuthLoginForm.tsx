@@ -28,7 +28,8 @@ const AuthForm = () => {
       return;
     }
     signInWithEmailAndPassword(auth, email, password)
-      .then(() => {
+      .then((userCredential) => {
+        localStorage.setItem("currUser", userCredential.user.uid);
         navigate("/home");
         setTimeout(() => {
           dispatch(AlertActions.turnOnAlert("Successfully logged in!"));

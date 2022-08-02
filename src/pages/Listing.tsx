@@ -1,18 +1,22 @@
 import DisplayWrapper from "../components/Wrapper/DisplayWrapper";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store";
-import { CountryViewObj } from "../models/model";
 import CountryCard from "../components/UI/Card/CountryCard";
 import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { doc, getDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { favoriteActions } from "../store/favorite-slice";
+import { beenActions } from "../store/been-slice";
 
 interface ListingName {
   name: string;
 }
 
 const Listing = ({ name }: ListingName) => {
+  const [currUserId, setCurrUserId] = useState(
+    localStorage.getItem("currUser") ? localStorage.getItem("currUser") : ""
+  );
+  const [isLoading, setIsLoading] = useState(false);
   // declare dispatch
   const dispatch = useDispatch();
   // declare selector
@@ -23,12 +27,17 @@ const Listing = ({ name }: ListingName) => {
     (state: RootState) => state.beenReducer.beenToList
   );
 
-  async function getCountryData() {
-    const querySnapshot = await getDocs(collection(db, "bucketlist"));
-    const bucketListDb: any = [];
-    querySnapshot.forEach((doc) => {
-      const resData = doc.data();
-      bucketListDb.push({
+  async function getCountryData(name: string) {
+    setIsLoading(true);
+    const currUserRef = doc(db, "users", `${currUserId}`);
+    const querySnapshot = await getDoc(currUserRef);
+    const snapShotData = querySnapshot.data();
+
+    const listDataFromDb: any = [];
+    const dataArray =
+      name === "record" ? snapShotData!.record : snapShotData!.bucketList;
+    dataArray.forEach((resData: any) => {
+      listDataFromDb.push({
         name: resData.name,
         capital: resData.capital ? resData.capital : "",
         population: resData.population,
@@ -42,11 +51,20 @@ const Listing = ({ name }: ListingName) => {
         borders: resData.borders,
       });
     });
-    dispatch(favoriteActions.fetchFavorite(bucketListDb));
+    dispatch(
+      name === "record"
+        ? beenActions.fetchBeenTo(listDataFromDb)
+        : favoriteActions.fetchFavorite(listDataFromDb)
+    );
+    setIsLoading(false);
   }
 
   useEffect(() => {
-    getCountryData();
+    name === "Record" && beenToList.length === 0 && getCountryData("record");
+    name !== "Record" &&
+      favoriteList.length === 0 &&
+      getCountryData("bucketList");
+    // getCountryData();
   }, []);
 
   return (
@@ -55,14 +73,17 @@ const Listing = ({ name }: ListingName) => {
         <div className="title text-center text-white">
           <h2 className="py-6 font-bold text-2xl">{name}</h2>
         </div>
-        {((name === "Record" && beenToList.length === 0) ||
-          (name !== "Record" && favoriteList.length === 0)) && (
-          <div className="text-center">
+        <div className="text-center">
+          {((!isLoading && name === "Record" && beenToList.length === 0) ||
+            (!isLoading && name !== "Record" && favoriteList.length === 0)) && (
             <p className="text-white dark:text-slate-100">
               No countries added.
             </p>
-          </div>
-        )}
+          )}
+          {isLoading && (
+            <p className="text-white dark:text-slate-100">Loading...</p>
+          )}
+        </div>
         <div className="overflow-scroll rounded-2xl max-h-680 md:max-h-640 md:flex flex-wrap">
           {(name === "Record" ? beenToList : favoriteList).map(
             (country, index) => {
