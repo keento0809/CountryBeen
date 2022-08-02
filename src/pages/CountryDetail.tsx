@@ -14,6 +14,7 @@ import {
   doc,
   updateDoc,
   arrayUnion,
+  arrayRemove,
 } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { CountryViewObj } from "../models/model";
@@ -179,16 +180,19 @@ const CountryDetail: React.FC = () => {
     });
   }
 
-  async function deleteToFirebase(params: string, cca3: string) {
-    await deleteDoc(doc(db, params, cca3));
-  }
+  // async function deleteToFirebase(type: string) {
+  //   await updateDoc(currUserRef, {
+  //     [type]: arrayRemove(),
+  //   });
+  // }
 
   function handleAddFavorite() {
     console.log(countryData);
     dispatch(favoriteActions.addFavorite(countryData));
+    // const countryDataObj = { [`${countryData.cca3}`]: { countryData } };
     // original
-    // postToFirebase("bucketlist", countryData.cca3, countryData);
     postToFirebase("bucketList", countryData);
+    // postToFirebase("bucketList", countryDataObj);
     dispatch(AlertActions.turnOnAlert("Country Added to BucketList!"));
     navigate("/home");
     setTimeout(() => {
@@ -198,7 +202,7 @@ const CountryDetail: React.FC = () => {
 
   function handleRemoveFavorite() {
     dispatch(favoriteActions.removeFavorite(countryData));
-    deleteToFirebase("bucketlist", countryData.cca3);
+    // deleteToFirebase("bucketlist", countryData.cca3);
     dispatch(favoriteActions.fetchFavorite(favoriteList));
     dispatch(AlertActions.turnOnAlert("Country deleted from BucketList!"));
     navigate("/home");
@@ -219,7 +223,7 @@ const CountryDetail: React.FC = () => {
 
   function handleRemoveBeenTo() {
     dispatch(beenActions.removeBeenTo(countryData));
-    deleteToFirebase("records", countryData.cca3);
+    // deleteToFirebase("records", countryData.cca3);
     dispatch(beenActions.fetchBeenTo(beenToList));
     dispatch(AlertActions.turnOnAlert("Country deleted from Record!"));
     navigate("/home");

@@ -101,7 +101,9 @@ const Header = () => {
     signOut(auth)
       .then(() => {
         localStorage.removeItem("currUser");
-        dispatch(AlertActions.turnOnAlert("Successfully signed out!"));
+        setTimeout(() => {
+          dispatch(AlertActions.turnOnAlert("Successfully signed out!"));
+        }, 200);
         navigate("/");
         setTimeout(() => {
           dispatch(AlertActions.turnOffAlert());

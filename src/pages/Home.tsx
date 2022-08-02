@@ -44,6 +44,8 @@ const Home = () => {
   const [currUserId, setCurrUserId] = useState(
     localStorage.getItem("currUser")
   );
+  const [isFavoriteLoading, setIsFavoriteLoading] = useState(false);
+  const [isBeenLoading, setIsBeenLoading] = useState(false);
 
   // declare dispatch
   const dispatch = useDispatch();
@@ -75,6 +77,7 @@ const Home = () => {
   }
 
   async function fetchDataFromDB(isRecords: boolean) {
+    isRecords ? setIsBeenLoading(true) : setIsFavoriteLoading(true);
     const currUserRef = doc(db, "users", `${currUserId}`);
     const currUserSnap = await getDoc(currUserRef);
     const currUserData: DocumentData | undefined = currUserSnap.data();
@@ -85,17 +88,17 @@ const Home = () => {
       : currUserData!.bucketList;
     dataArray.forEach((resData: any) => {
       resultData.push({
-        name: resData.name,
+        name: resData.name ? resData.name : "",
         capital: resData.capital ? resData.capital : "",
-        population: resData.population,
-        continents: resData.continents,
+        population: resData.population ? resData.population : "",
+        continents: resData.continents ? resData.continents : "",
         currencies: resData.currencies ? resData.currencies : "",
-        languages: resData.languages,
-        coatOfArms: resData.coatOfArms.png,
-        flagImg: resData.flagImg,
-        flagIcon: resData.flag,
-        cca3: resData.cca3,
-        borders: resData.borders,
+        languages: resData.languages ? resData.languages : "",
+        coatOfArms: resData.coatOfArms?.png ? resData.coatOfArms.png : "",
+        flagImg: resData.flagImg ? resData.flagImg : "",
+        flagIcon: resData.flag ? resData.flag : "",
+        cca3: resData.cca3 ? resData.cca3 : "",
+        borders: resData.borders ? resData.borders : "",
       });
     });
     dispatch(
@@ -103,6 +106,7 @@ const Home = () => {
         ? beenActions.fetchBeenTo(resultData)
         : favoriteActions.fetchFavorite(resultData)
     );
+    isRecords ? setIsBeenLoading(false) : setIsFavoriteLoading(false);
   }
 
   useEffect(() => {
@@ -148,8 +152,21 @@ const Home = () => {
                       </Link>
                     </div>
                     <div className="stat-title">You've been to</div>
-                    <div className="stat-value dark:text-slate-50">
-                      {totals}
+                    <div className="stat-value">
+                      <span
+                        className={`${
+                          (isFavoriteLoading || isBeenLoading) && "hidden"
+                        } dark:text-slate-50`}
+                      >
+                        {totals}
+                      </span>
+                      <span
+                        className={`${
+                          (!isFavoriteLoading || !isBeenLoading) && "hidden"
+                        } dark:text-slate-50 text-2xl`}
+                      >
+                        Loading...
+                      </span>
                     </div>
                     <div className="stat-desc">Countries</div>
                   </div>
@@ -171,8 +188,21 @@ const Home = () => {
                       </svg>
                     </div>
                     <div className="stat-title">Achievement rate</div>
-                    <div className="stat-value dark:text-slate-50">
-                      {percentage.toFixed(1)}%
+                    <div className="stat-value">
+                      <span
+                        className={`${
+                          (isFavoriteLoading || isBeenLoading) && "hidden"
+                        } dark:text-slate-50`}
+                      >
+                        {percentage.toFixed(1)}%
+                      </span>
+                      <span
+                        className={`${
+                          (!isFavoriteLoading || !isBeenLoading) && "hidden"
+                        } dark:text-slate-50 text-2xl`}
+                      >
+                        Loading...
+                      </span>
                     </div>
                     <div className="stat-desc">{totals} / 245 Countries</div>
                   </div>
@@ -195,8 +225,21 @@ const Home = () => {
                       </Link>
                     </div>
                     <div className="stat-title">Number of Bucket-list</div>
-                    <div className="stat-value dark:text-slate-50">
-                      {totalNumber}
+                    <div className="stat-value">
+                      <span
+                        className={`${
+                          (isFavoriteLoading || isBeenLoading) && "hidden"
+                        } dark:text-slate-50`}
+                      >
+                        {totalNumber}
+                      </span>
+                      <span
+                        className={`${
+                          (!isFavoriteLoading || !isBeenLoading) && "hidden"
+                        } dark:text-slate-50 text-2xl`}
+                      >
+                        Loading...
+                      </span>
                     </div>
                     <div className="stat-desc">Countries</div>
                   </div>
