@@ -86,7 +86,6 @@ const Home = () => {
     const dataArray = isRecords
       ? currUserData!.record
       : currUserData!.bucketList;
-    console.log(dataArray);
 
     dataArray.forEach((resData: any) => {
       resultData.push({

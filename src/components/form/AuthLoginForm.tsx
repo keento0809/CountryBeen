@@ -29,7 +29,6 @@ const AuthForm = () => {
     }
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential);
         localStorage.setItem("currUser", userCredential.user.uid);
         navigate("/home");
         setTimeout(() => {

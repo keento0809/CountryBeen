@@ -27,8 +27,6 @@ const Listing = ({ name }: ListingName) => {
     (state: RootState) => state.beenReducer.beenToList
   );
 
-  console.log("Record: ", beenToList, "BucketList: ", favoriteList);
-
   async function getCountryData(name: string) {
     setIsLoading(true);
     const currUserRef = doc(db, "users", `${currUserId}`);
