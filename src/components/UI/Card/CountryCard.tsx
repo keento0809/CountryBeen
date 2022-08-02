@@ -8,9 +8,7 @@ const CountryCard = ({
   cca3,
   isBeenTo,
 }: CountryCardProps) => {
-  function handleClick() {
-    console.log(cca3);
-  }
+  function handleClick() {}
 
   return (
     <div className="overflow-hidden rounded-2xl ml-auto mr-auto md:ml-0 md:mr-3 lg:mr-2.5 xl:mr-6 mb-4">
