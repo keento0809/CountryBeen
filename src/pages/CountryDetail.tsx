@@ -10,16 +10,20 @@ import { regionImageArr } from "../data/data";
 import { RootState } from "../store";
 import {
   setDoc,
+  getDoc,
   deleteDoc,
   doc,
   updateDoc,
   arrayUnion,
   arrayRemove,
+  query,
+  where,
+  collection,
+  FieldValue,
+  deleteField,
 } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { CountryViewObj } from "../models/model";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { auth } from "../services/firebase";
 
 const initialState = {
   name: "",
@@ -173,18 +177,46 @@ const CountryDetail: React.FC = () => {
     }
   }
 
+  // async function fetchDataFromDB() {
+  //   const currUserRef = doc(db, "users", `${currUserId}`);
+  //   const currUserSnap = await getDoc(currUserRef);
+  //   const currUserData = currUserSnap.data();
+
+  //   const resultData: any = [];
+  //   const dataArray = isRecords
+  //     ? currUserData!.record
+  //     : currUserData!.bucketList;
+  // }
+
   async function postToFirebase(type: string, data: any) {
     const currUserRef = doc(db, "users", `${currUserId && currUserId}`);
     await updateDoc(currUserRef, {
+      // original
       [type]: arrayUnion(data),
     });
   }
 
-  // async function deleteToFirebase(type: string) {
-  //   await updateDoc(currUserRef, {
-  //     [type]: arrayRemove(),
-  //   });
-  // }
+  async function deleteToFirebase(type: string, countryData: CountryViewObj) {
+    const currUserRef = doc(db, "users", `${currUserId}`);
+    const currUserSnap = await getDoc(currUserRef);
+    const currUserData = currUserSnap.data();
+    const dataArray =
+      type === "record" ? currUserData!.record : currUserData!.bucketList;
+    const updatedDataArray = dataArray.filter(
+      (data: CountryViewObj) => data.cca3 !== countryData.cca3
+    );
+    console.log(updatedDataArray);
+
+    // await updateDoc(currUserRef, {
+    //   [type]: [],
+    // });
+    await updateDoc(currUserRef, {
+      [type]: updatedDataArray,
+    });
+    // type === "record"
+    //   ? await dispatch(beenActions.fetchBeenTo(updatedDataArray))
+    //   : await dispatch(favoriteActions.fetchFavorite(updatedDataArray));
+  }
 
   function handleAddFavorite() {
     console.log(countryData);
@@ -202,8 +234,7 @@ const CountryDetail: React.FC = () => {
 
   function handleRemoveFavorite() {
     dispatch(favoriteActions.removeFavorite(countryData));
-    // deleteToFirebase("bucketlist", countryData.cca3);
-    dispatch(favoriteActions.fetchFavorite(favoriteList));
+    deleteToFirebase("bucketList", countryData);
     dispatch(AlertActions.turnOnAlert("Country deleted from BucketList!"));
     navigate("/home");
     setTimeout(() => {
@@ -222,9 +253,8 @@ const CountryDetail: React.FC = () => {
   }
 
   function handleRemoveBeenTo() {
+    deleteToFirebase("record", countryData);
     dispatch(beenActions.removeBeenTo(countryData));
-    // deleteToFirebase("records", countryData.cca3);
-    dispatch(beenActions.fetchBeenTo(beenToList));
     dispatch(AlertActions.turnOnAlert("Country deleted from Record!"));
     navigate("/home");
     setTimeout(() => {
