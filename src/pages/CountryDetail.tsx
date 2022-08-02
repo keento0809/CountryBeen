@@ -241,7 +241,12 @@ const CountryDetail: React.FC = () => {
             <div className="">
               <h2 className="stat-value overflow-x-auto overflow-y-hidden dark:text-slate-100">{`${countryData.name}`}</h2>
               <div className="icons max-h-32 my-2">
-                <div className="tooltip tooltip-left" data-tip="Add BucketList">
+                <div
+                  className="tooltip tooltip-left"
+                  data-tip={
+                    !isFavorite ? "Add BucketList" : "Remove from BucketList"
+                  }
+                >
                   {!isFavorite && (
                     <svg
                       onClick={handleAddFavorite}
@@ -275,7 +280,10 @@ const CountryDetail: React.FC = () => {
                     </svg>
                   )}
                 </div>
-                <div className="tooltip tooltip-right" data-tip="Add Record">
+                <div
+                  className="tooltip tooltip-right"
+                  data-tip={!isBeenTo ? "Add Record" : "Remove from Record"}
+                >
                   {!isBeenTo && (
                     <svg
                       onClick={handleAddBeenTo}
