@@ -1,6 +1,10 @@
 import React, { Fragment, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "../../services/firebase";
+import { useDispatch } from "react-redux";
+import { AlertActions } from "../../store/alert-slice";
 
 const AuthForm = () => {
   const [userInfo, setUserInfo] = useState({
@@ -12,6 +16,8 @@ const AuthForm = () => {
 
   const auth = getAuth();
 
+  const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,6 +26,16 @@ const AuthForm = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  const setUserDoc = async (userId: string, userEmail: string) => {
+    await setDoc(doc(db, "users", userId), {
+      id: userId,
+      email: userEmail,
+      bucketList: [],
+      record: [],
+    });
+  };
+
   const handleSubmit = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
 
@@ -36,10 +52,15 @@ const AuthForm = () => {
 
     createUserWithEmailAndPassword(auth, userInfo.email, userInfo.password)
       .then((userCredential) => {
-        // Sign in
-        const user = userCredential.user;
-        console.log(user);
+        localStorage.setItem("currUser", userCredential.user.uid);
+        setUserDoc(userCredential.user.uid, userCredential.user.email!);
         navigate("/home");
+        setTimeout(() => {
+          dispatch(AlertActions.turnOnAlert("Successfully logged in!"));
+        }, 200);
+        setTimeout(() => {
+          dispatch(AlertActions.turnOffAlert());
+        }, 1500);
       })
       .catch((error: any) => {
         const errorCode = error.code;

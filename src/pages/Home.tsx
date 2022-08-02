@@ -10,10 +10,11 @@ import { RootState } from "../store";
 import Alert from "../components/UI/Alert/Alert";
 import WorldMap from "../components/WorldMap/WorldMap";
 import axios from "axios";
-import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { doc, getDoc, DocumentData } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { beenActions } from "../store/been-slice";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { CountryViewObj } from "../models/model";
 
 const Home = () => {
   // declare selector
@@ -40,7 +41,9 @@ const Home = () => {
     (state: RootState) => state.favoriteReducer.isSuccessToAddBucketList
   );
 
-  const [currUserId, setCurrUserId] = useState("");
+  const [currUserId, setCurrUserId] = useState(
+    localStorage.getItem("currUser")
+  );
 
   // declare dispatch
   const dispatch = useDispatch();
@@ -64,28 +67,23 @@ const Home = () => {
       .catch((error) => console.log(error.message));
   }
 
+  interface currUserType {
+    id: string;
+    email: string;
+    bucketList: CountryViewObj[];
+    record: CountryViewObj[];
+  }
+
   async function fetchDataFromDB(isRecords: boolean) {
-    // test
-    // const currUserRef = doc(db, "users", `${currUserId}`);
-    // const currUserSnap = await getDoc(currUserRef);
-    // const currUserData = currUserSnap.data();
-    // if (currUserSnap.exists()) {
-    //   console.log(currUserSnap.data());
-    // }
-    // currUserSnap.forEach((user) => console.log(user.data()));
+    const currUserRef = doc(db, "users", `${currUserId}`);
+    const currUserSnap = await getDoc(currUserRef);
+    const currUserData: DocumentData | undefined = currUserSnap.data();
 
-    // fetchedUsers.forEach((user) => {
-    //   const userData = user.data();
-    //   console.log(userData.id, userData.email, userData.bucketList);
-    // });
-
-    // original do not delete!!!
-    const querySnapshot = isRecords
-      ? await getDocs(collection(db, "records"))
-      : await getDocs(collection(db, "bucketlist"));
     const resultData: any = [];
-    querySnapshot.forEach((doc) => {
-      const resData = doc.data();
+    const dataArray = isRecords
+      ? currUserData!.record
+      : currUserData!.bucketList;
+    dataArray.forEach((resData: any) => {
       resultData.push({
         name: resData.name,
         capital: resData.capital ? resData.capital : "",
@@ -107,23 +105,11 @@ const Home = () => {
     );
   }
 
-  const checkAuth = () => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        setCurrUserId(user.uid);
-      } else {
-        navigate("/");
-      }
-    });
-  };
-  checkAuth();
-
   useEffect(() => {
     localStorage.setItem("beenTo", JSON.stringify(beenToList));
   }, [beenToList.length]);
 
   useEffect(() => {
-    // checkAuth();
     fetchCountryData();
     fetchDataFromDB(true);
     fetchDataFromDB(false);

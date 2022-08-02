@@ -8,7 +8,7 @@ import { beenActions } from "../store/been-slice";
 import { AlertActions } from "../store/alert-slice";
 import { regionImageArr } from "../data/data";
 import { RootState } from "../store";
-import { setDoc, deleteDoc, doc } from "firebase/firestore";
+import { setDoc, deleteDoc, doc, updateDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { CountryViewObj } from "../models/model";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -184,8 +184,8 @@ const CountryDetail: React.FC = () => {
     console.log(countryData);
     dispatch(favoriteActions.addFavorite(countryData));
     // original
-    postToFirebase("bucketlist", countryData.cca3, countryData);
-    // postToFirebase(`${currUserId}/bucketlist`, countryData.cca3, countryData);
+    // postToFirebase("bucketlist", countryData.cca3, countryData);
+    postToFirebase(`users`, `${currUserId}`, countryData);
     dispatch(AlertActions.turnOnAlert("Country Added to BucketList!"));
     navigate("/home");
     setTimeout(() => {
