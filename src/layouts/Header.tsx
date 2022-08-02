@@ -268,7 +268,7 @@ const Header = () => {
                 CountryBeen
               </Link>
             </div>
-            <div className="nav-right flex justify-center items-center min-w-350 xl:min-w-400">
+            <div className="nav-right flex justify-center items-center min-w-400 lg:min-w-450 xl:min-w-600">
               <nav className="nav-list grow flex justify-between items-center">
                 {/* <Link to={"/home"} className="py-5">
                 HOME
@@ -309,6 +309,12 @@ const Header = () => {
                 >
                   Countries
                 </Link>
+                <span
+                  className="text-sm btn-ghost py-1 px-3 rounded-lg cursor-pointer"
+                  onClick={handleSignout}
+                >
+                  Sign out
+                </span>
               </nav>
             </div>
           </div>

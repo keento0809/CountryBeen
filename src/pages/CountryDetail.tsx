@@ -8,20 +8,7 @@ import { beenActions } from "../store/been-slice";
 import { AlertActions } from "../store/alert-slice";
 import { regionImageArr } from "../data/data";
 import { RootState } from "../store";
-import {
-  setDoc,
-  getDoc,
-  deleteDoc,
-  doc,
-  updateDoc,
-  arrayUnion,
-  arrayRemove,
-  query,
-  where,
-  collection,
-  FieldValue,
-  deleteField,
-} from "firebase/firestore";
+import { getDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { CountryViewObj } from "../models/model";
 
@@ -204,10 +191,10 @@ const CountryDetail: React.FC = () => {
     console.log(gettingData!.record);
   }
 
-  function handleAddFavorite() {
+  async function handleAddFavorite() {
     console.log(countryData);
     dispatch(favoriteActions.addFavorite(countryData));
-    postToFirebase("bucketList", countryData);
+    await postToFirebase("bucketList", countryData);
     dispatch(AlertActions.turnOnAlert("Country Added to BucketList!"));
     navigate("/home");
     setTimeout(() => {
@@ -225,9 +212,9 @@ const CountryDetail: React.FC = () => {
     }, 1000);
   }
 
-  function handleAddBeenTo() {
+  async function handleAddBeenTo() {
     dispatch(beenActions.addBeenTo(countryData));
-    postToFirebase("record", countryData);
+    await postToFirebase("record", countryData);
     dispatch(AlertActions.turnOnAlert("Country Added to Record!"));
     navigate("/home");
     setTimeout(() => {
