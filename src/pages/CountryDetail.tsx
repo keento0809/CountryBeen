@@ -8,7 +8,13 @@ import { beenActions } from "../store/been-slice";
 import { AlertActions } from "../store/alert-slice";
 import { regionImageArr } from "../data/data";
 import { RootState } from "../store";
-import { setDoc, deleteDoc, doc, updateDoc } from "firebase/firestore";
+import {
+  setDoc,
+  deleteDoc,
+  doc,
+  updateDoc,
+  arrayUnion,
+} from "firebase/firestore";
 import { db } from "../services/firebase";
 import { CountryViewObj } from "../models/model";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -35,7 +41,9 @@ const CountryDetail: React.FC = () => {
   const [bgImage, setBgImage] = useState("");
   const [isFavorite, setIsFavorite] = useState(false);
   const [isBeenTo, setIsBeenTo] = useState(false);
-  const [currUserId, setCurrUserId] = useState("");
+  const [currUserId, setCurrUserId] = useState(
+    localStorage.getItem("currUser") ? localStorage.getItem("currUser") : ""
+  );
 
   // declare selector
   const beenToList = useSelector(
@@ -164,16 +172,11 @@ const CountryDetail: React.FC = () => {
     }
   }
 
-  async function postToFirebase(
-    params: string,
-    cca3: string,
-    dataObj: CountryViewObj
-  ) {
-    try {
-      await setDoc(doc(db, params, cca3), dataObj);
-    } catch (e) {
-      console.error("Error adding doc: ", e);
-    }
+  async function postToFirebase(type: string, data: any) {
+    const currUserRef = doc(db, "users", `${currUserId && currUserId}`);
+    await updateDoc(currUserRef, {
+      [type]: arrayUnion(data),
+    });
   }
 
   async function deleteToFirebase(params: string, cca3: string) {
@@ -185,7 +188,7 @@ const CountryDetail: React.FC = () => {
     dispatch(favoriteActions.addFavorite(countryData));
     // original
     // postToFirebase("bucketlist", countryData.cca3, countryData);
-    postToFirebase(`users`, `${currUserId}`, countryData);
+    postToFirebase("bucketList", countryData);
     dispatch(AlertActions.turnOnAlert("Country Added to BucketList!"));
     navigate("/home");
     setTimeout(() => {
@@ -206,7 +209,7 @@ const CountryDetail: React.FC = () => {
 
   function handleAddBeenTo() {
     dispatch(beenActions.addBeenTo(countryData));
-    postToFirebase("records", countryData.cca3, countryData);
+    postToFirebase("record", countryData);
     dispatch(AlertActions.turnOnAlert("Country Added to Record!"));
     navigate("/home");
     setTimeout(() => {
@@ -225,16 +228,16 @@ const CountryDetail: React.FC = () => {
     }, 1000);
   }
 
-  const checkAuth = () => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const uid = user.uid;
-        setCurrUserId(uid);
-      } else {
-        navigate("/");
-      }
-    });
-  };
+  // const checkAuth = () => {
+  //   onAuthStateChanged(auth, (user) => {
+  //     if (user) {
+  //       const uid = user.uid;
+  //       setCurrUserId(uid);
+  //     } else {
+  //       navigate("/");
+  //     }
+  //   });
+  // };
 
   useEffect(() => {
     if (countriesData.length === 0) {
@@ -258,7 +261,12 @@ const CountryDetail: React.FC = () => {
             <div className="">
               <h2 className="stat-value overflow-x-auto overflow-y-hidden dark:text-slate-100">{`${countryData.name}`}</h2>
               <div className="icons max-h-32 my-2">
-                <div className="tooltip tooltip-left" data-tip="Add BucketList">
+                <div
+                  className="tooltip tooltip-left"
+                  data-tip={
+                    !isFavorite ? "Add BucketList" : "Remove from BucketList"
+                  }
+                >
                   {!isFavorite && (
                     <svg
                       onClick={handleAddFavorite}
@@ -292,7 +300,10 @@ const CountryDetail: React.FC = () => {
                     </svg>
                   )}
                 </div>
-                <div className="tooltip tooltip-right" data-tip="Add Record">
+                <div
+                  className="tooltip tooltip-right"
+                  data-tip={!isBeenTo ? "Add Record" : "Remove from Record"}
+                >
                   {!isBeenTo && (
                     <svg
                       onClick={handleAddBeenTo}
