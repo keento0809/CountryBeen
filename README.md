@@ -1,6 +1,6 @@
 # CountryBeen
 
-A web application memorizing countries where you've ever been to before and analyzing them visually with React and Typescript.
+A web application memorizing countries where you've ever been before and analyzing them visually with React and Typescript.
 
 ## Demo link:
 
@@ -19,11 +19,11 @@ Access this project at [CountryBeen](https://country-been.vercel.app/)!
 
 ## About The App
 
-[CountryBeen](https://country-been.vercel.app/) is one of my personal projects focusing on taking advantage of REST API (Country REST API), using React with Typescript to strictly check every variables in my projects to make the development more smoothly. Also, I adopt managing state by Redux-toolkit.
+[CountryBeen](https://country-been.vercel.app/) is one of my personal projects focusing on taking advantage of REST API (Country REST API), using React with Typescript to strictly check every variable in my projects to make the development more smoothly. Also, I adopt managing state by Redux-toolkit.
 
-Users can search countries and add them to BucketList (list of countries where users want to visit someday) and Record (list of countries where users have been to), and once a country added to Record, react-simple-map showcases it on the map enabling users to check which countries they've been to visually and easily.
+Users can search countries and add them to BucketList (list of countries where users want to visit someday) and Record (list of countries where users have been), and once a country is added to Record, react-simple-map showcases it on the map enabling users to check which countries they've been to visually and easily.
 
-What I'm working on now to improve is to fix layouts of components later on.
+What I'm working on now to improve is fixing the layouts of components later on.
 
 ## Screenshots
 
@@ -44,11 +44,11 @@ What I'm working on now to improve is to fix layouts of components later on.
 
 ## Approach
 
-- Utilize React.js and Redux with Typescript to make the state management easier and improve the efficiency of developing the application thanks to the power of Typescript.
-- Introducing `react-simple-map`, a library for React.js showcasing the world map with countries filled with colors where users have been to before.
-- Users can search countries using search bar on nav section or looking for them from regions via the 'countries' link on the home page.
-- Adding features as registrations to add countries to the bucket list (list of countries where users would like to visit in their future) and to the records (list of countries where users have been to) respectively utilizing the cloud firestore (firebase) as the database.
-- Being considered having a good user interface and designed by `TailWind CSS` and `DaisyUI`, a third-party library for Tailwind CSS.
+- Utilize React.js and Redux with Typescript to make state management easier and improve the efficiency of developing the application thanks to the power of Typescript.
+- Introducing `react-simple-map`, a library for React.js showcasing the world map with countries filled with colors where users have been before.
+- Users can search countries using the search bar on the nav section or looking for them from regions via the 'countries' link on the home page.
+- Adding features such as registrations to add countries to the bucket list (list of countries where users would like to visit in their future) and to the records (list of countries where users have been to) respectively utilizing the cloud firestore (firebase) as the database.
+- Being considered to have a good user interface and is designed by `TailWind CSS` and `DaisyUI`, a third-party library for Tailwind CSS.
 
 ## Status
 
