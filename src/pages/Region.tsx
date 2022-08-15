@@ -70,6 +70,7 @@ const Region = () => {
       .get("https://restcountries.com/v3.1/all")
       .then((res) => {
         if (!res) throw new Error("Request failed.");
+        console.log("CountryData fetched in Region.tsx");
         const resData = res.data;
 
         const loadedData = [];
@@ -172,7 +173,7 @@ const Region = () => {
               )}
             </div>
             {!isLoading && (
-              <div className="region-container max-h-640 overflow-scroll md:flex md:flex-wrap md:justify-between">
+              <div className="region-container max-h-640 overflow-scroll md:flex md:flex-wrap">
                 {countryData.map((country, index) => {
                   return (
                     <CountryCard

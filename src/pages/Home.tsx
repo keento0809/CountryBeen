@@ -63,6 +63,8 @@ const Home = () => {
       .get("https://restcountries.com/v3.1/all")
       .then((res) => {
         if (!res) throw new Error("Request failed.");
+        console.log("CountryData fetched");
+
         const resData = res.data;
         dispatch(countriesActions.fetchCountries(resData));
       })
