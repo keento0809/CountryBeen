@@ -19,9 +19,11 @@ Access this project at [CountryBeen](https://country-been.vercel.app/)!
 
 ## About The App
 
-[CountryBeen](https://country-been.vercel.app/) is one of my personal projects focusing on taking advantage of REST API (Country REST API), using React with Typescript to strictly check every variable in my projects to make the development more smoothly. Also, I adopt managing state by Redux-toolkit.
+[CountryBeen](https://country-been.vercel.app/) is one of my personal projects focusing on taking advantage of REST API (Country REST API), using React with Typescript to strictly check every variable in my projects to make the development more smoothly. Also, I introduce Redux-toolkit to make the state management easier.
 
-Users can search countries and add them to BucketList (list of countries where users want to visit someday) and Record (list of countries where users have been), and once a country is added to Record, react-simple-map showcases it on the map enabling users to check which countries they've been to visually and easily.
+Users can search countries by putting country's name on the search section on the navbar and add them to BucketList (list of countries where users want to visit someday) and Record (list of countries where users have been), and once a country is added to Record, react-simple-map showcases it on the map enabling users to check which countries they've been to visually and easily. Also, they can seek for the country from the continents. Each continent
+
+In the home page, there is a component showcasing the static data (the )
 
 What I'm working on now to improve is fixing the layouts of components later on.
 
@@ -40,7 +42,7 @@ What I'm working on now to improve is fixing the layouts of components later on.
 
 - Download or clone the repository
 - Run `npm install`
-- Run `npm run dev` to start running the app
+- Run `npm start` to start running the app
 
 ## Approach
 
