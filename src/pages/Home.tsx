@@ -58,8 +58,8 @@ const Home = () => {
 
   const percentage = (totals / 250) * 100;
 
-  function fetchCountryData() {
-    axios
+  async function fetchCountryData() {
+    await axios
       .get("https://restcountries.com/v3.1/all")
       .then((res) => {
         if (!res) throw new Error("Request failed.");

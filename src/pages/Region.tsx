@@ -17,7 +17,7 @@ const Region = () => {
   const [defaultData, setDefaultData] = useState<CountryViewObj[]>([]);
   const [countryData, setCountryData] = useState<CountryViewObj[]>([]);
   const [dataLength, setDataLength] = useState(defaultData.length);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   // const [isSet, setIsSet] = useState(false);
   const [bgImage, setBgImage] = useState("");
   const [currRegion, setCurrRegion] = useState("");
@@ -64,8 +64,6 @@ const Region = () => {
   }
 
   function fetchCountryData() {
-    setIsLoading(true);
-
     axios
       .get("https://restcountries.com/v3.1/all")
       .then((res) => {
@@ -95,10 +93,15 @@ const Region = () => {
         setDefaultData(loadedData);
         setCountryData(loadedData);
         setDataLength(loadedData.length);
+        setIsLoading(false);
       })
-      .catch((error) => console.log(error.message));
-    setIsLoading(false);
+      .catch((error) => {
+        console.log(error.message);
+        setIsLoading(false);
+      });
   }
+
+  console.log(isLoading);
 
   function utilizeCountriesData() {
     const resData: any = countriesData;
@@ -125,6 +128,7 @@ const Region = () => {
     setDefaultData(loadedData);
     setCountryData(loadedData);
     setDataLength(loadedData.length);
+    setIsLoading(false);
   }
 
   useEffect(() => {
@@ -134,6 +138,7 @@ const Region = () => {
     } else {
       utilizeCountriesData();
     }
+    // setIsLoading(false);
   }, []);
 
   function handleCheckValue() {
@@ -166,13 +171,13 @@ const Region = () => {
                   Loading...
                 </h2>
               )}
-              {!isLoading && (
+              {!isLoading && countriesData && (
                 <p className="font-bold text-xl text-slate-100 pb-3">
                   {currRegion}: {dataLength} countries matched
                 </p>
               )}
             </div>
-            {!isLoading && (
+            {!isLoading && countryData && (
               <div className="region-container max-h-640 overflow-scroll md:flex md:flex-wrap">
                 {countryData.map((country, index) => {
                   return (
