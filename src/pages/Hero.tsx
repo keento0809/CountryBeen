@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
 import AuthSignupForm from "../components/form/AuthSignupForm";
 import AuthLoginForm from "../components/form/AuthLoginForm";
@@ -58,12 +58,13 @@ const Hero = () => {
                 </span>{" "}
                 here!
               </p>
-              {isSignup && <AuthSignupForm />}
-              {!isSignup && <AuthLoginForm />}
+              {isSignup && <AuthSignupForm setIsError={setIsError} />}
+              {!isSignup && <AuthLoginForm setIsError={setIsError} />}
             </div>
           </div>
         </div>
         {isAlerting && <Alert text={alertText} />}
+        {isError && <Alert text={isError} />}
       </div>
     </div>
   );

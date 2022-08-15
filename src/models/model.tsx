@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, Dispatch, SetStateAction } from "react";
 
 export interface CountryViewObj {
   name: string;
@@ -63,4 +63,8 @@ export interface CountryCardProps {
   countryName: string;
   cca3: string;
   isBeenTo: boolean;
+}
+
+export interface TestProps {
+  setIsError: Dispatch<SetStateAction<string>>;
 }

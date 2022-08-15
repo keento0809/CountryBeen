@@ -3,8 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { AlertActions } from "../../store/alert-slice";
+import { TestProps } from "../../models/model";
 
-const AuthForm = () => {
+const AuthForm = ({ setIsError }: TestProps) => {
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
@@ -41,7 +42,11 @@ const AuthForm = () => {
       .catch((error: any) => {
         const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
+        setIsError(errorMessage);
+        setTimeout(() => {
+          setIsError("");
+        }, 2500);
+        console.log(errorCode, error);
       });
   };
 
