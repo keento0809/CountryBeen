@@ -10,6 +10,7 @@ import { RootState } from "../store";
 
 const Hero = () => {
   const [isSignup, setIsSignup] = useState(false);
+  const [isError, setIsError] = useState("");
 
   const isAlerting = useSelector(
     (state: RootState) => state.AlertReducer.isAlerting
