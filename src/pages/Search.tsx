@@ -12,6 +12,8 @@ const Search = () => {
     setRegionData(regionArrFixed);
   }, []);
 
+  console.log(regionData);
+
   return (
     <Wrapper>
       <Fragment>
@@ -22,17 +24,22 @@ const Search = () => {
         </div>
         <section className="countries lg:pb-6">
           <div className="countries-container max-h-680 overflow-scroll lg:flex lg:flex-wrap lg:justify-between">
-            {regionData.map((region, index) => {
-              return (
-                <Link
-                  to={`/countries/region/${region}`}
-                  key={index}
-                  className="lg:block lg:max-w-374"
-                >
-                  <RegionCard imgUrl={regionImageArr[region]} region={region} />
-                </Link>
-              );
-            })}
+            {regionData === [] && <p className="text-slate-800">Loading...</p>}
+            {regionData &&
+              regionData.map((region, index) => {
+                return (
+                  <Link
+                    to={`/countries/region/${region}`}
+                    key={index}
+                    className="lg:block lg:max-w-374"
+                  >
+                    <RegionCard
+                      imgUrl={regionImageArr[region]}
+                      region={region}
+                    />
+                  </Link>
+                );
+              })}
           </div>
         </section>
       </Fragment>
