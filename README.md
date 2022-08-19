@@ -21,11 +21,13 @@ Access this project at [CountryBeen](https://country-been.vercel.app/)!
 
 [CountryBeen](https://country-been.vercel.app/) is one of my personal projects focusing on taking advantage of REST API (Country REST API), using React with Typescript to strictly check every variable in my projects to make the development more smoothly. Also, I introduce Redux-toolkit to make the state management easier.
 
-Users can search countries by putting country's name on the search section on the navbar and add them to BucketList (list of countries where users want to visit someday) and Record (list of countries where users have been), and once a country is added to Record, react-simple-map showcases it on the map enabling users to check which countries they've been to visually and easily. Also, they can seek for the country from the continents. Each continent
+Users can search countries by putting country's name on the search section on the navbar and add them to BucketList (list of countries where users want to visit someday) and Record (list of countries where users have been). Once a country is added to Record, react-simple-map showcases it on the map enabling users to check which countries they've been to visually and easily.
 
-In the home page, there is a component showcasing the static data (the )
+This application also enables users to search the country from the regions. When users click the 'explore world' button or countries button on the nav bar, the page is jumped to the region select page containing six regions; Asia, Africa, Europe, North America, South America, and Oceania.
 
-What I'm working on now to improve is fixing the layouts of components later on.
+On the home page, there is a component showcasing three static data; the number of countries that users have been to before and those that users have added to the bucketList, and the percentage showing a rate comparing the amount of countries users have been before to the total number of countries in the world (245 countries).
+
+What I'm going to work on to improve is fixing the layouts of components later on.
 
 ## Screenshots
 

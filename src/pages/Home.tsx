@@ -40,6 +40,7 @@ const Home = () => {
   const isSuccessToAddBucketList = useSelector(
     (state: RootState) => state.favoriteReducer.isSuccessToAddBucketList
   );
+  // const countriesData = useSelector((state: RootState) => state.)
 
   const [currUserId, setCurrUserId] = useState(
     localStorage.getItem("currUser")
