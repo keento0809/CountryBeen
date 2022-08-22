@@ -20,12 +20,10 @@ const Listing = ({ name }: ListingName) => {
   // declare dispatch
   const dispatch = useDispatch();
   // declare selector
-  const favoriteList = useSelector(
-    (state: RootState) => state.favoriteReducer.favoriteList
+  const { favoriteList } = useSelector(
+    (state: RootState) => state.favoriteReducer
   );
-  const beenToList = useSelector(
-    (state: RootState) => state.beenReducer.beenToList
-  );
+  const { beenToList } = useSelector((state: RootState) => state.beenReducer);
 
   async function getCountryData(name: string) {
     setIsLoading(true);
