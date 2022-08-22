@@ -18,29 +18,15 @@ import { CountryViewObj } from "../models/model";
 
 const Home = () => {
   // declare selector
-  const totalNumber = useSelector(
-    (state: RootState) => state.favoriteReducer.totalNumber
+  const { totalNumber, isSuccessToAddBucketList } = useSelector(
+    (state: RootState) => state.favoriteReducer
   );
-  const totals = useSelector((state: RootState) => state.beenReducer.totals);
-  const favoriteList = useSelector(
-    (state: RootState) => state.favoriteReducer.favoriteList
+  const { totals, beenToList, isSuccessToAdd } = useSelector(
+    (state: RootState) => state.beenReducer
   );
-  const beenToList = useSelector(
-    (state: RootState) => state.beenReducer.beenToList
+  const { isAlerting, alertText } = useSelector(
+    (state: RootState) => state.AlertReducer
   );
-  const isAlerting = useSelector(
-    (state: RootState) => state.AlertReducer.isAlerting
-  );
-  const alertText = useSelector(
-    (state: RootState) => state.AlertReducer.alertText
-  );
-  const isSuccessToAdd = useSelector(
-    (state: RootState) => state.beenReducer.isSuccessToAdd
-  );
-  const isSuccessToAddBucketList = useSelector(
-    (state: RootState) => state.favoriteReducer.isSuccessToAddBucketList
-  );
-  // const countriesData = useSelector((state: RootState) => state.)
 
   const [currUserId, setCurrUserId] = useState(
     localStorage.getItem("currUser")

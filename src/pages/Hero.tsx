@@ -12,11 +12,8 @@ const Hero = () => {
   const [isSignup, setIsSignup] = useState(false);
   const [isError, setIsError] = useState("");
 
-  const isAlerting = useSelector(
-    (state: RootState) => state.AlertReducer.isAlerting
-  );
-  const alertText = useSelector(
-    (state: RootState) => state.AlertReducer.alertText
+  const { isAlerting, alertText } = useSelector(
+    (state: RootState) => state.AlertReducer
   );
 
   useEffect(() => {

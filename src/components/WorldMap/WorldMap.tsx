@@ -10,9 +10,7 @@ const WorldMap = () => {
   // declare useState
   const [cca3List, setCca3List] = useState<string[]>([]);
   // declare useSelector
-  const beenToList = useSelector(
-    (state: RootState) => state.beenReducer.beenToList
-  );
+  const { beenToList } = useSelector((state: RootState) => state.beenReducer);
   let cca3Arr: string[] = [];
   useEffect(() => {
     beenToList.map((country) => {

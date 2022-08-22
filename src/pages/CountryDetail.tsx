@@ -38,17 +38,12 @@ const CountryDetail: React.FC = () => {
   );
 
   // declare selector
-  const beenToList = useSelector(
-    (state: RootState) => state.beenReducer.beenToList
-  );
-  const isSuccessToAdd = useSelector(
-    (state: RootState) => state.beenReducer.isSuccessToAdd
-  );
+  const { beenToList } = useSelector((state: RootState) => state.beenReducer);
   const countriesData = useSelector(
     (state: RootState) => state.countriesReducer.countries
   );
-  const favoriteList = useSelector(
-    (state: RootState) => state.favoriteReducer.favoriteList
+  const { favoriteList } = useSelector(
+    (state: RootState) => state.favoriteReducer
   );
 
   // declare dispatch
