@@ -355,7 +355,6 @@ const CountryDetail: React.FC = () => {
               <div className="country-data basis-1/2 min-h-56 pr-2">
                 <div className="stat-title">Language</div>
                 <div className="font-bold text-2xl tracking-tight break-words dark:text-slate-100">
-                  {/* original */}
                   {Object.values(countryData.languages)[0]}
                   {Object.values(countryData.languages)[1] &&
                     ", " + Object.values(countryData.languages)[1]}
@@ -375,17 +374,14 @@ const CountryDetail: React.FC = () => {
                     ", " + Object.values(countryData.languages)[8]}
                   {Object.values(countryData.languages)[9] &&
                     ", " + Object.values(countryData.languages)[9]}
-                  {/* {languageArr} */}
                 </div>
               </div>
               <div className="country-data basis-1/2 min-h-56 pr-2">
                 <div className="stat-title">Currency</div>
                 <div className="font-bold text-2xl tracking-tight dark:text-slate-100">
-                  {/* original */}
                   {Object.keys(countryData.currencies)[0]}
                   {Object.keys(countryData.currencies)[1] &&
                     ", " + Object.keys(countryData.currencies)[1]}
-                  {/* {currencyArray} */}
                 </div>
               </div>
               <div className="country-data basis-1/2 min-h-56 pr-2">

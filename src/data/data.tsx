@@ -1,18 +1,19 @@
+import AsiaBgUrl from "../assets/asiaBg-1.jpg";
+import AntarcticaBgUrl from "../assets/antarcticaBg-1.jpg";
+import AfricaBgUrl from "../assets/africaBg-1.jpg";
+import EuropeBgUrl from "../assets/europeBg-1.jpg";
+import OceaniaBgUrl from "../assets/oceaniaBg-1.jpg";
+import NorthAmericaBgUrl from "../assets/northAmericaBg-1.jpg";
+import SouthAmericaBgUrl from "../assets/southAmericaBg-1.jpg";
+
 export const regionImageArr: { [key: string]: string } = {
-  Asia: "https://images.unsplash.com/flagged/photo-1565950978347-ba1cb53b0fef?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770",
-  Antarctica:
-    "https://images.unsplash.com/photo-1535752385016-16aa049b6a8d?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2123",
-  Africa:
-    "https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471",
-  Europe:
-    "https://images.unsplash.com/photo-1499856871958-5b9627545d1a?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1420",
-  Oceania:
-    "https://images.unsplash.com/photo-1589330273594-fade1ee91647?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470",
-  "North America":
-    "https://images.unsplash.com/photo-1570897620586-a24d2d0b85cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1771&q=80",
-  "South America":
-    // "https://images.unsplash.com/photo-1543385426-191664295b58?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1595",
-    "https://images.unsplash.com/photo-1653989761972-17f23c5dfdfe?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1674&q=80",
+  Asia: AsiaBgUrl,
+  Antarctica: AntarcticaBgUrl,
+  Africa: AfricaBgUrl,
+  Europe: EuropeBgUrl,
+  Oceania: OceaniaBgUrl,
+  "North America": NorthAmericaBgUrl,
+  "South America": SouthAmericaBgUrl,
 };
 
 export const regionArr = [
