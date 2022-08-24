@@ -2,11 +2,13 @@ import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
 import AuthSignupForm from "../components/form/AuthSignupForm";
 import AuthLoginForm from "../components/form/AuthLoginForm";
-import imgLink from "../assets/revisedHeroBg.jpg";
+import imgLink from "../assets/revisedHeroBg-1.jpg";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Alert from "../components/UI/Alert/Alert";
-import { useSelector } from "react-redux";
 import { RootState } from "../store";
+import { fetchCountries } from "../store/countries-slice";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch } from "../store";
 
 const Hero = () => {
   const [isSignup, setIsSignup] = useState(false);
@@ -15,12 +17,18 @@ const Hero = () => {
   const { isAlerting, alertText } = useSelector(
     (state: RootState) => state.AlertReducer
   );
+  const { countries } = useSelector(
+    (state: RootState) => state.countriesReducer
+  );
+
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       user ? console.log("User logged in") : console.log("No user here");
     });
+    dispatch(fetchCountries()).then((action) => console.log("Done fetching"));
   }, []);
 
   return (

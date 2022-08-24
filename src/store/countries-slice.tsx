@@ -1,11 +1,10 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import countryService from "../features/countryService";
 
-const fetchCountries = createAsyncThunk(
-  "countries/getCountries",
+export const fetchCountries = createAsyncThunk(
+  "countries/fetchCountries",
   async (thunkAPI) => {
-    const response = await fetch("https://restcountries.com/v3.1/all");
-    const data = await response.json();
-    return data;
+    return await countryService.get();
   }
 );
 

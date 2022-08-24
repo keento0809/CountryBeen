@@ -27,6 +27,9 @@ const Home = () => {
   const { isAlerting, alertText } = useSelector(
     (state: RootState) => state.AlertReducer
   );
+  const { countries } = useSelector(
+    (state: RootState) => state.countriesReducer
+  );
 
   const [currUserId, setCurrUserId] = useState(
     localStorage.getItem("currUser")
@@ -50,8 +53,7 @@ const Home = () => {
       .get("https://restcountries.com/v3.1/all")
       .then((res) => {
         if (!res) throw new Error("Request failed.");
-        console.log("CountryData fetched");
-
+        console.log("Homeにてfetch致した");
         const resData = res.data;
         dispatch(countriesActions.fetchCountries(resData));
       })
@@ -104,7 +106,7 @@ const Home = () => {
   }, [beenToList.length]);
 
   useEffect(() => {
-    fetchCountryData();
+    countries.length === 0 && fetchCountryData();
     fetchDataFromDB(true);
     fetchDataFromDB(false);
   }, []);
