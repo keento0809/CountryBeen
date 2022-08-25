@@ -4,7 +4,9 @@ import axios from "axios";
 import { CountryViewObj } from "../models/model";
 import { getAuth, signOut } from "firebase/auth";
 import { AlertActions } from "../store/alert-slice";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { AppDispatch, RootState } from "../store";
+import { fetchCountries } from "../store/countries-slice";
 
 const Header = () => {
   // declare useState
@@ -15,14 +17,37 @@ const Header = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
+  const { countries } = useSelector(
+    (state: RootState) => state.countriesReducer
+  );
+  const dispatch = useDispatch<AppDispatch>();
+
+  const setCountriesForSearch = () => {
+    const resData: any = countries;
+    const loadedData = [];
+
+    for (const key in resData) {
+      loadedData.push({
+        name: resData[key].name.common,
+        population: resData[key].population,
+        continents: resData[key].continents,
+        capital: resData[key].capital,
+        currencies: resData[key].currencies,
+        languages: resData[key].languages,
+        coatOfArms: resData[key].coatOfArms.png,
+        flagImg: resData[key].flags.png,
+        flagIcon: resData[key].flag,
+        cca3: resData[key].cca3,
+        borders: resData[key].borders,
+      });
+    }
+    setDefaultData(loadedData);
+  };
+
   // declare useRef
   const searchInputRef = useRef<HTMLInputElement>(null);
-
   // declare useNavigate
   const navigate = useNavigate();
-
-  const dispatch = useDispatch();
-
   const auth = getAuth();
 
   function handleCheckValue() {
@@ -42,12 +67,8 @@ const Header = () => {
     setCountryData(filteredData);
   }
 
-  function handleSearch() {
-    setIsSearchMode(true);
-  }
-
-  function handleCloseSearch() {
-    setIsSearchMode(false);
+  function handleToggleSearch() {
+    setIsSearchMode(!isSearchMode);
   }
 
   function handleTransition() {
@@ -56,12 +77,8 @@ const Header = () => {
     searchInputRef.current!.value = "";
   }
 
-  function handleOpenMenu() {
-    setIsMenuOpen(true);
-  }
-
-  function handleCloseMenu() {
-    setIsMenuOpen(false);
+  function handleToggleMenu() {
+    setIsMenuOpen(!isMenuOpen);
   }
 
   function handleSignout() {
@@ -80,8 +97,12 @@ const Header = () => {
   }
 
   useEffect(() => {
-    handleCloseMenu();
+    countries.length === 0 && dispatch(fetchCountries());
   }, [window.location.pathname]);
+
+  useEffect(() => {
+    setCountriesForSearch();
+  }, [countries.length]);
 
   return (
     <Fragment>
@@ -90,7 +111,7 @@ const Header = () => {
           <div className="z-30 backdrop fixed top-0 left-0 right-0 bottom-0 w-full bg-slate-900 opacity-95"></div>
           <section className="z-40 py-4 px-5 fixed top-0 right-0 w-full mx-auto">
             <svg
-              onClick={handleCloseMenu}
+              onClick={handleToggleMenu}
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6 text-white mr-3 mb-4"
               fill="none"
@@ -130,7 +151,7 @@ const Header = () => {
           <section className="z-40 py-4 px-5 md:px-8 fixed top-0 right-0 w-4/5 mx-auto">
             <div className="flex flex-row items-center justify-end">
               <svg
-                onClick={handleCloseSearch}
+                onClick={handleToggleSearch}
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6 text-white mr-3 mb-4"
                 fill="none"
@@ -182,7 +203,7 @@ const Header = () => {
             <div className="dropdown">
               <label tab-index="0" className="btn btn-ghost btn-circle">
                 <svg
-                  onClick={handleOpenMenu}
+                  onClick={handleToggleMenu}
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-5 w-5"
                   fill="none"
@@ -207,7 +228,7 @@ const Header = () => {
           <div className="navbar-end">
             <button className="btn btn-ghost btn-circle">
               <svg
-                onClick={handleSearch}
+                onClick={handleToggleSearch}
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-5 w-5"
                 fill="none"
@@ -238,7 +259,7 @@ const Header = () => {
               </Link> */}
                 <button className="btn btn-ghost btn-circle">
                   <svg
-                    onClick={handleSearch}
+                    onClick={handleToggleSearch}
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-4 w-4"
                     fill="none"
@@ -253,7 +274,6 @@ const Header = () => {
                     />
                   </svg>
                 </button>
-                {/* test */}
                 <Link
                   to={"/record"}
                   className="text-sm btn-ghost py-1 px-3 rounded-lg"

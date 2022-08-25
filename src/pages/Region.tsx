@@ -25,7 +25,9 @@ const Region = () => {
   const countriesData = useSelector(
     (state: RootState) => state.countriesReducer.countries
   );
-
+  const { countries } = useSelector(
+    (state: RootState) => state.countriesReducer
+  );
   // declare dispatch
   const dispatch = useDispatch<AppDispatch>();
 
@@ -60,7 +62,8 @@ const Region = () => {
   }
 
   function utilizeCountriesData() {
-    const resData: any = countriesData;
+    if (countries.length === 0) return;
+    const resData: any = countries;
     const loadedData = [];
 
     for (const key in resData) {
@@ -88,12 +91,12 @@ const Region = () => {
 
   useEffect(() => {
     checkRegion();
-    if (countriesData.length === 0) {
-      dispatch(fetchCountries());
-    } else {
-      utilizeCountriesData();
-    }
+    countries.length === 0 && dispatch(fetchCountries());
   }, []);
+
+  useEffect(() => {
+    utilizeCountriesData();
+  }, [countries.length]);
 
   function handleCheckValue() {
     const filteredData = defaultData.filter((country) =>
