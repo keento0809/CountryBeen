@@ -4,9 +4,9 @@ import HomeWrapper from "../components/Wrapper/HomeWrapper";
 import { Link, useNavigate } from "react-router-dom";
 import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { countriesActions } from "../store/countries-slice";
+import { countriesActions, fetchCountries } from "../store/countries-slice";
 import { favoriteActions } from "../store/favorite-slice";
-import { RootState } from "../store";
+import { AppDispatch, RootState } from "../store";
 import Alert from "../components/UI/Alert/Alert";
 import WorldMap from "../components/WorldMap/WorldMap";
 import axios from "axios";
@@ -37,28 +37,18 @@ const Home = () => {
   const [isFavoriteLoading, setIsFavoriteLoading] = useState(false);
   const [isBeenLoading, setIsBeenLoading] = useState(false);
 
-  // declare dispatch
-  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
 
+  // declare dispatch
+  const dispatch = useDispatch<AppDispatch>();
   // declare auth
   const auth = getAuth();
-
   // declare navigate
   const navigate = useNavigate();
 
   const percentage = (totals / 250) * 100;
 
-  async function fetchCountryData() {
-    await axios
-      .get("https://restcountries.com/v3.1/all")
-      .then((res) => {
-        if (!res) throw new Error("Request failed.");
-        console.log("Homeにてfetch致した");
-        const resData = res.data;
-        dispatch(countriesActions.fetchCountries(resData));
-      })
-      .catch((error) => console.log(error.message));
-  }
+  console.log("rendering");
 
   interface currUserType {
     id: string;
@@ -67,19 +57,17 @@ const Home = () => {
     record: CountryViewObj[];
   }
 
-  async function fetchDataFromDB(isRecords: boolean) {
-    isRecords ? setIsBeenLoading(true) : setIsFavoriteLoading(true);
+  async function fetchFromDB() {
+    setLoading(true);
     const currUserRef = doc(db, "users", `${currUserId}`);
     const currUserSnap = await getDoc(currUserRef);
     const currUserData: DocumentData | undefined = currUserSnap.data();
 
-    const resultData: any = [];
-    const dataArray = isRecords
-      ? currUserData!.record
-      : currUserData!.bucketList;
+    const resultRecordData: any = [];
+    const resultBucketListData: any = [];
 
-    dataArray.forEach((resData: any) => {
-      resultData.push({
+    currUserData!.record.forEach((resData: any) => {
+      resultRecordData.push({
         name: resData.name ? resData.name : "",
         capital: resData.capital ? resData.capital : "",
         population: resData.population ? resData.population : "",
@@ -93,22 +81,29 @@ const Home = () => {
         borders: resData.borders ? resData.borders : "",
       });
     });
-    dispatch(
-      isRecords
-        ? beenActions.fetchBeenTo(resultData)
-        : favoriteActions.fetchFavorite(resultData)
-    );
-    isRecords ? setIsBeenLoading(false) : setIsFavoriteLoading(false);
+    currUserData!.bucketList.forEach((resData: any) => {
+      resultBucketListData.push({
+        name: resData.name ? resData.name : "",
+        capital: resData.capital ? resData.capital : "",
+        population: resData.population ? resData.population : "",
+        continents: resData.continents ? resData.continents : "",
+        currencies: resData.currencies ? resData.currencies : "",
+        languages: resData.languages ? resData.languages : "",
+        coatOfArms: resData.coatOfArms?.png ? resData.coatOfArms.png : "",
+        flagImg: resData.flagImg ? resData.flagImg : "",
+        flagIcon: resData.flag ? resData.flag : "",
+        cca3: resData.cca3 ? resData.cca3 : "",
+        borders: resData.borders ? resData.borders : "",
+      });
+    });
+    dispatch(beenActions.fetchBeenTo(resultRecordData));
+    dispatch(favoriteActions.fetchFavorite(resultBucketListData));
+
+    setLoading(false);
   }
 
   useEffect(() => {
-    localStorage.setItem("beenTo", JSON.stringify(beenToList));
-  }, [beenToList.length]);
-
-  useEffect(() => {
-    countries.length === 0 && fetchCountryData();
-    fetchDataFromDB(true);
-    fetchDataFromDB(false);
+    fetchFromDB();
   }, []);
 
   return (

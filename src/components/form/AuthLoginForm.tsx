@@ -52,7 +52,6 @@ const AuthForm = ({ setIsError }: TestProps) => {
 
   const handleSubmit = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
-    console.log(userInfo);
     authentication(userInfo.email, userInfo.password);
   };
 
