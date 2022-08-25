@@ -12,8 +12,6 @@ const Search = () => {
     setRegionData(regionArrFixed);
   }, []);
 
-  console.log(regionData);
-
   return (
     <Wrapper>
       <Fragment>

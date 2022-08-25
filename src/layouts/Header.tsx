@@ -25,39 +25,6 @@ const Header = () => {
 
   const auth = getAuth();
 
-  function fetchCountryData() {
-    setIsLoading(true);
-
-    axios
-      .get("https://restcountries.com/v3.1/all")
-      .then((res) => {
-        if (!res) throw new Error("Request failed.");
-        const resData = res.data;
-
-        const loadedData = [];
-        for (const key in resData) {
-          loadedData.push({
-            name: resData[key].name.common,
-            population: resData[key].population,
-            continents: resData[key].continents,
-            capital: resData[key].capital,
-            currencies: resData[key].currencies,
-            languages: resData[key].languages,
-            coatOfArms: resData[key].coatOfArms.png,
-            flagImg: resData[key].flags.png,
-            flagIcon: resData[key].flag,
-            cca3: resData[key].cca3,
-            borders: resData[key].borders,
-            // test
-            // beenTo: false,
-          });
-        }
-        setDefaultData(loadedData);
-      })
-      .catch((error) => console.log(error.message));
-    setIsLoading(false);
-  }
-
   function handleCheckValue() {
     const currValue = searchInputRef.current!.value;
     if (currValue === "") {
@@ -111,10 +78,6 @@ const Header = () => {
       })
       .catch((error) => console.log(error));
   }
-
-  useEffect(() => {
-    fetchCountryData();
-  }, []);
 
   useEffect(() => {
     handleCloseMenu();

@@ -1,16 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
-import { CountryViewObj, PropsRegion } from "../models/model";
-import Wrapper from "../components/Wrapper/Wrapper";
+import { CountryViewObj } from "../models/model";
 import RegionWrapper from "../components/Wrapper/RegionWrapper";
-import Header from "../layouts/Header";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { favoriteActions } from "../store/favorite-slice";
-import { beenActions } from "../store/been-slice";
 import { regionImageArr, regionArr } from "../data/data";
 import CountryCard from "../components/UI/Card/CountryCard";
-import { RootState } from "../store";
+import { AppDispatch, RootState } from "../store";
+import { fetchCountries } from "../store/countries-slice";
 
 const Region = () => {
   // declare useState
@@ -18,7 +15,6 @@ const Region = () => {
   const [countryData, setCountryData] = useState<CountryViewObj[]>([]);
   const [dataLength, setDataLength] = useState(defaultData.length);
   const [isLoading, setIsLoading] = useState(true);
-  // const [isSet, setIsSet] = useState(false);
   const [bgImage, setBgImage] = useState("");
   const [currRegion, setCurrRegion] = useState("");
 
@@ -31,7 +27,7 @@ const Region = () => {
   );
 
   // declare dispatch
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   // declare navigate
   const navigate = useNavigate();
@@ -63,52 +59,11 @@ const Region = () => {
     }
   }
 
-  function fetchCountryData() {
-    axios
-      .get("https://restcountries.com/v3.1/all")
-      .then((res) => {
-        if (!res) throw new Error("Request failed.");
-        console.log("CountryData fetched in Region.tsx");
-        const resData = res.data;
-
-        const loadedData = [];
-        for (const key in resData) {
-          // I need to change here.
-          if (resData[key].continents[0] === selectedRegion) {
-            loadedData.push({
-              name: resData[key].name.common,
-              population: resData[key].population,
-              continents: resData[key].continents,
-              capital: resData[key].capital,
-              currencies: resData[key].currencies,
-              languages: resData[key].languages,
-              coatOfArms: resData[key].coatOfArms.png,
-              flagImg: resData[key].flags.png,
-              flagIcon: resData[key].flag,
-              cca3: resData[key].cca3,
-              borders: resData[key].borders,
-            });
-          }
-        }
-        setDefaultData(loadedData);
-        setCountryData(loadedData);
-        setDataLength(loadedData.length);
-        setIsLoading(false);
-      })
-      .catch((error) => {
-        console.log(error.message);
-        setIsLoading(false);
-      });
-  }
-
-  console.log(isLoading);
-
   function utilizeCountriesData() {
     const resData: any = countriesData;
     const loadedData = [];
 
     for (const key in resData) {
-      // I need to change here.
       if (resData[key].continents[0] === selectedRegion) {
         loadedData.push({
           name: resData[key].name.common,
@@ -134,11 +89,10 @@ const Region = () => {
   useEffect(() => {
     checkRegion();
     if (countriesData.length === 0) {
-      fetchCountryData();
+      dispatch(fetchCountries());
     } else {
       utilizeCountriesData();
     }
-    // setIsLoading(false);
   }, []);
 
   function handleCheckValue() {

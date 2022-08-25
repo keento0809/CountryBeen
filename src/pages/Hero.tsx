@@ -24,11 +24,7 @@ const Hero = () => {
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      user ? console.log("User logged in") : console.log("No user here");
-    });
-    dispatch(fetchCountries()).then((action) => console.log("Done fetching"));
+    dispatch(fetchCountries());
   }, []);
 
   return (

@@ -176,18 +176,14 @@ const CountryDetail: React.FC = () => {
     const updatedDataArray = dataArray.filter(
       (data: CountryViewObj) => data.cca3 !== countryData.cca3
     );
-    console.log(updatedDataArray);
 
     await updateDoc(currUserRef, {
       [type]: updatedDataArray,
     });
     const getSnap = await getDoc(currUserRef);
-    const gettingData = getSnap.data();
-    console.log(gettingData!.record);
   }
 
   async function handleAddFavorite() {
-    console.log(countryData);
     dispatch(favoriteActions.addFavorite(countryData));
     await postToFirebase("bucketList", countryData);
     dispatch(AlertActions.turnOnAlert("Country Added to BucketList!"));
