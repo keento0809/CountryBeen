@@ -39,7 +39,6 @@ const Region = () => {
 
   function checkRegion() {
     let boolRegion = false;
-
     const pathArr = window.location.pathname.split("/");
 
     pathArr.forEach((text) => {
@@ -67,7 +66,10 @@ const Region = () => {
     const loadedData = [];
 
     for (const key in resData) {
-      if (resData[key].continents[0] === selectedRegion) {
+      if (
+        resData[key].continents[0] ===
+        (selectedRegion === undefined ? currRegion : selectedRegion)
+      ) {
         loadedData.push({
           name: resData[key].name.common,
           population: resData[key].population,
