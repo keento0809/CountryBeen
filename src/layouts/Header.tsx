@@ -98,6 +98,7 @@ const Header = () => {
 
   useEffect(() => {
     countries.length === 0 && dispatch(fetchCountries());
+    setIsMenuOpen(false);
   }, [window.location.pathname]);
 
   useEffect(() => {

@@ -11,9 +11,9 @@ const CountryCard = ({
   function handleClick() {}
 
   return (
-    <div className="overflow-hidden rounded-2xl ml-auto mr-auto md:ml-0 md:mr-3 lg:mr-2.5 xl:mr-6 mb-4">
+    <div className="overflow-hidden rounded-2xl bg-transparent ml-auto mr-auto md:ml-0 md:mr-3 lg:mr-2.5 xl:mr-6 mb-4">
       <Link to={`/countries/${cca3}`} className="cursor-pointer">
-        <div className="card w-full max-w-374 md:max-w-340 lg:max-w-310 xl:max-w-320 md:basis-1/2 h-248 max-h-264 bg-base-100 shadow-xl image-full hover:scale-105 transition-transform">
+        <div className="card w-full max-w-374 md:max-w-340 lg:max-w-310 xl:max-w-320 md:basis-1/2 h-248 max-h-264 shadow-xl image-full hover:scale-105 transition-transform rounded-2xl bg-transparent">
           <figure>
             <img
               className="object-cover w-full opacity-40 z-10"
