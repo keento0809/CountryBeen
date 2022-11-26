@@ -106,7 +106,7 @@ const Home = () => {
           <section className="title text-center text-white">
             <h2 className="py-6 font-bold text-2xl">Dashboard</h2>
           </section>
-          <div className="max-h-640 md:max-h-620 xl:flex xl:space-x-8 xl:justify-evenly overflow-scroll">
+          <div className="max-h-640 md:max-h-620 xl:max-h-none xl:flex xl:space-x-8 xl:justify-evenly overflow-scroll xl:overflow-clip">
             <section className="mapping bg-slate-700 rounded-2xl lg:mx-0 xl:min-w-800 xl:basis-1">
               <WorldMap />
             </section>
