@@ -13,20 +13,17 @@ import { AppDispatch } from "../store";
 const Hero = () => {
   const [isSignup, setIsSignup] = useState(false);
   const [isError, setIsError] = useState("");
-
   const { isAlerting, alertText } = useSelector(
     (state: RootState) => state.AlertReducer
   );
   const { countries } = useSelector(
     (state: RootState) => state.countriesReducer
   );
-
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     dispatch(fetchCountries());
   }, []);
-
   return (
     <div className="overflow-hidden">
       <div
@@ -36,7 +33,6 @@ const Hero = () => {
           backgroundSize: "cover",
         }}
       >
-        <div className="hero-overlay bg-opacity-60"></div>
         <div className="w-11/12 mx-auto">
           <div className="hero-content rounded-lg bg-slate-800 bg-opacity-70 text-center text-neutral-content p-8 lg:p-12 max-w-600 lg:max-w-700 mx-auto">
             <div className="max-w-md lg:max-w-500">

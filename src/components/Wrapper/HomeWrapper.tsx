@@ -1,6 +1,7 @@
 import Header from "../../layouts/Header";
 import { ChildrenType } from "../../models/model";
-import imgUrl from "../../assets/homeBg.jpg";
+// import imgUrl from "../../assets/homeBg.jpg";
+import imgUrl from "../../assets/revisedHeroBg-1.jpg";
 
 const HomeWrapper = ({ children }: ChildrenType) => {
   return (
@@ -14,7 +15,7 @@ const HomeWrapper = ({ children }: ChildrenType) => {
     >
       <div className="min-h-screen px-5 sm:px-8">
         <Header />
-        <div className="pt-16 mx-auto max-w-374 md:max-w-600 xl:max-w-800">
+        <div className="pt-16 mx-auto max-w-374 md:max-w-600 xl:max-w-none">
           {children}
         </div>
       </div>
