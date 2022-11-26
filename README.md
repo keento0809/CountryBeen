@@ -31,7 +31,7 @@ What I'm going to work on to improve is fixing the layouts of components later o
 
 ## Screenshots
 
-![CountryBeen](https://user-images.githubusercontent.com/65790344/181345386-feb6a6d5-04d7-401c-ad3f-d30f44687ad4.png)
+![CountryBeen](https://user-images.githubusercontent.com/65790344/204110322-11c319fd-b0f1-4feb-81e7-67cab1068009.png)
 
 ## Technologies
 

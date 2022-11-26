@@ -22,7 +22,9 @@ const Search = () => {
         </div>
         <section className="countries lg:pb-6">
           <div className="countries-container max-h-680 overflow-scroll lg:flex lg:flex-wrap lg:justify-between">
-            {regionData === [] && <p className="text-slate-800">Loading...</p>}
+            {regionData.length === 0 && (
+              <p className="text-slate-800">Loading...</p>
+            )}
             {regionData &&
               regionData.map((region, index) => {
                 return (
