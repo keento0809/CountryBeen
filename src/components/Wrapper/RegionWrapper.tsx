@@ -1,13 +1,13 @@
 import Header from "../../layouts/Header";
 import { RegionWrapperType } from "../../models/model";
-import imageUrl from "../../assets/homeBg.jpg";
+import imagePath from "../../assets/revisedHeroBg-1.jpg";
 
 const RegionWrapper = ({ children, imageUrl }: RegionWrapperType) => {
   return (
     <div
       className="min-h-screen"
       style={{
-        backgroundImage: `url(${imageUrl})`,
+        backgroundImage: `url(${imagePath})`,
         backgroundSize: "cover",
         backgroundPosition: "50% 50%",
       }}

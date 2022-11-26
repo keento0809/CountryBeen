@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
-import axios from "axios";
+import { useEffect, useState, useRef } from "react";
 import { CountryViewObj } from "../models/model";
 import RegionWrapper from "../components/Wrapper/RegionWrapper";
 import { useNavigate } from "react-router-dom";
@@ -10,17 +9,19 @@ import { AppDispatch, RootState } from "../store";
 import { fetchCountries } from "../store/countries-slice";
 
 const Region = () => {
+  let pathRegion = window.location.pathname.split("/")[3];
+  if (pathRegion === "North%20America") pathRegion = "North America";
+  if (pathRegion === "South%20America") pathRegion = "South America";
   // declare useState
   const [defaultData, setDefaultData] = useState<CountryViewObj[]>([]);
   const [countryData, setCountryData] = useState<CountryViewObj[]>([]);
   const [dataLength, setDataLength] = useState(defaultData.length);
   const [isLoading, setIsLoading] = useState(true);
-  const [bgImage, setBgImage] = useState("");
-  const [currRegion, setCurrRegion] = useState("");
+  const [bgImage, setBgImage] = useState(regionImageArr[pathRegion]);
+  const [currRegion, setCurrRegion] = useState(pathRegion);
 
   // declare useRef
   const searchInputRef = useRef<HTMLInputElement>(null);
-
   // declare useSelector
   const countriesData = useSelector(
     (state: RootState) => state.countriesReducer.countries
@@ -30,41 +31,15 @@ const Region = () => {
   );
   // declare dispatch
   const dispatch = useDispatch<AppDispatch>();
-
   // declare navigate
   const navigate = useNavigate();
 
   let selectedRegion: string;
-  let selectedImage: string;
-
-  function checkRegion() {
-    let boolRegion = false;
-    const pathArr = window.location.pathname.split("/");
-
-    pathArr.forEach((text) => {
-      for (let i = 0; i < regionArr.length; i++) {
-        if (text === regionArr[i]) {
-          boolRegion = true;
-          if (regionArr[i] === "North%20America") {
-            selectedRegion = "North America";
-          } else if (regionArr[i] === "South%20America") {
-            selectedRegion = "South America";
-          } else selectedRegion = regionArr[i];
-          setBgImage(regionImageArr[selectedRegion]);
-          setCurrRegion(selectedRegion);
-        }
-      }
-    });
-    if (!boolRegion) {
-      navigate("/home");
-    }
-  }
 
   function utilizeCountriesData() {
     if (countries.length === 0) return;
     const resData: any = countries;
     const loadedData = [];
-
     for (const key in resData) {
       if (
         resData[key].continents[0] ===
@@ -90,12 +65,9 @@ const Region = () => {
     setDataLength(loadedData.length);
     setIsLoading(false);
   }
-
   useEffect(() => {
-    checkRegion();
     countries.length === 0 && dispatch(fetchCountries());
   }, []);
-
   useEffect(() => {
     utilizeCountriesData();
   }, [countries.length]);

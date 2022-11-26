@@ -30,13 +30,11 @@ const Home = () => {
   const { countries } = useSelector(
     (state: RootState) => state.countriesReducer
   );
-
   const [currUserId, setCurrUserId] = useState(
     localStorage.getItem("currUser")
   );
   const [isFavoriteLoading, setIsFavoriteLoading] = useState(false);
   const [isBeenLoading, setIsBeenLoading] = useState(false);
-
   const [loading, setLoading] = useState(false);
 
   // declare dispatch
@@ -45,10 +43,7 @@ const Home = () => {
   const auth = getAuth();
   // declare navigate
   const navigate = useNavigate();
-
   const percentage = (totals / 250) * 100;
-
-  console.log("rendering");
 
   interface currUserType {
     id: string;
@@ -98,10 +93,8 @@ const Home = () => {
     });
     dispatch(beenActions.fetchBeenTo(resultRecordData));
     dispatch(favoriteActions.fetchFavorite(resultBucketListData));
-
     setLoading(false);
   }
-
   useEffect(() => {
     fetchFromDB();
   }, []);
@@ -113,12 +106,12 @@ const Home = () => {
           <section className="title text-center text-white">
             <h2 className="py-6 font-bold text-2xl">Dashboard</h2>
           </section>
-          <div className="max-h-640 md:max-h-620 overflow-scroll">
-            <section className="mapping bg-slate-700 rounded-2xl lg:mx-0">
+          <div className="max-h-640 md:max-h-620 xl:flex xl:space-x-8 xl:justify-evenly overflow-scroll">
+            <section className="mapping bg-slate-700 rounded-2xl lg:mx-0 xl:min-w-800 xl:basis-1">
               <WorldMap />
             </section>
-            <div className="md:flex flex-row items-start justify-center">
-              <section className="statistic-data pt-2 pb-5 md:basis-3/5">
+            <div className="md:flex flex-row xl:flex-col items-start xl:items-center justify-center">
+              <section className="statistic-data pt-2 xl:pt-0 xl:min-w-500 pb-5 md:basis-3/5">
                 <div className="stats shadow flex flex-col">
                   <div className="stat basis-4/12 pb-3">
                     <div className="stat-figure text-secondary">
@@ -232,7 +225,7 @@ const Home = () => {
                   </div>
                 </div>
               </section>
-              <section className="buttons text-center md:basis-2/5 md:pt-10">
+              <section className="buttons text-center md:basis-2/5 md:pt-10 xl:pt-0 xl:flex xl:justify-center xl:items-center">
                 <button className="btn btn-outline btn-secondary gap-2">
                   <Link to="/countries" className="flex flex-row items-center">
                     <svg
