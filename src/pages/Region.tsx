@@ -109,7 +109,7 @@ const Region = () => {
               )}
             </div>
             {!isLoading && countryData && (
-              <div className="region-container max-h-640 overflow-scroll md:flex md:flex-wrap">
+              <div className="region-container max-h-640 overflow-scroll md:flex md:flex-wrap xl:pb-32">
                 {countryData.map((country, index) => {
                   return (
                     <CountryCard

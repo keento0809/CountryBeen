@@ -384,6 +384,8 @@ const CountryDetail: React.FC = () => {
                 <div className="stat-title">More Info</div>
                 <div className="font-normal text-2xl tracking-tight dark:text-slate-100">
                   <a
+                    target="_blank"
+                    rel="noopener noreferrer"
                     href={`https://en.wikipedia.org/wiki/${
                       countryData.name[0]
                     }${countryData.name.slice(1)}`}
