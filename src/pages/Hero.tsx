@@ -4,7 +4,7 @@ import AuthSignupForm from "../components/form/AuthSignupForm";
 import AuthLoginForm from "../components/form/AuthLoginForm";
 import imgLink from "../assets/revisedHeroBg-1.jpg";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import Alert from "../components/UI/Alert/Alert";
+import Alert from "../components/Alert/Alert";
 import { RootState } from "../store";
 import { fetchCountries } from "../store/countries-slice";
 import { useDispatch, useSelector } from "react-redux";

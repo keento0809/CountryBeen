@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { countriesActions, fetchCountries } from "../store/countries-slice";
 import { favoriteActions } from "../store/favorite-slice";
 import { AppDispatch, RootState } from "../store";
-import Alert from "../components/UI/Alert/Alert";
+import Alert from "../components/Alert/Alert";
 import WorldMap from "../components/WorldMap/WorldMap";
 import axios from "axios";
 import { doc, getDoc, DocumentData } from "firebase/firestore";

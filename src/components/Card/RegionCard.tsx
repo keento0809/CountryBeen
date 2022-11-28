@@ -1,5 +1,5 @@
 import { Fragment } from "react";
-import { RegionCardProps } from "../../../models/model";
+import { RegionCardProps } from "../../models/model";
 import imgPath from "../../../assets/img-for-regionCard.jpg";
 
 const RegionCard = ({ imgUrl, region }: RegionCardProps) => {

@@ -4,7 +4,7 @@ import RegionWrapper from "../components/Wrapper/RegionWrapper";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { regionImageArr, regionArr } from "../data/data";
-import CountryCard from "../components/UI/Card/CountryCard";
+import CountryCard from "../components/Card/CountryCard";
 import { AppDispatch, RootState } from "../store";
 import { fetchCountries } from "../store/countries-slice";
 

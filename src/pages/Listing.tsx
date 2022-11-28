@@ -1,7 +1,7 @@
 import DisplayWrapper from "../components/Wrapper/DisplayWrapper";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store";
-import CountryCard from "../components/UI/Card/CountryCard";
+import CountryCard from "../components/Card/CountryCard";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../services/firebase";
