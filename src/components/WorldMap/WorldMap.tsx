@@ -7,9 +7,7 @@ const geoUrl =
   "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
 
 const WorldMap = () => {
-  // declare useState
   const [cca3List, setCca3List] = useState<string[]>([]);
-  // declare useSelector
   const { beenToList } = useSelector((state: RootState) => state.beenReducer);
   let cca3Arr: string[] = [];
   useEffect(() => {
@@ -24,14 +22,12 @@ const WorldMap = () => {
       <ComposableMap>
         <Geographies
           geography={geoUrl}
-          // original
           fill="#F7F7F7"
           stroke="#888888"
           className="max-h-500"
         >
           {({ geographies }) =>
             geographies.map((geo) => {
-              // cca3
               let boolBeen = false;
               for (let i = 0; i < cca3List.length; i++) {
                 if (geo.id == cca3List[i]) {
@@ -55,6 +51,3 @@ const WorldMap = () => {
 };
 
 export default WorldMap;
-
-// const rootElement = document.getElementById("root");
-// ReactDOM.render(<ReactSimpleMap />, rootElement);

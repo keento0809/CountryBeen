@@ -17,9 +17,7 @@ const Listing = ({ name }: ListingName) => {
     localStorage.getItem("currUser") ? localStorage.getItem("currUser") : ""
   );
   const [isLoading, setIsLoading] = useState(false);
-  // declare dispatch
   const dispatch = useDispatch();
-  // declare selector
   const { favoriteList } = useSelector(
     (state: RootState) => state.favoriteReducer
   );
@@ -62,7 +60,6 @@ const Listing = ({ name }: ListingName) => {
     name !== "Record" &&
       favoriteList.length === 0 &&
       getCountryData("bucketList");
-    // getCountryData();
   }, []);
 
   return (

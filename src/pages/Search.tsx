@@ -6,12 +6,7 @@ import { regionArrFixed, regionImageArr } from "../data/data";
 import RegionCard from "../components/Card/RegionCard";
 
 const Search = () => {
-  // declare useState
   const [regionData, setRegionData] = useState<string[]>(regionArrFixed);
-
-  // useEffect(() => {
-  //   setRegionData(regionArrFixed);
-  // }, []);
   return (
     <SearchWrapper>
       <Fragment>

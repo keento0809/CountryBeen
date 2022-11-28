@@ -17,7 +17,6 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { CountryViewObj } from "../models/model";
 
 const Home = () => {
-  // declare selector
   const { totalNumber, isSuccessToAddBucketList } = useSelector(
     (state: RootState) => state.favoriteReducer
   );
@@ -36,21 +35,10 @@ const Home = () => {
   const [isFavoriteLoading, setIsFavoriteLoading] = useState(false);
   const [isBeenLoading, setIsBeenLoading] = useState(false);
   const [loading, setLoading] = useState(false);
-
-  // declare dispatch
   const dispatch = useDispatch<AppDispatch>();
-  // declare auth
   const auth = getAuth();
-  // declare navigate
   const navigate = useNavigate();
   const percentage = (totals / 250) * 100;
-
-  interface currUserType {
-    id: string;
-    email: string;
-    bucketList: CountryViewObj[];
-    record: CountryViewObj[];
-  }
 
   async function fetchFromDB() {
     setLoading(true);
@@ -162,7 +150,6 @@ const Home = () => {
                         <path
                           strokeLinecap="round"
                           strokeLinejoin="round"
-                          //   stroke-width="2"
                           d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
                         ></path>
                       </svg>

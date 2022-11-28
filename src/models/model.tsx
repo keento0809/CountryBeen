@@ -11,8 +11,6 @@ export interface CountryViewObj {
   flagImg: string;
   flagIcon: string;
   cca3: string;
-  // test
-  // beenTo: boolean;
 }
 
 export interface ChildrenType {

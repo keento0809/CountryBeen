@@ -17,7 +17,6 @@ const Main = () => {
       <Route path="/countries" element={<Search />} />
       <Route path="/countries/region/:region" element={<Region />} />
       <Route path="/countries/:id" element={<CountryDetail />} />
-      {/* temporary */}
       <Route path="*" element={<NotFound />} />
     </Routes>
   );
