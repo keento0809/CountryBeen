@@ -27,7 +27,6 @@ const initialState = {
 };
 
 const CountryDetail: React.FC = () => {
-  // declare useState
   const [countryData, setCountryData] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
   const [bgImage, setBgImage] = useState("");
@@ -36,8 +35,6 @@ const CountryDetail: React.FC = () => {
   const [currUserId, setCurrUserId] = useState(
     localStorage.getItem("currUser") ? localStorage.getItem("currUser") : ""
   );
-
-  // declare selector
   const { beenToList } = useSelector((state: RootState) => state.beenReducer);
   const countriesData = useSelector(
     (state: RootState) => state.countriesReducer.countries
@@ -45,11 +42,7 @@ const CountryDetail: React.FC = () => {
   const { favoriteList } = useSelector(
     (state: RootState) => state.favoriteReducer
   );
-
-  // declare dispatch
   const dispatch = useDispatch();
-
-  // declare navigate
   const navigate = useNavigate();
 
   function requestCountryData() {
@@ -162,7 +155,6 @@ const CountryDetail: React.FC = () => {
   async function postToFirebase(type: string, data: any) {
     const currUserRef = doc(db, "users", `${currUserId && currUserId}`);
     await updateDoc(currUserRef, {
-      // original
       [type]: arrayUnion(data),
     });
   }
@@ -227,7 +219,6 @@ const CountryDetail: React.FC = () => {
     if (countriesData.length === 0) {
       requestCountryData();
     } else utilizeCountriesData();
-    // test dependencies
   }, [window.location.pathname]);
 
   return (

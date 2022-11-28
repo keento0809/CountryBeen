@@ -3,15 +3,10 @@ import Wrapper from "../components/Wrapper/Wrapper";
 import SearchWrapper from "../components/Wrapper/SearchWrapper";
 import { Link } from "react-router-dom";
 import { regionArrFixed, regionImageArr } from "../data/data";
-import RegionCard from "../components/UI/Card/RegionCard";
+import RegionCard from "../components/Card/RegionCard";
 
 const Search = () => {
-  // declare useState
   const [regionData, setRegionData] = useState<string[]>(regionArrFixed);
-
-  // useEffect(() => {
-  //   setRegionData(regionArrFixed);
-  // }, []);
   return (
     <SearchWrapper>
       <Fragment>

@@ -9,7 +9,6 @@ import { AppDispatch, RootState } from "../store";
 import { fetchCountries } from "../store/countries-slice";
 
 const Header = () => {
-  // declare useState
   const [isSearchMode, setIsSearchMode] = useState(false);
   const [defaultData, setDefaultData] = useState<CountryViewObj[]>([]);
   const [countryData, setCountryData] = useState<CountryViewObj[]>([]);
@@ -44,9 +43,7 @@ const Header = () => {
     setDefaultData(loadedData);
   };
 
-  // declare useRef
   const searchInputRef = useRef<HTMLInputElement>(null);
-  // declare useNavigate
   const navigate = useNavigate();
   const auth = getAuth();
 

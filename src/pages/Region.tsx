@@ -4,7 +4,7 @@ import RegionWrapper from "../components/Wrapper/RegionWrapper";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { regionImageArr, regionArr } from "../data/data";
-import CountryCard from "../components/UI/Card/CountryCard";
+import CountryCard from "../components/Card/CountryCard";
 import { AppDispatch, RootState } from "../store";
 import { fetchCountries } from "../store/countries-slice";
 
@@ -12,27 +12,20 @@ const Region = () => {
   let pathRegion = window.location.pathname.split("/")[3];
   if (pathRegion === "North%20America") pathRegion = "North America";
   if (pathRegion === "South%20America") pathRegion = "South America";
-  // declare useState
   const [defaultData, setDefaultData] = useState<CountryViewObj[]>([]);
   const [countryData, setCountryData] = useState<CountryViewObj[]>([]);
   const [dataLength, setDataLength] = useState(defaultData.length);
   const [isLoading, setIsLoading] = useState(true);
   const [bgImage, setBgImage] = useState(regionImageArr[pathRegion]);
   const [currRegion, setCurrRegion] = useState(pathRegion);
-
-  // declare useRef
   const searchInputRef = useRef<HTMLInputElement>(null);
-  // declare useSelector
   const countriesData = useSelector(
     (state: RootState) => state.countriesReducer.countries
   );
   const { countries } = useSelector(
     (state: RootState) => state.countriesReducer
   );
-  // declare dispatch
   const dispatch = useDispatch<AppDispatch>();
-  // declare navigate
-  const navigate = useNavigate();
 
   let selectedRegion: string;
 

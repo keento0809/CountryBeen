@@ -1,6 +1,5 @@
 import Header from "../../layouts/Header";
 import { ChildrenType } from "../../models/model";
-// import imgUrl from "../../assets/homeBg.jpg";
 import imgUrl from "../../assets/revisedHeroBg-1.jpg";
 
 const HomeWrapper = ({ children }: ChildrenType) => {

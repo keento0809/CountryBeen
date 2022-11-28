@@ -1,4 +1,4 @@
-import { AlertText } from "../../../models/model";
+import { AlertText } from "../../models/model";
 
 const Alert = ({ text }: AlertText) => {
   return (
