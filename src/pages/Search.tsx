@@ -2,7 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import Wrapper from "../components/Wrapper/Wrapper";
 import SearchWrapper from "../components/Wrapper/SearchWrapper";
 import { Link } from "react-router-dom";
-import { regionArrFixed, regionImageArr } from "../data/data";
+import { regionArrFixed } from "../data/data";
 import RegionCard from "../components/Card/RegionCard";
 
 const Search = () => {
@@ -28,10 +28,7 @@ const Search = () => {
                     key={index}
                     className="lg:block lg:max-w-374"
                   >
-                    <RegionCard
-                      imgUrl={regionImageArr[region]}
-                      region={region}
-                    />
+                    <RegionCard region={region} />
                   </Link>
                 );
               })}

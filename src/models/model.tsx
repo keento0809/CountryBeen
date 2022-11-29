@@ -44,7 +44,7 @@ export interface RegionObj {
 
 export interface RegionWrapperType {
   children: ReactNode;
-  imageUrl: string;
+  imageUrl?: string;
 }
 
 export interface AlertText {
@@ -52,7 +52,7 @@ export interface AlertText {
 }
 
 export interface RegionCardProps {
-  imgUrl: string;
+  imgUrl?: string;
   region: string;
 }
 
