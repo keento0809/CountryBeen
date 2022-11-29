@@ -3,15 +3,13 @@ import countryService from "../features/countryService";
 
 export const fetchCountries = createAsyncThunk(
   "countries/fetchCountries",
-  async (thunkAPI) => {
+  async () => {
     return await countryService.get();
   }
 );
-
 const initialState = {
   countries: [],
 };
-
 const CountriesSlice = createSlice({
   name: "countries",
   initialState: initialState,

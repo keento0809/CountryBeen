@@ -156,6 +156,7 @@ const Header = () => {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
                 strokeWidth={2}
+                style={{ cursor: "pointer" }}
               >
                 <path
                   strokeLinecap="round"

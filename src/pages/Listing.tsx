@@ -79,7 +79,7 @@ const Listing = ({ name }: ListingName) => {
             <p className="text-white dark:text-slate-100">Loading...</p>
           )}
         </div>
-        <div className="overflow-scroll rounded-2xl max-h-680 md:max-h-640 md:flex flex-wrap">
+        <div className="overflow-scroll rounded-2xl max-h-680 md:grid md:grid-cols-2 md:mx-auto md:max-w-704 lg:grid-cols-3 lg:max-w-960 xl:grid-cols-4 xl:max-w-none xl:gap-2">
           {(name === "Record" ? beenToList : favoriteList).map(
             (country, index) => {
               return (
