@@ -2,7 +2,7 @@ import { Fragment } from "react";
 import { RegionCardProps } from "../../models/model";
 import imgPath from "../../assets/img-for-regionCard.jpg";
 
-const RegionCard = ({ imgUrl, region }: RegionCardProps) => {
+const RegionCard = ({ region }: RegionCardProps) => {
   return (
     <div className="overflow-hidden rounded-2xl mb-2">
       <div className="card w-full bg-base-100 shadow-xl image-full cursor-pointer hover:scale-110 transition-transform">

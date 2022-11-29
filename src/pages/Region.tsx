@@ -58,13 +58,6 @@ const Region = () => {
     setDataLength(loadedData.length);
     setIsLoading(false);
   }
-  useEffect(() => {
-    countries.length === 0 && dispatch(fetchCountries());
-  }, []);
-  useEffect(() => {
-    utilizeCountriesData();
-  }, [countries.length]);
-
   function handleCheckValue() {
     const filteredData = defaultData.filter((country) =>
       country.name
@@ -74,7 +67,12 @@ const Region = () => {
     setCountryData(filteredData);
     setDataLength(filteredData.length);
   }
-
+  useEffect(() => {
+    countries.length === 0 && dispatch(fetchCountries());
+  }, []);
+  useEffect(() => {
+    utilizeCountriesData();
+  }, [countries.length]);
   return (
     <RegionWrapper imageUrl={bgImage}>
       <div className="">
@@ -102,7 +100,7 @@ const Region = () => {
               )}
             </div>
             {!isLoading && countryData && (
-              <div className="region-container max-h-640 overflow-scroll md:flex md:flex-wrap xl:pb-32">
+              <div className="region-container max-h-640 overflow-scroll md:grid md:grid-cols-2 md:mx-auto md:max-w-704 lg:grid-cols-3 lg:max-w-960 xl:grid-cols-4 xl:max-w-none xl:gap-2 xl:pb-32">
                 {countryData.map((country, index) => {
                   return (
                     <CountryCard
@@ -124,3 +122,5 @@ const Region = () => {
 };
 
 export default Region;
+
+// md:flex md:flex-wrap

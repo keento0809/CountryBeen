@@ -2,7 +2,7 @@ import Header from "../../layouts/Header";
 import { RegionWrapperType } from "../../models/model";
 import imagePath from "../../assets/revisedHeroBg-1.jpg";
 
-const RegionWrapper = ({ children, imageUrl }: RegionWrapperType) => {
+const RegionWrapper = ({ children }: RegionWrapperType) => {
   return (
     <div
       className="min-h-screen"

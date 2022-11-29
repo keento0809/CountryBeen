@@ -29,7 +29,6 @@ const initialState = {
 const CountryDetail: React.FC = () => {
   const [countryData, setCountryData] = useState(initialState);
   const [isLoading, setIsLoading] = useState(false);
-  const [bgImage, setBgImage] = useState("");
   const [isFavorite, setIsFavorite] = useState(false);
   const [isBeenTo, setIsBeenTo] = useState(false);
   const [currUserId, setCurrUserId] = useState(
@@ -89,7 +88,6 @@ const CountryDetail: React.FC = () => {
               cca3: resData[key].cca3 ? resData[key].cca3 : "No data",
               borders: resData[key].borders ? resData[key].borders : "No data",
             });
-            setBgImage(regionImageArr[resData[key].continents]);
             break;
           }
         }
@@ -144,7 +142,6 @@ const CountryDetail: React.FC = () => {
           cca3: resData[key].cca3 ? resData[key].cca3 : "No data",
           borders: resData[key].borders ? resData[key].borders : "No data",
         });
-        setBgImage(regionImageArr[resData[key].continents]);
         checkInFavorite(resData[key].cca3);
         checkInBeenTo(resData[key].cca3);
         break;
@@ -222,7 +219,7 @@ const CountryDetail: React.FC = () => {
   }, [window.location.pathname]);
 
   return (
-    <RegionWrapper imageUrl={bgImage}>
+    <RegionWrapper>
       <div className="flex justify-center items-center z-10 pt-4 lg:pt-16">
         <div className="card w-full glass mx-auto max-w-374 md:max-h-680 lg:max-w-960 lg:flex lg:flex-row lg:items-start max-h-780 overflow-scroll bg-transparent rounded-3xl">
           <figure className="pb-3 lg:min-w-374 lg:mr-2">
