@@ -12,7 +12,7 @@ const initialState = {
 };
 const CountriesSlice = createSlice({
   name: "countries",
-  initialState: initialState,
+  initialState,
   reducers: {
     fetchCountries(state, { payload }: PayloadAction<any>) {
       state.countries = payload;
