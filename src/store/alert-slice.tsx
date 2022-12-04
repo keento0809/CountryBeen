@@ -7,7 +7,7 @@ const initialState = {
 
 export const AlertSlice = createSlice({
   name: "alert",
-  initialState: initialState,
+  initialState,
   reducers: {
     turnOnAlert(state, { payload }: PayloadAction<string>) {
       state.isAlerting = true;

@@ -9,7 +9,7 @@ const initialState: InitialS = {
 
 const favoriteSlice = createSlice({
   name: "favorite",
-  initialState: initialState,
+  initialState,
   reducers: {
     fetchFavorite(state, { payload }: PayloadAction<CountryViewObj[]>) {
       state.favoriteList = [...payload];

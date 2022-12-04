@@ -11,7 +11,7 @@ const initialState: BeenToInitialS = {
 
 const BeenSlice = createSlice({
   name: "beenTo",
-  initialState: initialState,
+  initialState,
   reducers: {
     fetchBeenTo(state, { payload }: PayloadAction<CountryViewObj[]>) {
       state.beenToList = [...payload];
