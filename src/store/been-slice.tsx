@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { BeenToInitialS, CountryViewObj } from "../models/model";
-import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { BeenToInitialS } from "../models/model";
+import { CountryViewObj } from "../types/country";
 
 const initialState: BeenToInitialS = {
   beenToList: [],

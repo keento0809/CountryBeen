@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { AlertInitialState } from "../types/index";
 
-const initialState = {
+const initialState: AlertInitialState = {
   isAlerting: false,
   alertText: "",
 };

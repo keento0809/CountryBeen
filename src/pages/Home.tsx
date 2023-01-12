@@ -14,7 +14,6 @@ import { doc, getDoc, DocumentData } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { beenActions } from "../store/been-slice";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { CountryViewObj } from "../models/model";
 
 const Home = () => {
   const { totalNumber, isSuccessToAddBucketList } = useSelector(
