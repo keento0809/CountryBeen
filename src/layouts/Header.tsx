@@ -1,7 +1,6 @@
 import { useState, Fragment, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { CountryViewObj } from "../models/model";
+import { CountryViewObj } from "../types/country";
 import { getAuth, signOut } from "firebase/auth";
 import { AlertActions } from "../store/alert-slice";
 import { useSelector, useDispatch } from "react-redux";
@@ -12,7 +11,6 @@ const Header = () => {
   const [isSearchMode, setIsSearchMode] = useState(false);
   const [defaultData, setDefaultData] = useState<CountryViewObj[]>([]);
   const [countryData, setCountryData] = useState<CountryViewObj[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 

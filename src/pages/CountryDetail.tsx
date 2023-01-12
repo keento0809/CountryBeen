@@ -6,13 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { favoriteActions } from "../store/favorite-slice";
 import { beenActions } from "../store/been-slice";
 import { AlertActions } from "../store/alert-slice";
-import { regionImageArr } from "../data/data";
 import { RootState } from "../store";
 import { getDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../services/firebase";
-import { CountryViewObj } from "../models/model";
+import { CountryViewObj } from "../types/country";
 
-const initialState = {
+const initialState: CountryViewObj = {
   name: "",
   capital: "",
   population: "",
@@ -27,11 +26,11 @@ const initialState = {
 };
 
 const CountryDetail: React.FC = () => {
-  const [countryData, setCountryData] = useState(initialState);
+  const [countryData, setCountryData] = useState<CountryViewObj>(initialState);
   const [isLoading, setIsLoading] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [isBeenTo, setIsBeenTo] = useState(false);
-  const [currUserId, setCurrUserId] = useState(
+  const [currUserId, setCurrUserId] = useState<string | null>(
     localStorage.getItem("currUser") ? localStorage.getItem("currUser") : ""
   );
   const { beenToList } = useSelector((state: RootState) => state.beenReducer);
@@ -46,7 +45,6 @@ const CountryDetail: React.FC = () => {
 
   function requestCountryData() {
     setIsLoading(true);
-
     axios
       .get("https://restcountries.com/v3.1/all")
       .then((res) => {
@@ -58,7 +56,6 @@ const CountryDetail: React.FC = () => {
           pathName.length - 3,
           pathName.length
         );
-
         for (const key in resData) {
           if (resData[key].cca3 === currentCCA3) {
             setCountryData({

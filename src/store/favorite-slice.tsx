@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { InitialS, CountryViewObj } from "../models/model";
+import { InitialS } from "../models/model";
+import { CountryViewObj } from "../types/country";
 
 const initialState: InitialS = {
   favoriteList: [],

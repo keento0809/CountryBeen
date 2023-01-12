@@ -1,9 +1,8 @@
 import { useEffect, useState, useRef } from "react";
-import { CountryViewObj } from "../models/model";
+import { CountryViewObj } from "../types/country";
 import RegionWrapper from "../components/Wrapper/RegionWrapper";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { regionImageArr, regionArr } from "../data/data";
+import { regionImageArr } from "../data/data";
 import CountryCard from "../components/Card/CountryCard";
 import { AppDispatch, RootState } from "../store";
 import { fetchCountries } from "../store/countries-slice";
