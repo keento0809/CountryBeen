@@ -1,11 +1,11 @@
 import { useState, Fragment, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { CountryViewObj } from "../types/country";
+import { CountryViewObj } from "../../types/country";
 import { getAuth, signOut } from "firebase/auth";
-import { AlertActions } from "../store/alert-slice";
+import { AlertActions } from "../../store/alert-slice";
 import { useSelector, useDispatch } from "react-redux";
-import { AppDispatch, RootState } from "../store";
-import { fetchCountries } from "../store/countries-slice";
+import { AppDispatch, RootState } from "../../store";
+import { fetchCountries } from "../../store/countries-slice";
 
 const Header = () => {
   const [isSearchMode, setIsSearchMode] = useState(false);

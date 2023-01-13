@@ -1,19 +1,16 @@
 import { useEffect, useState } from "react";
-import Header from "../layouts/Header";
 import HomeWrapper from "../components/Wrapper/HomeWrapper";
 import { Link, useNavigate } from "react-router-dom";
 import { Fragment } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { countriesActions, fetchCountries } from "../store/countries-slice";
 import { favoriteActions } from "../store/favorite-slice";
 import { AppDispatch, RootState } from "../store";
 import Alert from "../components/Alert/Alert";
 import WorldMap from "../components/WorldMap/WorldMap";
-import axios from "axios";
 import { doc, getDoc, DocumentData } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { beenActions } from "../store/been-slice";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 
 const Home = () => {
   const { totalNumber, isSuccessToAddBucketList } = useSelector(
@@ -87,7 +84,7 @@ const Home = () => {
   }, []);
 
   return (
-    <Fragment>
+    <>
       <HomeWrapper>
         <div className="lg:mx-auto">
           <section className="title text-center text-white">
@@ -241,7 +238,7 @@ const Home = () => {
           )}
         </div>
       </HomeWrapper>
-    </Fragment>
+    </>
   );
 };
 

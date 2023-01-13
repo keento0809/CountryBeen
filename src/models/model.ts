@@ -9,12 +9,6 @@ export interface PropsRegion {
   selectedRegion: string;
 }
 
-export interface InitialS {
-  favoriteList: CountryViewObj[];
-  totalNumber: number;
-  isSuccessToAddBucketList: boolean;
-}
-
 export interface BeenToInitialS {
   beenToList: CountryViewObj[];
   totals: number;

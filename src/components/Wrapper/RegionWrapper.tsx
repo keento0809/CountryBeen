@@ -1,4 +1,4 @@
-import Header from "../../layouts/Header";
+import Header from "../Nav/Header";
 import { RegionWrapperType } from "../../models/model";
 import imagePath from "../../assets/revisedHeroBg-1.jpg";
 
