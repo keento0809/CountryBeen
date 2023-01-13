@@ -1,6 +1,5 @@
-import { Fragment } from "react";
 import { Link } from "react-router-dom";
-import { CountryCardProps } from "../../models/model";
+import { CountryCardProps } from "../../types/country";
 
 const CountryCard = ({
   flagImg,

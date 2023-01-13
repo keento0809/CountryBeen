@@ -1,8 +1,8 @@
 import Header from "../Nav/Header";
-import { RegionWrapperType } from "../../models/model";
+import { RegionWrapperProps } from "../../types/region";
 import imagePath from "../../assets/revisedHeroBg-1.jpg";
 
-const RegionWrapper = ({ children }: RegionWrapperType) => {
+const RegionWrapper = ({ children }: RegionWrapperProps) => {
   return (
     <div
       className="min-h-screen"

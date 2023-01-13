@@ -5,9 +5,9 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../services/firebase";
 import { useDispatch } from "react-redux";
 import { AlertActions } from "../../store/alert-slice";
-import { TestProps } from "../../models/model";
+import { AuthFormProps } from "../../models/model";
 
-const AuthForm = ({ setIsError }: TestProps) => {
+const AuthForm = ({ setIsError }: AuthFormProps) => {
   const [userInfo, setUserInfo] = useState({
     username: "",
     email: "",

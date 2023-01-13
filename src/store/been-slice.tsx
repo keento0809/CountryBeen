@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { BeenToInitialS } from "../models/model";
-import { CountryViewObj } from "../types/country";
+import { CountryViewObj, BeenInitialState } from "../types/country";
 
-const initialState: BeenToInitialS = {
+const initialState: BeenInitialState = {
   beenToList: [],
   totals: 0,
   isSuccessToAdd: false,
