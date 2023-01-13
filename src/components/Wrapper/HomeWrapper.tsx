@@ -1,8 +1,8 @@
 import Header from "../Nav/Header";
-import { ChildrenType } from "../../models/model";
+import { Children } from "../../types/index";
 import imgUrl from "../../assets/revisedHeroBg-1.jpg";
 
-const HomeWrapper = ({ children }: ChildrenType) => {
+const HomeWrapper = ({ children }: Children) => {
   return (
     <div
       className="min-h-screen"

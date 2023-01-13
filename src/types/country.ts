@@ -23,3 +23,10 @@ export interface FavoriteInitialState {
   totalNumber: number;
   isSuccessToAddBucketList: boolean;
 }
+
+export interface CountryCardProps {
+  flagImg: string;
+  countryName: string;
+  cca3: string;
+  isBeenTo: boolean;
+}

@@ -3,9 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { AlertActions } from "../../store/alert-slice";
-import { TestProps } from "../../models/model";
+import { AuthFormProps } from "../../models/model";
 
-const AuthForm = ({ setIsError }: TestProps) => {
+const AuthForm = ({ setIsError }: AuthFormProps) => {
   const [userInfo, setUserInfo] = useState({
     email: "",
     password: "",
