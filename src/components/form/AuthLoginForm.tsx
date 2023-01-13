@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { AlertActions } from "../../store/alert-slice";
-import { AuthFormProps } from "../../models/model";
+import { AuthFormProps } from "../../types/index";
 
 const AuthForm = ({ setIsError }: AuthFormProps) => {
   const [userInfo, setUserInfo] = useState({
