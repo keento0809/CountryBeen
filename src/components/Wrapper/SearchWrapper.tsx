@@ -1,4 +1,4 @@
-import Header from "../../layouts/Header";
+import Header from "../Nav/Header";
 import { ChildrenType } from "../../models/model";
 import imgUrl from "../../assets/revisedHeroBg-1.jpg";
 

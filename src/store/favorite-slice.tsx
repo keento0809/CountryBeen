@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { InitialS } from "../models/model";
-import { CountryViewObj } from "../types/country";
+import { CountryViewObj, FavoriteInitialState } from "../types/country";
 
-const initialState: InitialS = {
+const initialState: FavoriteInitialState = {
   favoriteList: [],
   totalNumber: 0,
   isSuccessToAddBucketList: false,

@@ -11,7 +11,7 @@ import { getDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { CountryViewObj } from "../types/country";
 
-const initialState: CountryViewObj = {
+const countryDataInitialState: CountryViewObj = {
   name: "",
   capital: "",
   population: "",
@@ -26,7 +26,9 @@ const initialState: CountryViewObj = {
 };
 
 const CountryDetail: React.FC = () => {
-  const [countryData, setCountryData] = useState<CountryViewObj>(initialState);
+  const [countryData, setCountryData] = useState<CountryViewObj>(
+    countryDataInitialState
+  );
   const [isLoading, setIsLoading] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [isBeenTo, setIsBeenTo] = useState(false);
