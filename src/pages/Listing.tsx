@@ -3,65 +3,45 @@ import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store";
 import CountryCard from "../components/Card/CountryCard";
 import { useEffect, useState } from "react";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../services/firebase";
 import { favoriteActions } from "../store/favorite-slice";
 import { beenActions } from "../store/been-slice";
+import { fetchCurrentUserDataFromDB } from "../helpers/Listing";
+import { useLocation } from "react-router-dom";
 
 interface ListingName {
   name: string;
 }
 
 const Listing = ({ name }: ListingName) => {
-  const [currUserId, setCurrUserId] = useState(
-    localStorage.getItem("currUser") ? localStorage.getItem("currUser") : ""
-  );
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
+  const location = useLocation();
   const { favoriteList } = useSelector(
     (state: RootState) => state.favoriteReducer
   );
   const { beenToList } = useSelector((state: RootState) => state.beenReducer);
 
-  async function getCountryData(name: string) {
+  async function getCurrentUserCountryData(name: string) {
     setIsLoading(true);
-    const currUserRef = doc(db, "users", `${currUserId}`);
-    const querySnapshot = await getDoc(currUserRef);
-    const snapShotData = querySnapshot.data();
-
-    const listDataFromDb: any = [];
-    const dataArray =
-      name === "record" ? snapShotData!.record : snapShotData!.bucketList;
-    dataArray.forEach((resData: any) => {
-      listDataFromDb.push({
-        name: resData.name,
-        capital: resData.capital ? resData.capital : "",
-        population: resData.population,
-        continents: resData.continents,
-        currencies: resData.currencies ? resData.currencies : "",
-        languages: resData.languages,
-        coatOfArms: resData.coatOfArms.png,
-        flagImg: resData.flagImg,
-        flagIcon: resData.flag,
-        cca3: resData.cca3,
-        borders: resData.borders,
-      });
-    });
-    dispatch(
-      name === "record"
-        ? beenActions.fetchBeenTo(listDataFromDb)
-        : favoriteActions.fetchFavorite(listDataFromDb)
-    );
+    await fetchCurrentUserDataFromDB()
+      .then((res) => {
+        dispatch(
+          name === "record"
+            ? beenActions.fetchBeenTo(res.beenListDataFromDb)
+            : favoriteActions.fetchFavorite(res.favoriteListDataFromDb)
+        );
+      })
+      .catch((err) => console.log(err));
     setIsLoading(false);
   }
-
   useEffect(() => {
-    name === "Record" && beenToList.length === 0 && getCountryData("record");
-    name !== "Record" &&
+    name === "Record" &&
+      beenToList.length === 0 &&
+      getCurrentUserCountryData("record");
+    name === "Bucket List" &&
       favoriteList.length === 0 &&
-      getCountryData("bucketList");
-  }, []);
-
+      getCurrentUserCountryData("bucketList");
+  }, [location.pathname]);
   return (
     <DisplayWrapper>
       <div className="">

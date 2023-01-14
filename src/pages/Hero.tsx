@@ -1,9 +1,7 @@
-import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import AuthSignupForm from "../components/form/AuthSignupForm";
 import AuthLoginForm from "../components/form/AuthLoginForm";
 import imgLink from "../assets/revisedHeroBg-1.jpg";
-import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Alert from "../components/Alert/Alert";
 import { RootState } from "../store";
 import { fetchCountries } from "../store/countries-slice";
@@ -16,11 +14,7 @@ const Hero = () => {
   const { isAlerting, alertText } = useSelector(
     (state: RootState) => state.AlertReducer
   );
-  const { countries } = useSelector(
-    (state: RootState) => state.countriesReducer
-  );
   const dispatch = useDispatch<AppDispatch>();
-
   useEffect(() => {
     dispatch(fetchCountries());
   }, []);
@@ -44,7 +38,6 @@ const Hero = () => {
                 and analyzing it visually? Here's the best tool making that
                 request happen. Start a brand new adventure here!
               </p>
-              {/* <Link to="/home">Get Started</Link> */}
               <p className="mb-2 text-sm">
                 {isSignup ? "Have an account?" : "Need an account?"}{" "}
                 <span

@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { favoriteActions } from "../store/favorite-slice";
 import { beenActions } from "../store/been-slice";
 import { AlertActions } from "../store/alert-slice";
-import { RootState } from "../store";
+import { AppDispatch, RootState } from "../store";
 import { CountryViewObj } from "../types/country";
 import {
   updateDataInFirebase,
@@ -44,7 +44,7 @@ const CountryDetail: React.FC = () => {
   const { favoriteList } = useSelector(
     (state: RootState) => state.favoriteReducer
   );
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
   function handleSetCountryData(resData: any) {
@@ -84,7 +84,7 @@ const CountryDetail: React.FC = () => {
       }
     }
   }
-  function requestCountryData() {
+  async function requestCountryData() {
     // setIsLoading(true);
     console.log("request視野う");
     axios
@@ -96,6 +96,8 @@ const CountryDetail: React.FC = () => {
       })
       .catch((error) => console.log(error.message));
     // setIsLoading(false);
+    // dispatch(beenActions.fetchBeenTo());
+    // dispatch(favoriteActions.fetchFavorite())
   }
   function checkInFavorite(cca3Val: string) {
     favoriteList?.forEach((country) => {
