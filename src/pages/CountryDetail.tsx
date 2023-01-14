@@ -7,8 +7,6 @@ import { favoriteActions } from "../store/favorite-slice";
 import { beenActions } from "../store/been-slice";
 import { AlertActions } from "../store/alert-slice";
 import { RootState } from "../store";
-import { getDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
-import { db } from "../services/firebase";
 import { CountryViewObj } from "../types/country";
 import {
   updateDataInFirebase,
@@ -33,12 +31,12 @@ const CountryDetail: React.FC = () => {
   const [countryData, setCountryData] = useState<CountryViewObj>(
     countryDataInitialState
   );
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [isBeenTo, setIsBeenTo] = useState(false);
-  const [currUserId, setCurrUserId] = useState<string | null>(
-    localStorage.getItem("currUser") ? localStorage.getItem("currUser") : ""
-  );
+  const currUserId = localStorage.getItem("currUser")
+    ? localStorage.getItem("currUser")
+    : "";
   const { beenToList } = useSelector((state: RootState) => state.beenReducer);
   const countriesData = useSelector(
     (state: RootState) => state.countriesReducer.countries
@@ -49,78 +47,12 @@ const CountryDetail: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  function requestCountryData() {
-    setIsLoading(true);
-    axios
-      .get("https://restcountries.com/v3.1/all")
-      .then((res) => {
-        if (!res) throw new Error("Request failed.");
-        const resData = res.data;
-
-        const pathName = window.location.pathname.toString();
-        const currentCCA3 = pathName.substring(
-          pathName.length - 3,
-          pathName.length
-        );
-        for (const key in resData) {
-          if (resData[key].cca3 === currentCCA3) {
-            setCountryData({
-              name: resData[key].name.common
-                ? resData[key].name.common
-                : "No data",
-              capital: resData[key].capital ? resData[key].capital : "No data",
-              population: resData[key].population
-                ? resData[key].population
-                : "No data",
-              continents: resData[key].continents
-                ? resData[key].continents
-                : "No data",
-              currencies: resData[key].currencies
-                ? resData[key].currencies
-                : "No data",
-              languages: resData[key].languages
-                ? resData[key].languages
-                : "No data",
-              coatOfArms: resData[key].coatOfArms.png
-                ? resData[key].coatOfArms.png
-                : "No data",
-              flagImg: resData[key].flags.png
-                ? resData[key].flags.png
-                : "No data",
-              flagIcon: resData[key].flag ? resData[key].flag : "No data",
-              cca3: resData[key].cca3 ? resData[key].cca3 : "No data",
-              borders: resData[key].borders ? resData[key].borders : "No data",
-            });
-            break;
-          }
-        }
-      })
-      .catch((error) => console.log(error.message));
-    setIsLoading(false);
-  }
-
-  function utilizeCountriesData() {
-    const resData: any = countriesData;
-    console.log("resData: ", resData);
-
+  function handleSetCountryData(resData: any) {
     const pathName = window.location.pathname.toString();
     const currentCCA3 = pathName.substring(
       pathName.length - 3,
       pathName.length
     );
-
-    function checkInFavorite(cca3Val: string) {
-      favoriteList.forEach((country) => {
-        country.cca3 === cca3Val && setIsFavorite(true);
-      });
-    }
-
-    function checkInBeenTo(cca3Val: string) {
-      beenToList.forEach((country) => {
-        country.cca3 === cca3Val && setIsBeenTo(true);
-      });
-    }
-
     for (const key in resData) {
       if (resData[key].cca3 === currentCCA3) {
         setCountryData({
@@ -152,7 +84,35 @@ const CountryDetail: React.FC = () => {
       }
     }
   }
-
+  function requestCountryData() {
+    // setIsLoading(true);
+    console.log("request視野う");
+    axios
+      .get(`${process.env.REACT_APP_FETCH_COUNTRY_DATA_ENDPOINT}`)
+      .then((res) => {
+        if (!res) throw new Error("Request failed.");
+        const resData = res.data;
+        handleSetCountryData(resData);
+      })
+      .catch((error) => console.log(error.message));
+    // setIsLoading(false);
+  }
+  function checkInFavorite(cca3Val: string) {
+    favoriteList?.forEach((country) => {
+      country.cca3 === cca3Val && setIsFavorite(true);
+    });
+  }
+  function checkInBeenTo(cca3Val: string) {
+    beenToList?.forEach((country) => {
+      country.cca3 === cca3Val && setIsBeenTo(true);
+    });
+  }
+  function utilizeCountriesData() {
+    // setIsLoading(true);
+    const resData: any = countriesData;
+    handleSetCountryData(resData);
+    // setIsLoading(false);
+  }
   async function handleAddFavorite() {
     dispatch(favoriteActions.addFavorite(countryData));
     await updateDataInFirebase("bucketList", countryData, currUserId);
@@ -162,7 +122,6 @@ const CountryDetail: React.FC = () => {
       dispatch(AlertActions.turnOffAlert());
     }, 1000);
   }
-
   async function handleRemoveFavorite() {
     dispatch(favoriteActions.removeFavorite(countryData));
     await deleteDataInFirebase("bucketList", countryData, currUserId);
@@ -172,7 +131,6 @@ const CountryDetail: React.FC = () => {
       dispatch(AlertActions.turnOffAlert());
     }, 1000);
   }
-
   async function handleAddBeenTo() {
     dispatch(beenActions.addBeenTo(countryData));
     await updateDataInFirebase("record", countryData, currUserId);
@@ -182,7 +140,6 @@ const CountryDetail: React.FC = () => {
       dispatch(AlertActions.turnOffAlert());
     }, 1000);
   }
-
   async function handleRemoveBeenTo() {
     dispatch(beenActions.removeBeenTo(countryData));
     await deleteDataInFirebase("record", countryData, currUserId);
@@ -192,13 +149,9 @@ const CountryDetail: React.FC = () => {
       dispatch(AlertActions.turnOffAlert());
     }, 1000);
   }
-
   useEffect(() => {
-    if (countriesData.length === 0) {
-      requestCountryData();
-    } else utilizeCountriesData();
+    countriesData.length === 0 ? requestCountryData() : utilizeCountriesData();
   }, [window.location.pathname]);
-
   return (
     <RegionWrapper>
       <div className="flex justify-center items-center z-10 pt-4 lg:pt-16">
@@ -296,8 +249,6 @@ const CountryDetail: React.FC = () => {
               <div className="country-data basis-1/2 min-h-56 pr-2 ">
                 <div className="stat-title">Capital City</div>
                 <div className="font-bold text-2xl tracking-tight dark:text-slate-100">
-                  {/* original */}
-                  {/* {countryData.capital} */}
                   {Object.values(countryData.capital)[0]}
                   {Object.values(countryData.capital)[1] &&
                     ", " + Object.values(countryData.capital)[1]}
