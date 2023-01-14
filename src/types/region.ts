@@ -1,8 +1,4 @@
-import { ReactNode, Dispatch, SetStateAction } from "react";
-
-export interface RegionObj {
-  region: string;
-}
+import { ReactNode } from "react";
 
 export interface RegionWrapperProps {
   children: ReactNode;
