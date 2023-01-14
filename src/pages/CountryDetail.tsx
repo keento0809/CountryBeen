@@ -10,6 +10,10 @@ import { RootState } from "../store";
 import { getDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { CountryViewObj } from "../types/country";
+import {
+  updateDataInFirebase,
+  deleteDataInFirebase,
+} from "../helpers/CountryDetail";
 
 const countryDataInitialState: CountryViewObj = {
   name: "",
@@ -97,6 +101,7 @@ const CountryDetail: React.FC = () => {
 
   function utilizeCountriesData() {
     const resData: any = countriesData;
+    console.log("resData: ", resData);
 
     const pathName = window.location.pathname.toString();
     const currentCCA3 = pathName.substring(
@@ -148,32 +153,9 @@ const CountryDetail: React.FC = () => {
     }
   }
 
-  async function postToFirebase(type: string, data: any) {
-    const currUserRef = doc(db, "users", `${currUserId && currUserId}`);
-    await updateDoc(currUserRef, {
-      [type]: arrayUnion(data),
-    });
-  }
-
-  async function deleteToFirebase(type: string, countryData: CountryViewObj) {
-    const currUserRef = doc(db, "users", `${currUserId}`);
-    const currUserSnap = await getDoc(currUserRef);
-    const currUserData = currUserSnap.data();
-    const dataArray =
-      type === "record" ? currUserData!.record : currUserData!.bucketList;
-    const updatedDataArray = dataArray.filter(
-      (data: CountryViewObj) => data.cca3 !== countryData.cca3
-    );
-
-    await updateDoc(currUserRef, {
-      [type]: updatedDataArray,
-    });
-    const getSnap = await getDoc(currUserRef);
-  }
-
   async function handleAddFavorite() {
     dispatch(favoriteActions.addFavorite(countryData));
-    await postToFirebase("bucketList", countryData);
+    await updateDataInFirebase("bucketList", countryData, currUserId);
     dispatch(AlertActions.turnOnAlert("Country Added to BucketList!"));
     navigate("/home");
     setTimeout(() => {
@@ -183,7 +165,7 @@ const CountryDetail: React.FC = () => {
 
   async function handleRemoveFavorite() {
     dispatch(favoriteActions.removeFavorite(countryData));
-    await deleteToFirebase("bucketList", countryData);
+    await deleteDataInFirebase("bucketList", countryData, currUserId);
     dispatch(AlertActions.turnOnAlert("Country deleted from BucketList!"));
     navigate("/home");
     setTimeout(() => {
@@ -193,7 +175,7 @@ const CountryDetail: React.FC = () => {
 
   async function handleAddBeenTo() {
     dispatch(beenActions.addBeenTo(countryData));
-    await postToFirebase("record", countryData);
+    await updateDataInFirebase("record", countryData, currUserId);
     dispatch(AlertActions.turnOnAlert("Country Added to Record!"));
     navigate("/home");
     setTimeout(() => {
@@ -203,7 +185,7 @@ const CountryDetail: React.FC = () => {
 
   async function handleRemoveBeenTo() {
     dispatch(beenActions.removeBeenTo(countryData));
-    await deleteToFirebase("record", countryData);
+    await deleteDataInFirebase("record", countryData, currUserId);
     dispatch(AlertActions.turnOnAlert("Country deleted from Record!"));
     navigate("/home");
     setTimeout(() => {

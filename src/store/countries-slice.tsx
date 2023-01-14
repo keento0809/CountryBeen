@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import countryService from "../features/countryService";
+import countryService from "../helpers/countryService";
 
 export const fetchCountries = createAsyncThunk(
   "countries/fetchCountries",
