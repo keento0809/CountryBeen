@@ -25,8 +25,9 @@ const Region = () => {
     (state: RootState) => state.countriesReducer
   );
   const dispatch = useDispatch<AppDispatch>();
-
   let selectedRegion: string;
+
+  console.log("render-render-render");
 
   function utilizeCountriesData() {
     if (countries.length === 0) return;
@@ -67,10 +68,12 @@ const Region = () => {
     setDataLength(filteredData.length);
   }
   useEffect(() => {
-    countries.length === 0 && dispatch(fetchCountries());
+    if (countries.length === 0) {
+      dispatch(fetchCountries());
+    } else utilizeCountriesData();
   }, []);
   useEffect(() => {
-    utilizeCountriesData();
+    countries.length === 250 && utilizeCountriesData();
   }, [countries.length]);
   return (
     <RegionWrapper imageUrl={bgImage}>
@@ -121,5 +124,3 @@ const Region = () => {
 };
 
 export default Region;
-
-// md:flex md:flex-wrap

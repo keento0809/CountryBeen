@@ -1,8 +1,6 @@
 const countryService = {
   get: async () => {
-    const res = await fetch(
-      `${process.env.REACT_APP_FETCH_COUNTRY_DATA_ENDPOINT}`
-    );
+    const res = await fetch(`https://restcountries.com/v3.1/all`);
     const data = await res.json();
     return data;
   },
