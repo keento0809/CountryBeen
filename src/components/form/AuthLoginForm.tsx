@@ -11,9 +11,7 @@ const AuthForm = ({ setIsError }: AuthFormProps) => {
     password: "",
   });
   const auth = getAuth();
-
   const dispatch = useDispatch();
-
   const navigate = useNavigate();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,7 +20,6 @@ const AuthForm = ({ setIsError }: AuthFormProps) => {
       [e.target.name]: e.target.value,
     });
   };
-
   const authentication = (email: string, password: string) => {
     if (email === "" || password === "") {
       alert("Invalid credentials");
@@ -49,19 +46,16 @@ const AuthForm = ({ setIsError }: AuthFormProps) => {
         console.log(errorCode, error);
       });
   };
-
   const handleSubmit = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
     authentication(userInfo.email, userInfo.password);
   };
-
   const handleGuestLogin = () => {
     const guestUserEmail: string = process.env.REACT_APP_GUEST_USER_EMAIL!;
     const guestUserPass: string = process.env.REACT_APP_GUEST_USER_PASS!;
 
     authentication(guestUserEmail, guestUserPass);
   };
-
   return (
     <Fragment>
       <section className="max-w-4xl p-6 mx-auto bg-slate-50 rounded-md shadow-md dark:bg-gray-800">

@@ -6,6 +6,7 @@ import { regionImageArr } from "../data/data";
 import CountryCard from "../components/Card/CountryCard";
 import { AppDispatch, RootState } from "../store";
 import { fetchCountries } from "../store/countries-slice";
+import { createLoadedDataArray } from "../helpers/Region";
 
 const Region = () => {
   let pathRegion = window.location.pathname.split("/")[3];
@@ -13,10 +14,7 @@ const Region = () => {
   if (pathRegion === "South%20America") pathRegion = "South America";
   const [defaultData, setDefaultData] = useState<CountryViewObj[]>([]);
   const [countryData, setCountryData] = useState<CountryViewObj[]>([]);
-  const [dataLength, setDataLength] = useState(defaultData.length);
   const [isLoading, setIsLoading] = useState(true);
-  const [bgImage, setBgImage] = useState(regionImageArr[pathRegion]);
-  const [currRegion, setCurrRegion] = useState(pathRegion);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const countriesData = useSelector(
     (state: RootState) => state.countriesReducer.countries
@@ -24,38 +22,23 @@ const Region = () => {
   const { countries } = useSelector(
     (state: RootState) => state.countriesReducer
   );
-  const dispatch = useDispatch<AppDispatch>();
+  const bgImage = regionImageArr[pathRegion];
+  const currRegion = pathRegion;
   let selectedRegion: string;
+  const dispatch = useDispatch<AppDispatch>();
 
   console.log("render-render-render");
 
   function utilizeCountriesData() {
     if (countries.length === 0) return;
     const resData: any = countries;
-    const loadedData = [];
-    for (const key in resData) {
-      if (
-        resData[key].continents[0] ===
-        (selectedRegion === undefined ? currRegion : selectedRegion)
-      ) {
-        loadedData.push({
-          name: resData[key].name.common,
-          population: resData[key].population,
-          continents: resData[key].continents,
-          capital: resData[key].capital,
-          currencies: resData[key].currencies,
-          languages: resData[key].languages,
-          coatOfArms: resData[key].coatOfArms.png,
-          flagImg: resData[key].flags.png,
-          flagIcon: resData[key].flag,
-          cca3: resData[key].cca3,
-          borders: resData[key].borders,
-        });
-      }
-    }
+    const loadedData = createLoadedDataArray(
+      resData,
+      currRegion,
+      selectedRegion && selectedRegion
+    );
     setDefaultData(loadedData);
     setCountryData(loadedData);
-    setDataLength(loadedData.length);
     setIsLoading(false);
   }
   function handleCheckValue() {
@@ -65,7 +48,6 @@ const Region = () => {
         .includes(searchInputRef.current!.value.toLowerCase())
     );
     setCountryData(filteredData);
-    setDataLength(filteredData.length);
   }
   useEffect(() => {
     if (countries.length === 0) {
@@ -97,7 +79,7 @@ const Region = () => {
               )}
               {!isLoading && countriesData && (
                 <p className="font-bold text-xl text-slate-100 pb-3">
-                  {currRegion}: {dataLength} countries matched
+                  {currRegion}: {countryData.length} countries matched
                 </p>
               )}
             </div>
