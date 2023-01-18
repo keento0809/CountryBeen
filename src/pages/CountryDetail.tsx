@@ -331,11 +331,9 @@ const CountryDetail: React.FC = () => {
               </div>
             </div>
             <div className="card-actions justify-end">
-              <button className="btn btn-secondary btn-outline">
-                <Link to={`/countries/region/${countryData.continents}`}>
-                  BACK
-                </Link>
-              </button>
+              <Link to={`/countries/region/${countryData.continents}`}>
+                <button className="btn btn-secondary btn-outline">BACK</button>
+              </Link>
             </div>
           </div>
         </div>

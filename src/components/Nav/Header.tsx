@@ -76,7 +76,7 @@ const Header = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const handleSignout = () => {
+  const handleSignOut = () => {
     signOut(auth)
       .then(() => {
         localStorage.removeItem("currUser");
@@ -134,7 +134,7 @@ const Header = () => {
               <Link to={"/countries"} className="py-5">
                 Countries
               </Link>
-              <span className="inline-block py-5" onClick={handleSignout}>
+              <span className="inline-block py-5" onClick={handleSignOut}>
                 Sign out
               </span>
             </div>
@@ -291,7 +291,7 @@ const Header = () => {
                 </Link>
                 <span
                   className="text-sm btn-ghost py-1 px-3 rounded-lg cursor-pointer"
-                  onClick={handleSignout}
+                  onClick={handleSignOut}
                 >
                   Sign out
                 </span>
