@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import HomeWrapper from "../components/Wrapper/HomeWrapper";
-import { Link, useNavigate } from "react-router-dom";
-import { Fragment } from "react";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { favoriteActions } from "../store/favorite-slice";
 import { AppDispatch, RootState } from "../store";
@@ -10,33 +9,25 @@ import WorldMap from "../components/WorldMap/WorldMap";
 import { doc, getDoc, DocumentData } from "firebase/firestore";
 import { db } from "../services/firebase";
 import { beenActions } from "../store/been-slice";
-import { getAuth } from "firebase/auth";
 
 const Home = () => {
   const { totalNumber, isSuccessToAddBucketList } = useSelector(
     (state: RootState) => state.favoriteReducer
   );
-  const { totals, beenToList, isSuccessToAdd } = useSelector(
+  const { totals, isSuccessToAdd } = useSelector(
     (state: RootState) => state.beenReducer
   );
   const { isAlerting, alertText } = useSelector(
     (state: RootState) => state.AlertReducer
   );
-  const { countries } = useSelector(
-    (state: RootState) => state.countriesReducer
-  );
-  const [currUserId, setCurrUserId] = useState(
-    localStorage.getItem("currUser")
-  );
+  const currUserId = localStorage.getItem("currUser");
   const [isFavoriteLoading, setIsFavoriteLoading] = useState(false);
   const [isBeenLoading, setIsBeenLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch<AppDispatch>();
-  const auth = getAuth();
-  const navigate = useNavigate();
   const percentage = (totals / 250) * 100;
 
-  async function fetchFromDB() {
+  const fetchFromDB = async () => {
     setLoading(true);
     const currUserRef = doc(db, "users", `${currUserId}`);
     const currUserSnap = await getDoc(currUserRef);
@@ -78,7 +69,7 @@ const Home = () => {
     dispatch(beenActions.fetchBeenTo(resultRecordData));
     dispatch(favoriteActions.fetchFavorite(resultBucketListData));
     setLoading(false);
-  }
+  };
   useEffect(() => {
     fetchFromDB();
   }, []);

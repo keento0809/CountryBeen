@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux";
@@ -20,6 +20,7 @@ const AuthForm = ({ setIsError }: AuthFormProps) => {
       [e.target.name]: e.target.value,
     });
   };
+
   const authentication = (email: string, password: string) => {
     if (email === "" || password === "") {
       alert("Invalid credentials");
@@ -46,18 +47,21 @@ const AuthForm = ({ setIsError }: AuthFormProps) => {
         console.log(errorCode, error);
       });
   };
+
   const handleSubmit = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
     authentication(userInfo.email, userInfo.password);
   };
+
   const handleGuestLogin = () => {
     const guestUserEmail: string = process.env.REACT_APP_GUEST_USER_EMAIL!;
     const guestUserPass: string = process.env.REACT_APP_GUEST_USER_PASS!;
 
     authentication(guestUserEmail, guestUserPass);
   };
+
   return (
-    <Fragment>
+    <>
       <section className="max-w-4xl p-6 mx-auto bg-slate-50 rounded-md shadow-md dark:bg-gray-800">
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
@@ -110,7 +114,7 @@ const AuthForm = ({ setIsError }: AuthFormProps) => {
           </span>
         </div>
       </section>
-    </Fragment>
+    </>
   );
 };
 

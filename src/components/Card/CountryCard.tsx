@@ -1,14 +1,7 @@
 import { Link } from "react-router-dom";
 import { CountryCardProps } from "../../types/country";
 
-const CountryCard = ({
-  flagImg,
-  countryName,
-  cca3,
-  isBeenTo,
-}: CountryCardProps) => {
-  function handleClick() {}
-
+const CountryCard = ({ flagImg, countryName, cca3 }: CountryCardProps) => {
   return (
     <div className="overflow-hidden rounded-2xl bg-transparent mr-auto mb-4">
       <Link to={`/countries/${cca3}`} className="cursor-pointer">
@@ -32,7 +25,6 @@ const CountryCard = ({
                 viewBox="0 0 24 24"
                 stroke="currentColor"
                 strokeWidth={2}
-                onClick={handleClick}
               >
                 <path
                   strokeLinecap="round"

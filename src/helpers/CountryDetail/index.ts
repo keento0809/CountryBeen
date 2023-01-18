@@ -2,24 +2,24 @@ import { getDoc, doc, updateDoc, arrayUnion } from "firebase/firestore";
 import { db } from "../../services/firebase";
 import { CountryViewObj } from "../../types/country";
 
-export async function updateDataInFirebase(
+export const updateDataInFirebase = async (
   type: string,
   data: any,
   currUserId: string | null
-) {
+) => {
   if (currUserId) {
     const currUserRef = doc(db, "users", `${currUserId}`);
     await updateDoc(currUserRef, {
       [type]: arrayUnion(data),
     });
   }
-}
+};
 
-export async function deleteDataInFirebase(
+export const deleteDataInFirebase = async (
   type: string,
   countryData: CountryViewObj,
   currUserId: string | null
-) {
+) => {
   if (currUserId) {
     const currUserRef = doc(db, "users", `${currUserId}`);
     const currUserSnap = await getDoc(currUserRef);
@@ -35,4 +35,4 @@ export async function deleteDataInFirebase(
     });
     await getDoc(currUserRef);
   }
-}
+};

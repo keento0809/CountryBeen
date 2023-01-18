@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc } from "firebase/firestore";
@@ -74,7 +74,7 @@ const AuthForm = ({ setIsError }: AuthFormProps) => {
       });
   };
   return (
-    <Fragment>
+    <>
       <section className="max-w-4xl p-6 mx-auto bg-slate-50 rounded-md shadow-md dark:bg-gray-800">
         <form onSubmit={handleSubmit}>
           <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
@@ -154,7 +154,7 @@ const AuthForm = ({ setIsError }: AuthFormProps) => {
           </div>
         </form>
       </section>
-    </Fragment>
+    </>
   );
 };
 
