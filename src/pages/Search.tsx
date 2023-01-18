@@ -1,15 +1,13 @@
-import React, { Fragment, useEffect, useState } from "react";
-import Wrapper from "../components/Wrapper/Wrapper";
 import SearchWrapper from "../components/Wrapper/SearchWrapper";
 import { Link } from "react-router-dom";
 import { regionArrFixed } from "../data/data";
 import RegionCard from "../components/Card/RegionCard";
 
 const Search = () => {
-  const [regionData, setRegionData] = useState<string[]>(regionArrFixed);
+  const regionData = regionArrFixed;
   return (
     <SearchWrapper>
-      <Fragment>
+      <>
         <div className="title text-center text-white">
           <h2 className="py-6 font-bold text-2xl dark:text-gray-200">
             Select Region
@@ -34,7 +32,7 @@ const Search = () => {
               })}
           </div>
         </section>
-      </Fragment>
+      </>
     </SearchWrapper>
   );
 };

@@ -21,7 +21,7 @@ const Listing = ({ name }: ListingName) => {
   );
   const { beenToList } = useSelector((state: RootState) => state.beenReducer);
 
-  async function getCurrentUserCountryData(name: string) {
+  const getCurrentUserCountryData = async (name: string) => {
     setIsLoading(true);
     await fetchCurrentUserDataFromDB()
       .then((res) => {
@@ -33,7 +33,7 @@ const Listing = ({ name }: ListingName) => {
       })
       .catch((err) => console.log(err));
     setIsLoading(false);
-  }
+  };
   useEffect(() => {
     name === "Record" &&
       beenToList.length === 0 &&

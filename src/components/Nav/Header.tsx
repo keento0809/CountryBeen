@@ -1,4 +1,4 @@
-import { useState, Fragment, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { CountryViewObj } from "../../types/country";
 import { getAuth, signOut } from "firebase/auth";
@@ -45,7 +45,7 @@ const Header = () => {
   const navigate = useNavigate();
   const auth = getAuth();
 
-  function handleCheckValue() {
+  const handleCheckValue = () => {
     const currValue = searchInputRef.current!.value;
     if (currValue === "") {
       setIsSearching(false);
@@ -60,23 +60,23 @@ const Header = () => {
         .includes(searchInputRef.current!.value.toLowerCase())
     );
     setCountryData(filteredData);
-  }
+  };
 
-  function handleToggleSearch() {
+  const handleToggleSearch = () => {
     setIsSearchMode(!isSearchMode);
-  }
+  };
 
-  function handleTransition() {
+  const handleTransition = () => {
     setIsSearchMode(false);
     setIsSearching(false);
     searchInputRef.current!.value = "";
-  }
+  };
 
-  function handleToggleMenu() {
+  const handleToggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-  }
+  };
 
-  function handleSignout() {
+  const handleSignout = () => {
     signOut(auth)
       .then(() => {
         localStorage.removeItem("currUser");
@@ -89,7 +89,7 @@ const Header = () => {
         }, 1500);
       })
       .catch((error) => console.log(error));
-  }
+  };
 
   useEffect(() => {
     countries.length === 0 && dispatch(fetchCountries());
@@ -101,9 +101,9 @@ const Header = () => {
   }, [countries.length]);
 
   return (
-    <Fragment>
+    <>
       {isMenuOpen && (
-        <Fragment>
+        <>
           <div className="z-30 backdrop fixed top-0 left-0 right-0 bottom-0 w-full bg-slate-900 opacity-95"></div>
           <section className="z-40 py-4 px-5 fixed top-0 right-0 w-full mx-auto">
             <svg
@@ -139,10 +139,10 @@ const Header = () => {
               </span>
             </div>
           </section>
-        </Fragment>
+        </>
       )}
       {isSearchMode && (
-        <Fragment>
+        <>
           <div className="z-30 backdrop fixed top-0 left-0 right-0 bottom-0 w-full bg-slate-900 opacity-80"></div>
           <section className="z-40 py-4 px-5 md:px-8 fixed top-0 right-0 w-4/5 mx-auto">
             <div className="flex flex-row items-center justify-end">
@@ -192,7 +192,7 @@ const Header = () => {
                 })}
             </div>
           </section>
-        </Fragment>
+        </>
       )}
       <header className="fixed top-0 left-0 w-full bg-transparent text-slate-100">
         <div className="navbar lg:hidden mx-auto md:px-6">
@@ -300,7 +300,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-    </Fragment>
+    </>
   );
 };
 

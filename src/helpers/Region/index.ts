@@ -1,8 +1,8 @@
-export function createLoadedDataArray(
+export const createLoadedDataArray = (
   resData: any,
   currRegion: string,
   selectedRegion?: string
-) {
+) => {
   const loadedData = [];
   for (const key in resData) {
     if (
@@ -25,4 +25,4 @@ export function createLoadedDataArray(
     }
   }
   return loadedData;
-}
+};

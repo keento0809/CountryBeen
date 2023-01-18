@@ -6,7 +6,7 @@ const currUserId = localStorage.getItem("currUser")
   ? localStorage.getItem("currUser")
   : "";
 
-function pushCountryData(dataArray: any) {
+const pushCountryData = (dataArray: any) => {
   const listArr: CountryViewObj[] = [];
   dataArray.forEach((resData: any) => {
     listArr.push({
@@ -24,9 +24,9 @@ function pushCountryData(dataArray: any) {
     });
   });
   return listArr;
-}
+};
 
-export async function fetchCurrentUserDataFromDB() {
+export const fetchCurrentUserDataFromDB = async () => {
   const currUserRef = doc(db, "users", `${currUserId}`);
   const querySnapshot = await getDoc(currUserRef);
   const snapShotData = querySnapshot.data();
@@ -37,4 +37,4 @@ export async function fetchCurrentUserDataFromDB() {
     snapShotData!.record
   );
   return { favoriteListDataFromDb, beenListDataFromDb };
-}
+};

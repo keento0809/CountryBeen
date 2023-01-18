@@ -47,7 +47,7 @@ const CountryDetail: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
-  function handleSetCountryData(resData: any) {
+  const handleSetCountryData = (resData: any) => {
     const pathName = window.location.pathname.toString();
     const currentCCA3 = pathName.substring(
       pathName.length - 3,
@@ -83,10 +83,10 @@ const CountryDetail: React.FC = () => {
         break;
       }
     }
-  }
-  async function requestCountryData() {
+  };
+
+  const requestCountryData = async () => {
     // setIsLoading(true);
-    console.log("request視野う");
     axios
       .get(`${process.env.REACT_APP_FETCH_COUNTRY_DATA_ENDPOINT}`)
       .then((res) => {
@@ -95,65 +95,63 @@ const CountryDetail: React.FC = () => {
         handleSetCountryData(resData);
       })
       .catch((error) => console.log(error.message));
-    // setIsLoading(false);
-    // dispatch(beenActions.fetchBeenTo());
-    // dispatch(favoriteActions.fetchFavorite())
-  }
-  function checkInFavorite(cca3Val: string) {
+  };
+
+  const checkInFavorite = (cca3Val: string) => {
     favoriteList?.forEach((country) => {
       country.cca3 === cca3Val && setIsFavorite(true);
     });
-  }
-  function checkInBeenTo(cca3Val: string) {
+  };
+
+  const checkInBeenTo = (cca3Val: string) => {
     beenToList?.forEach((country) => {
       country.cca3 === cca3Val && setIsBeenTo(true);
     });
-  }
-  function utilizeCountriesData() {
+  };
+
+  const utilizeCountriesData = () => {
     // setIsLoading(true);
     const resData: any = countriesData;
     handleSetCountryData(resData);
     // setIsLoading(false);
-  }
-  async function handleAddFavorite() {
+  };
+
+  const handleNavigatePageWithAlert = (alertText: string) => {
+    dispatch(AlertActions.turnOnAlert(alertText));
+    navigate("/home");
+    setTimeout(() => {
+      dispatch(AlertActions.turnOffAlert());
+    }, 1000);
+  };
+
+  const handleAddFavorite = async () => {
     dispatch(favoriteActions.addFavorite(countryData));
     await updateDataInFirebase("bucketList", countryData, currUserId);
-    dispatch(AlertActions.turnOnAlert("Country Added to BucketList!"));
-    navigate("/home");
-    setTimeout(() => {
-      dispatch(AlertActions.turnOffAlert());
-    }, 1000);
-  }
-  async function handleRemoveFavorite() {
+    handleNavigatePageWithAlert("Country Added to BucketList!");
+  };
+
+  const handleRemoveFavorite = async () => {
     dispatch(favoriteActions.removeFavorite(countryData));
     await deleteDataInFirebase("bucketList", countryData, currUserId);
-    dispatch(AlertActions.turnOnAlert("Country deleted from BucketList!"));
-    navigate("/home");
-    setTimeout(() => {
-      dispatch(AlertActions.turnOffAlert());
-    }, 1000);
-  }
-  async function handleAddBeenTo() {
+    handleNavigatePageWithAlert("Country deleted from BucketList!");
+  };
+
+  const handleAddBeenTo = async () => {
     dispatch(beenActions.addBeenTo(countryData));
     await updateDataInFirebase("record", countryData, currUserId);
-    dispatch(AlertActions.turnOnAlert("Country Added to Record!"));
-    navigate("/home");
-    setTimeout(() => {
-      dispatch(AlertActions.turnOffAlert());
-    }, 1000);
-  }
-  async function handleRemoveBeenTo() {
+    handleNavigatePageWithAlert("Country Added to Record!");
+  };
+
+  const handleRemoveBeenTo = async () => {
     dispatch(beenActions.removeBeenTo(countryData));
     await deleteDataInFirebase("record", countryData, currUserId);
-    dispatch(AlertActions.turnOnAlert("Country deleted from Record!"));
-    navigate("/home");
-    setTimeout(() => {
-      dispatch(AlertActions.turnOffAlert());
-    }, 1000);
-  }
+    handleNavigatePageWithAlert("Country deleted from Record!");
+  };
+
   useEffect(() => {
     countriesData.length === 0 ? requestCountryData() : utilizeCountriesData();
   }, [window.location.pathname]);
+
   return (
     <RegionWrapper>
       <div className="flex justify-center items-center z-10 pt-4 lg:pt-16">

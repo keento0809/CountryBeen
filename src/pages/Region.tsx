@@ -29,7 +29,7 @@ const Region = () => {
 
   console.log("render-render-render");
 
-  function utilizeCountriesData() {
+  const utilizeCountriesData = () => {
     if (countries.length === 0) return;
     const resData: any = countries;
     const loadedData = createLoadedDataArray(
@@ -40,15 +40,15 @@ const Region = () => {
     setDefaultData(loadedData);
     setCountryData(loadedData);
     setIsLoading(false);
-  }
-  function handleCheckValue() {
+  };
+  const handleCheckValue = () => {
     const filteredData = defaultData.filter((country) =>
       country.name
         .toLowerCase()
         .includes(searchInputRef.current!.value.toLowerCase())
     );
     setCountryData(filteredData);
-  }
+  };
   useEffect(() => {
     if (countries.length === 0) {
       dispatch(fetchCountries());
