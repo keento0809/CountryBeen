@@ -6,7 +6,7 @@ import RegionCard from "../components/Card/RegionCard";
 const Search = () => {
   const regionData = regionArrFixed;
   return (
-    <Wrapper>
+    <Wrapper customStyle={`md:max-w-374 lg:max-w-780 xl:max-w-full`}>
       <>
         <div className="title text-center text-white">
           <h2 className="py-6 font-bold text-2xl dark:text-gray-200">

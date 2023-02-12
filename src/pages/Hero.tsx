@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import AuthSignupForm from "../components/form/AuthSignupForm";
 import AuthLoginForm from "../components/form/AuthLoginForm";
-import imgLink from "../assets/revisedHeroBg-1.jpg";
+import imgLink from "../assets/revisedHeroBg-1ver2.jpg";
 import Alert from "../components/Alert/Alert";
 import { RootState } from "../store";
 import { fetchCountries } from "../store/countries-slice";
