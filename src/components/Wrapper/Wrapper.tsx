@@ -1,6 +1,5 @@
 import Header from "../Nav/Header";
-import { Children } from "../../types/index";
-import imgUrl from "../../assets/revisedHeroBg-1.jpg";
+import imgUrl from "../../assets/revisedHeroBg-1ver2.jpg";
 
 type Props = {
   children: React.ReactNode;

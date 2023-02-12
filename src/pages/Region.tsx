@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from "react";
 import { CountryViewObj } from "../types/country";
 import Wrapper from "../components/Wrapper/Wrapper";
 import { useDispatch, useSelector } from "react-redux";
-import { regionImageArr } from "../data/data";
 import CountryCard from "../components/Card/CountryCard";
 import { AppDispatch, RootState } from "../store";
 import { fetchCountries } from "../store/countries-slice";
@@ -22,7 +21,6 @@ const Region = () => {
   const { countries } = useSelector(
     (state: RootState) => state.countriesReducer
   );
-  const bgImage = regionImageArr[pathRegion];
   const currRegion = pathRegion;
   let selectedRegion: string;
   const dispatch = useDispatch<AppDispatch>();
