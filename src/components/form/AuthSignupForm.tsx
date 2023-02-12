@@ -5,6 +5,7 @@ import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../services/firebase";
 import { useDispatch } from "react-redux";
 import { AlertActions } from "../../store/alert-slice";
+import { AuthActions } from "../../store/auth-slice";
 import { AuthFormProps } from "../../types/index";
 
 const AuthForm = ({ setIsError }: AuthFormProps) => {
@@ -55,6 +56,7 @@ const AuthForm = ({ setIsError }: AuthFormProps) => {
       .then((userCredential) => {
         localStorage.setItem("currUser", userCredential.user.uid);
         setUserDoc(userCredential.user.uid, userCredential.user.email!);
+        dispatch(AuthActions.signIn());
         navigate("/home");
         setTimeout(() => {
           dispatch(AlertActions.turnOnAlert("Successfully logged in!"));

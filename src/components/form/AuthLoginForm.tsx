@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { AlertActions } from "../../store/alert-slice";
+import { AuthActions } from "../../store/auth-slice";
 import { AuthFormProps } from "../../types/index";
 
 const AuthForm = ({ setIsError }: AuthFormProps) => {
@@ -28,6 +29,7 @@ const AuthForm = ({ setIsError }: AuthFormProps) => {
     }
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        dispatch(AuthActions.signIn());
         localStorage.setItem("currUser", userCredential.user.uid);
         navigate("/home");
         setTimeout(() => {
@@ -56,7 +58,6 @@ const AuthForm = ({ setIsError }: AuthFormProps) => {
   const handleGuestLogin = () => {
     const guestUserEmail: string = process.env.REACT_APP_GUEST_USER_EMAIL!;
     const guestUserPass: string = process.env.REACT_APP_GUEST_USER_PASS!;
-
     authentication(guestUserEmail, guestUserPass);
   };
 
