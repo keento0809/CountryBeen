@@ -1,4 +1,4 @@
-import SearchWrapper from "../components/Wrapper/SearchWrapper";
+import Wrapper from "../components/Wrapper/Wrapper";
 import { Link } from "react-router-dom";
 import { regionArrFixed } from "../data/data";
 import RegionCard from "../components/Card/RegionCard";
@@ -6,7 +6,7 @@ import RegionCard from "../components/Card/RegionCard";
 const Search = () => {
   const regionData = regionArrFixed;
   return (
-    <SearchWrapper>
+    <Wrapper>
       <>
         <div className="title text-center text-white">
           <h2 className="py-6 font-bold text-2xl dark:text-gray-200">
@@ -33,7 +33,7 @@ const Search = () => {
           </div>
         </section>
       </>
-    </SearchWrapper>
+    </Wrapper>
   );
 };
 

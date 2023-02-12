@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from "react";
 import { CountryViewObj } from "../types/country";
-import RegionWrapper from "../components/Wrapper/RegionWrapper";
+import Wrapper from "../components/Wrapper/Wrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { regionImageArr } from "../data/data";
 import CountryCard from "../components/Card/CountryCard";
@@ -58,7 +58,7 @@ const Region = () => {
     countries.length === 250 && utilizeCountriesData();
   }, [countries.length]);
   return (
-    <RegionWrapper imageUrl={bgImage}>
+    <Wrapper>
       <div className="">
         <section className="py-4">
           <input
@@ -101,7 +101,7 @@ const Region = () => {
           </div>
         </section>
       </div>
-    </RegionWrapper>
+    </Wrapper>
   );
 };
 

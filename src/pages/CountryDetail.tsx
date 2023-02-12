@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import RegionWrapper from "../components/Wrapper/RegionWrapper";
+import Wrapper from "../components/Wrapper/Wrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { favoriteActions } from "../store/favorite-slice";
 import { beenActions } from "../store/been-slice";
@@ -153,7 +153,7 @@ const CountryDetail: React.FC = () => {
   }, [window.location.pathname]);
 
   return (
-    <RegionWrapper>
+    <Wrapper>
       <div className="flex justify-center items-center z-10 pt-4 lg:pt-16">
         <div className="card w-full glass mx-auto max-w-374 md:max-h-680 lg:max-w-960 lg:flex lg:flex-row lg:items-start max-h-780 overflow-scroll bg-transparent rounded-3xl">
           <figure className="pb-3 lg:min-w-374 lg:mr-2">
@@ -338,7 +338,7 @@ const CountryDetail: React.FC = () => {
           </div>
         </div>
       </div>
-    </RegionWrapper>
+    </Wrapper>
   );
 };
 

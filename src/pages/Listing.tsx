@@ -1,4 +1,4 @@
-import DisplayWrapper from "../components/Wrapper/DisplayWrapper";
+import Wrapper from "../components/Wrapper/Wrapper";
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../store";
 import CountryCard from "../components/Card/CountryCard";
@@ -43,7 +43,7 @@ const Listing = ({ name }: ListingName) => {
       getCurrentUserCountryData("bucketList");
   }, [location.pathname]);
   return (
-    <DisplayWrapper>
+    <Wrapper customStyle={`max-w-374 md:max-w-full`}>
       <div className="">
         <div className="title text-center text-white">
           <h2 className="py-6 font-bold text-2xl">{name}</h2>
@@ -75,7 +75,7 @@ const Listing = ({ name }: ListingName) => {
           )}
         </div>
       </div>
-    </DisplayWrapper>
+    </Wrapper>
   );
 };
 
