@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { CountryViewObj } from "../../types/country";
 import { getAuth, signOut } from "firebase/auth";
 import { AlertActions } from "../../store/alert-slice";
+import { AuthActions } from "../../store/auth-slice";
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { fetchCountries } from "../../store/countries-slice";
@@ -80,6 +81,7 @@ const Header = () => {
     signOut(auth)
       .then(() => {
         localStorage.removeItem("currUser");
+        dispatch(AuthActions.signOut());
         setTimeout(() => {
           dispatch(AlertActions.turnOnAlert("Successfully signed out!"));
         }, 200);
@@ -251,9 +253,6 @@ const Header = () => {
             </div>
             <div className="nav-right flex justify-center items-center min-w-400 lg:min-w-450 xl:min-w-600">
               <nav className="nav-list grow flex justify-between items-center">
-                {/* <Link to={"/home"} className="py-5">
-                HOME
-              </Link> */}
                 <button className="btn btn-ghost btn-circle">
                   <svg
                     onClick={handleToggleSearch}
