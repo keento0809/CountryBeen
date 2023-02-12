@@ -2,7 +2,12 @@ import Header from "../Nav/Header";
 import { Children } from "../../types/index";
 import imgUrl from "../../assets/revisedHeroBg-1.jpg";
 
-const Wrapper = ({ children }: Children) => {
+type Props = {
+  children: React.ReactNode;
+  customStyle?: string;
+};
+
+const Wrapper = ({ children, customStyle }: Props) => {
   return (
     <div
       className="min-h-screen"
@@ -10,11 +15,14 @@ const Wrapper = ({ children }: Children) => {
         backgroundImage: `url(${imgUrl})`,
         backgroundSize: "cover",
         backgroundPosition: "50% 50%",
+        minHeight: "100svh",
       }}
     >
-      <div className="min-h-screen px-5 sm:px-8">
+      <div className="px-5 sm:px-8">
         <Header />
-        <div className="pt-16 mx-auto max-w-374 lg:max-w-780">{children}</div>
+        <div className={`pt-16 mx-auto ${customStyle && customStyle}`}>
+          {children}
+        </div>
       </div>
     </div>
   );

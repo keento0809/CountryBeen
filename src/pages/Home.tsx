@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import HomeWrapper from "../components/Wrapper/HomeWrapper";
+import Wrapper from "../components/Wrapper/Wrapper";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { favoriteActions } from "../store/favorite-slice";
@@ -76,12 +76,12 @@ const Home = () => {
 
   return (
     <>
-      <HomeWrapper>
+      <Wrapper customStyle={`max-w-374 md:max-w-600 xl:max-w-none`}>
         <div className="lg:mx-auto">
           <section className="title text-center text-white">
             <h2 className="py-6 font-bold text-2xl">Dashboard</h2>
           </section>
-          <div className="max-h-640 md:max-h-620 xl:max-h-none xl:flex xl:space-x-8 xl:justify-evenly overflow-scroll xl:overflow-clip">
+          <div className="xl:flex xl:space-x-8 xl:justify-evenly overflow-scroll xl:overflow-clip">
             <section className="mapping bg-slate-700 rounded-2xl lg:mx-0 xl:min-w-800 xl:basis-1">
               <WorldMap />
             </section>
@@ -228,7 +228,7 @@ const Home = () => {
             <Alert text={alertText} />
           )}
         </div>
-      </HomeWrapper>
+      </Wrapper>
     </>
   );
 };
