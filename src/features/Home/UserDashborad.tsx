@@ -36,9 +36,16 @@ const UserDashboard = ({ isLoading, data }: Props) => {
           <div className="stat-title">You've been to</div>
           <div className="stat-value">
             <span
-              className={`${isLoading ? "hidden" : "block"} dark:text-slate-50`}
+              className={`${
+                !isLoading ? "block" : "hidden"
+              } dark:text-slate-50`}
             >
               {data.totalBeenToCountries}
+            </span>
+            <span
+              className={`${isLoading ? "block" : "hidden"} dark:text-slate-50`}
+            >
+              Loading
             </span>
           </div>
           <div className="stat-desc">Countries</div>
@@ -62,9 +69,16 @@ const UserDashboard = ({ isLoading, data }: Props) => {
           <div className="stat-title">Achievement rate</div>
           <div className="stat-value">
             <span
-              className={`${isLoading ? "hidden" : "block"} dark:text-slate-50`}
+              className={`${
+                !isLoading ? "block" : "hidden"
+              } dark:text-slate-50`}
             >
               {data.percentage.toFixed(1)}%
+            </span>
+            <span
+              className={`${isLoading ? "block" : "hidden"} dark:text-slate-50`}
+            >
+              Loading
             </span>
           </div>
           <div className="stat-desc">
@@ -91,8 +105,17 @@ const UserDashboard = ({ isLoading, data }: Props) => {
           </div>
           <div className="stat-title">Number of Bucket-list</div>
           <div className="stat-value">
-            <span className={`${isLoading && "hidden"} dark:text-slate-50`}>
+            <span
+              className={`${
+                !isLoading ? "block" : "hidden"
+              } dark:text-slate-50`}
+            >
               {data.totalFavoriteCountries}
+            </span>
+            <span
+              className={`${isLoading ? "block" : "hidden"} dark:text-slate-50`}
+            >
+              Loading
             </span>
           </div>
           <div className="stat-desc">Countries</div>
