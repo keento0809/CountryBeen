@@ -1,9 +1,9 @@
 import Wrapper from "../components/Wrapper/Wrapper";
 import CountriesList from "../features/Listing/CountriesList";
 
-interface ListingName {
+type ListingName = {
   name: string;
-}
+};
 
 const Listing = ({ name }: ListingName) => {
   return (
