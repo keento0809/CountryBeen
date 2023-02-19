@@ -39,6 +39,7 @@ const Region = () => {
     setCountryData(loadedData);
     setIsLoading(false);
   };
+
   const handleCheckValue = () => {
     const filteredData = defaultData.filter((country) =>
       country.name
@@ -47,14 +48,17 @@ const Region = () => {
     );
     setCountryData(filteredData);
   };
+
   useEffect(() => {
     if (countries.length === 0) {
       dispatch(fetchCountries());
     } else utilizeCountriesData();
   }, []);
+
   useEffect(() => {
     countries.length === 250 && utilizeCountriesData();
   }, [countries.length]);
+
   return (
     <Wrapper>
       <div className="">
