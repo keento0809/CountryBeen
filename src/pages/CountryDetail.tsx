@@ -31,7 +31,6 @@ const CountryDetail: React.FC = () => {
   const [countryData, setCountryData] = useState<CountryViewObj>(
     countryDataInitialState
   );
-  // const [isLoading, setIsLoading] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
   const [isBeenTo, setIsBeenTo] = useState(false);
   const currUserId = localStorage.getItem("currUser")
@@ -86,7 +85,6 @@ const CountryDetail: React.FC = () => {
   };
 
   const requestCountryData = async () => {
-    // setIsLoading(true);
     axios
       .get(`${process.env.REACT_APP_FETCH_COUNTRY_DATA_ENDPOINT}`)
       .then((res) => {
@@ -110,10 +108,8 @@ const CountryDetail: React.FC = () => {
   };
 
   const utilizeCountriesData = () => {
-    // setIsLoading(true);
     const resData: any = countriesData;
     handleSetCountryData(resData);
-    // setIsLoading(false);
   };
 
   const handleNavigatePageWithAlert = (alertText: string) => {
