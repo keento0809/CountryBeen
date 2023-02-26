@@ -144,7 +144,7 @@ const Header = () => {
         </>
       )}
       {isSearchMode && (
-        <>
+        <div className="fixed z-40">
           <div className="z-30 backdrop fixed top-0 left-0 right-0 bottom-0 w-full bg-slate-900 opacity-80"></div>
           <section className="z-40 py-4 px-5 md:px-8 fixed top-0 right-0 w-4/5 mx-auto">
             <div className="flex flex-row items-center justify-end">
@@ -194,7 +194,7 @@ const Header = () => {
                 })}
             </div>
           </section>
-        </>
+        </div>
       )}
       <header className="fixed top-0 left-0 w-full bg-transparent text-slate-100">
         <div className="navbar lg:hidden mx-auto md:px-6">
