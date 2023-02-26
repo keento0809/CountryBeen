@@ -150,7 +150,7 @@ const CountryDetail: React.FC = () => {
 
   return (
     <Wrapper>
-      <div className="flex justify-center items-center z-10 pt-4 lg:pt-16">
+      <div className="flex justify-center items-center z-10 pt-4 pb-12 lg:pt-16">
         <div className="card w-full glass mx-auto max-w-374 md:max-h-680 lg:max-w-960 lg:flex lg:flex-row lg:items-start max-h-780 overflow-scroll bg-transparent rounded-3xl">
           <figure className="pb-3 lg:min-w-374 lg:mr-2">
             <img

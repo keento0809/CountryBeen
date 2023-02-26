@@ -67,7 +67,7 @@ const RegionContainer = () => {
           onKeyUp={handleCheckValue}
         />
       </section>
-      <section className="countries py-4 md:pb-0">
+      <section className="countries pt-4 pb-12 md:pb-0">
         <div className="regionCountries">
           <div className="min-h-40">
             {isLoading && (

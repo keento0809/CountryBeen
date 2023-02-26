@@ -52,7 +52,7 @@ const HomeContainer = () => {
         <section className="title text-center text-white">
           <h2 className="py-6 font-bold text-2xl">Dashboard</h2>
         </section>
-        <div className="pb-8 xl:flex xl:space-x-8 xl:justify-evenly overflow-scroll xl:overflow-clip">
+        <div className="pb-12 xl:flex xl:space-x-8 xl:justify-evenly overflow-scroll xl:overflow-clip">
           <section className="mapping bg-slate-700 rounded-2xl lg:mx-0 xl:min-w-800 xl:basis-1">
             <WorldMap />
           </section>
