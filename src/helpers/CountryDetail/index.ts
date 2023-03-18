@@ -36,3 +36,13 @@ export const deleteDataInFirebase = async (
     await getDoc(currUserRef);
   }
 };
+
+export const checkListIfFavoriteOrBeenTo = (
+  list: CountryViewObj[],
+  cca3Val: string,
+  dispatch: (value: React.SetStateAction<boolean>) => void
+) => {
+  list?.forEach((country) => {
+    country.cca3 === cca3Val && dispatch(true);
+  });
+};

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { favoriteActions } from "../../store/favorite-slice";
@@ -10,11 +10,10 @@ import { CountryViewObj } from "../../types/country";
 import {
   updateDataInFirebase,
   deleteDataInFirebase,
+  checkListIfFavoriteOrBeenTo,
 } from "../../helpers/CountryDetail";
-import ContainedCheckIcon from "../../components/Icons/ContainedCheckIcon";
-import OutlinedCheckIcon from "../../components/Icons/OutlinedCheckIcon";
-import ContainedFavoriteIcon from "../../components/Icons/ContainedFavoriteIcon";
-import OutlinedFavoriteIcon from "../../components/Icons/OutlinedFavoriteIcon";
+import FavoriteIcon from "../../components/Icons/FavoriteIcon";
+import CheckIcon from "../../components/Icons/CheckIcon";
 
 const countryDataInitialState: CountryViewObj = {
   name: "",
@@ -31,14 +30,17 @@ const countryDataInitialState: CountryViewObj = {
 };
 
 const CountryDetailContainer: React.FC = () => {
+  // react state
   const [countryData, setCountryData] = useState<CountryViewObj>(
     countryDataInitialState
   );
   const [isFavorite, setIsFavorite] = useState(false);
   const [isBeenTo, setIsBeenTo] = useState(false);
+  // local storage
   const currUserId = localStorage.getItem("currUser")
     ? localStorage.getItem("currUser")
     : "";
+  // state from store (redux)
   const { beenToList } = useSelector((state: RootState) => state.beenReducer);
   const countriesData = useSelector(
     (state: RootState) => state.countriesReducer.countries
@@ -46,9 +48,9 @@ const CountryDetailContainer: React.FC = () => {
   const { favoriteList } = useSelector(
     (state: RootState) => state.favoriteReducer
   );
+  // dispatch, router (navigate)
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
-  const { pathname } = useLocation();
 
   const handleSetCountryData = (resData: any) => {
     const pathName = window.location.pathname.toString();
@@ -81,8 +83,12 @@ const CountryDetailContainer: React.FC = () => {
           cca3: resData[key].cca3 ? resData[key].cca3 : "No data",
           borders: resData[key].borders ? resData[key].borders : "No data",
         });
-        checkInFavorite(resData[key].cca3);
-        checkInBeenTo(resData[key].cca3);
+        checkListIfFavoriteOrBeenTo(
+          favoriteList,
+          resData[key].cca3,
+          setIsFavorite
+        );
+        checkListIfFavoriteOrBeenTo(beenToList, resData[key].cca3, setIsBeenTo);
         break;
       }
     }
@@ -97,18 +103,6 @@ const CountryDetailContainer: React.FC = () => {
         handleSetCountryData(resData);
       })
       .catch((error) => console.log(error.message));
-  };
-
-  const checkInFavorite = (cca3Val: string) => {
-    favoriteList?.forEach((country) => {
-      country.cca3 === cca3Val && setIsFavorite(true);
-    });
-  };
-
-  const checkInBeenTo = (cca3Val: string) => {
-    beenToList?.forEach((country) => {
-      country.cca3 === cca3Val && setIsBeenTo(true);
-    });
   };
 
   const utilizeCountriesData = () => {
@@ -156,6 +150,8 @@ const CountryDetailContainer: React.FC = () => {
     countriesData.length === 0 ? requestCountryData() : utilizeCountriesData();
   }, [window.location.pathname]);
 
+  console.log(Object.values(countryData?.languages));
+
   return (
     <div className="flex justify-center items-center z-10 pt-4 pb-12 lg:pt-16">
       <div className="card w-full glass mx-auto max-w-374 md:max-h-680 lg:max-w-960 lg:flex lg:flex-row lg:items-start max-h-780 overflow-scroll bg-transparent rounded-3xl">
@@ -177,19 +173,34 @@ const CountryDetailContainer: React.FC = () => {
                 }
               >
                 {!isFavorite && (
-                  <OutlinedFavoriteIcon onClick={handleAddFavorite} />
+                  <FavoriteIcon
+                    onClick={handleAddFavorite}
+                    stroke={"#f92fca"}
+                    strokeWidth={2}
+                    fill={"none"}
+                  />
                 )}
                 {isFavorite && (
-                  <ContainedFavoriteIcon onClick={handleRemoveFavorite} />
+                  <FavoriteIcon
+                    onClick={handleRemoveFavorite}
+                    fill={"#f92fca"}
+                  />
                 )}
               </div>
               <div
                 className="tooltip tooltip-right"
                 data-tip={!isBeenTo ? "Add Record" : "Remove from Record"}
               >
-                {!isBeenTo && <OutlinedCheckIcon onClick={handleAddBeenTo} />}
+                {!isBeenTo && (
+                  <CheckIcon
+                    onClick={handleAddBeenTo}
+                    stroke={"#f92fca"}
+                    strokeWidth={2}
+                    fill={"none"}
+                  />
+                )}
                 {isBeenTo && (
-                  <ContainedCheckIcon onClick={handleRemoveBeenTo} />
+                  <CheckIcon onClick={handleRemoveBeenTo} fill={"#f92fca"} />
                 )}
               </div>
             </div>
@@ -197,13 +208,16 @@ const CountryDetailContainer: React.FC = () => {
           <div className="flex flex-wrap flex-row justify-start items-start pb-3">
             <div className="country-data basis-1/2 min-h-56 pr-2 ">
               <div className="stat-title">Capital City</div>
-              <div className="font-bold text-2xl tracking-tight dark:text-slate-100">
-                {Object.values(countryData.capital)[0]}
-                {Object.values(countryData.capital)[1] &&
-                  ", " + Object.values(countryData.capital)[1]}
-                {Object.values(countryData.capital)[2] &&
-                  ", " + Object.values(countryData.capital)[2]}
-              </div>
+              {Object.values(countryData?.capital).map((city) => {
+                return (
+                  <div
+                    key={city}
+                    className="font-bold text-2xl tracking-tight dark:text-slate-100"
+                  >
+                    {city}
+                  </div>
+                );
+              })}
             </div>
             <div className="country-data basis-1/2 min-h-56 pr-2">
               <div className="stat-title dark:text-slate-100">Population</div>
@@ -219,35 +233,29 @@ const CountryDetailContainer: React.FC = () => {
             </div>
             <div className="country-data basis-1/2 min-h-56 pr-2">
               <div className="stat-title">Language</div>
-              <div className="font-bold text-2xl tracking-tight break-words dark:text-slate-100">
-                {Object.values(countryData.languages)[0]}
-                {Object.values(countryData.languages)[1] &&
-                  ", " + Object.values(countryData.languages)[1]}
-                {Object.values(countryData.languages)[2] &&
-                  ", " + Object.values(countryData.languages)[2]}
-                {Object.values(countryData.languages)[3] &&
-                  ", " + Object.values(countryData.languages)[3]}
-                {Object.values(countryData.languages)[4] &&
-                  ", " + Object.values(countryData.languages)[4]}
-                {Object.values(countryData.languages)[5] &&
-                  ", " + Object.values(countryData.languages)[5]}
-                {Object.values(countryData.languages)[6] &&
-                  ", " + Object.values(countryData.languages)[6]}
-                {Object.values(countryData.languages)[7] &&
-                  ", " + Object.values(countryData.languages)[7]}
-                {Object.values(countryData.languages)[8] &&
-                  ", " + Object.values(countryData.languages)[8]}
-                {Object.values(countryData.languages)[9] &&
-                  ", " + Object.values(countryData.languages)[9]}
-              </div>
+              {Object.values(countryData?.languages).map((lang) => {
+                return (
+                  <div
+                    key={lang}
+                    className="font-bold text-2xl tracking-tight break-words dark:text-slate-100"
+                  >
+                    {lang}
+                  </div>
+                );
+              })}
             </div>
             <div className="country-data basis-1/2 min-h-56 pr-2">
               <div className="stat-title">Currency</div>
-              <div className="font-bold text-2xl tracking-tight dark:text-slate-100">
-                {Object.keys(countryData.currencies)[0]}
-                {Object.keys(countryData.currencies)[1] &&
-                  ", " + Object.keys(countryData.currencies)[1]}
-              </div>
+              {Object.keys(countryData?.currencies).map((curr) => {
+                return (
+                  <div
+                    key={curr}
+                    className="font-bold text-2xl tracking-tight dark:text-slate-100"
+                  >
+                    {curr}
+                  </div>
+                );
+              })}
             </div>
             <div className="country-data basis-1/2 min-h-56 pr-2">
               <div className="stat-title">More Info</div>
