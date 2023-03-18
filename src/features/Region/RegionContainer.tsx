@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from "react";
-import { CountryViewObj } from "../../types/country";
+import { Countries, CountryViewObj, ResCountryData } from "../../types/country";
 import { useDispatch, useSelector } from "react-redux";
 import CountryCard from "../../components/Cards/CountryCard";
 import { AppDispatch, RootState } from "../../store";
@@ -17,7 +17,7 @@ const RegionContainer = () => {
   const countriesData = useSelector(
     (state: RootState) => state.countriesReducer.countries
   );
-  const { countries } = useSelector(
+  const { countries }: Countries = useSelector(
     (state: RootState) => state.countriesReducer
   );
   const currRegion = pathRegion;
@@ -36,7 +36,7 @@ const RegionContainer = () => {
 
   const utilizeCountriesData = () => {
     if (countries.length === 0) return;
-    const resData: any = countries;
+    const resData = countries;
     const loadedData = createLoadedDataArray(
       resData,
       currRegion,

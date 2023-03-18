@@ -6,11 +6,12 @@ import { favoriteActions } from "../../store/favorite-slice";
 import { beenActions } from "../../store/been-slice";
 import { AlertActions } from "../../store/alert-slice";
 import { AppDispatch, RootState } from "../../store";
-import { CountryViewObj } from "../../types/country";
+import { CountryViewObj, ResCountryData } from "../../types/country";
 import {
   updateDataInFirebase,
   deleteDataInFirebase,
   checkListIfFavoriteOrBeenTo,
+  createCountryDataObj,
 } from "../../helpers/CountryDetail";
 import CountryDataSection from "./CountryDataSection";
 import IconsSection from "./IconsSection";
@@ -53,7 +54,7 @@ const CountryDetailContainer: React.FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
 
-  const handleSetCountryData = (resData: any) => {
+  const handleSetCountryData = (resData: ResCountryData[]) => {
     const pathName = window.location.pathname.toString();
     const currentCCA3 = pathName.substring(
       pathName.length - 3,
@@ -61,29 +62,8 @@ const CountryDetailContainer: React.FC = () => {
     );
     for (const key in resData) {
       if (resData[key].cca3 === currentCCA3) {
-        setCountryData({
-          name: resData[key].name.common ? resData[key].name.common : "No data",
-          capital: resData[key].capital ? resData[key].capital : "No data",
-          population: resData[key].population
-            ? resData[key].population
-            : "No data",
-          continents: resData[key].continents
-            ? resData[key].continents
-            : "No data",
-          currencies: resData[key].currencies
-            ? resData[key].currencies
-            : "No data",
-          languages: resData[key].languages
-            ? resData[key].languages
-            : "No data",
-          coatOfArms: resData[key].coatOfArms.png
-            ? resData[key].coatOfArms.png
-            : "No data",
-          flagImg: resData[key].flags.png ? resData[key].flags.png : "No data",
-          flagIcon: resData[key].flag ? resData[key].flag : "No data",
-          cca3: resData[key].cca3 ? resData[key].cca3 : "No data",
-          borders: resData[key].borders ? resData[key].borders : "No data",
-        });
+        const countryDataObj = createCountryDataObj(key, resData);
+        setCountryData(countryDataObj);
         checkListIfFavoriteOrBeenTo(
           favoriteList,
           resData[key].cca3,
@@ -107,7 +87,7 @@ const CountryDetailContainer: React.FC = () => {
   };
 
   const utilizeCountriesData = () => {
-    const resData: any = countriesData;
+    const resData = countriesData;
     handleSetCountryData(resData);
   };
 
