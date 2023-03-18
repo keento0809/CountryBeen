@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import axios from "axios";
 import Wrapper from "../components/Wrappers/Wrapper";
 import { useDispatch, useSelector } from "react-redux";
@@ -45,6 +45,7 @@ const CountryDetail: React.FC = () => {
   );
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   const handleSetCountryData = (resData: any) => {
     const pathName = window.location.pathname.toString();
@@ -142,6 +143,10 @@ const CountryDetail: React.FC = () => {
     dispatch(beenActions.removeBeenTo(countryData));
     await deleteDataInFirebase("record", countryData, currUserId);
     handleNavigatePageWithAlert("Country deleted from Record!");
+  };
+
+  const handleGoBack = () => {
+    navigate(-1);
   };
 
   useEffect(() => {
@@ -327,9 +332,9 @@ const CountryDetail: React.FC = () => {
               </div>
             </div>
             <div className="card-actions justify-end">
-              <Link to={`/countries/region/${countryData.continents}`}>
+              <span onClick={handleGoBack}>
                 <button className="btn btn-secondary btn-outline">BACK</button>
-              </Link>
+              </span>
             </div>
           </div>
         </div>
