@@ -1,5 +1,5 @@
 import HeroContainer from "../features/Hero/HeroContainer";
-import HeroWrapper from "../components/Wrapper/HeroWrapper";
+import HeroWrapper from "../components/Wrappers/HeroWrapper";
 
 const Hero = () => {
   return (

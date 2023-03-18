@@ -12,7 +12,3 @@ export interface AlertInitialState {
 export interface AuthFormProps {
   setIsError: Dispatch<SetStateAction<string>>;
 }
-
-export interface AlertText {
-  text: string;
-}

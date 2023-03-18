@@ -1,6 +1,8 @@
-import { AlertText } from "../../types/index";
+type Props = {
+  text: string;
+};
 
-const Alert = ({ text }: AlertText) => {
+const Alert = ({ text }: Props) => {
   return (
     <div className="px-5 mx-auto fixed bottom-10 left-0 w-full md:w-2/3 lg:w-1/2 xl:w-1/3 z-50">
       <div className="alert shadow-lg items-start bg-slate-600 text-white">

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import Wrapper from "../components/Wrapper/Wrapper";
+import Wrapper from "../components/Wrappers/Wrapper";
 import { useDispatch, useSelector } from "react-redux";
 import { favoriteActions } from "../store/favorite-slice";
 import { beenActions } from "../store/been-slice";

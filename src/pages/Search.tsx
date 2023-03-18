@@ -1,4 +1,4 @@
-import Wrapper from "../components/Wrapper/Wrapper";
+import Wrapper from "../components/Wrappers/Wrapper";
 import SearchContainer from "../features/Search/SearchContainer";
 
 const Search = () => {
