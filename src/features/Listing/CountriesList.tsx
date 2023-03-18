@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { RootState } from "../../store";
-import CountryCard from "../../components/Card/CountryCard";
+import CountryCard from "../../components/Cards/CountryCard";
 import { useEffect, useState } from "react";
 import { favoriteActions } from "../../store/favorite-slice";
 import { beenActions } from "../../store/been-slice";

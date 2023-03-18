@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import AuthSignupForm from "../../components/form/AuthSignupForm";
-import AuthLoginForm from "../../components/form/AuthLoginForm";
+import AuthSignupForm from "../../components/Forms/AuthSignupForm";
+import AuthLoginForm from "../../components/Forms/AuthLoginForm";
 import Alert from "../../components/Alert/Alert";
 import { RootState } from "../../store";
 import { fetchCountries } from "../../store/countries-slice";

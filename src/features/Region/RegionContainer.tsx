@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { CountryViewObj } from "../../types/country";
 import { useDispatch, useSelector } from "react-redux";
-import CountryCard from "../../components/Card/CountryCard";
+import CountryCard from "../../components/Cards/CountryCard";
 import { AppDispatch, RootState } from "../../store";
 import { fetchCountries } from "../../store/countries-slice";
 import { createLoadedDataArray } from "../../helpers/Region";

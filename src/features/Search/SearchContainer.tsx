@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { regionArrFixed } from "../../data/data";
-import RegionCard from "../../components/Card/RegionCard";
+import RegionCard from "../../components/Cards/RegionCard";
 
 const SearchContainer = () => {
   const regionData = regionArrFixed;
