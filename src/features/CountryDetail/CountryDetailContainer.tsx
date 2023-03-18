@@ -12,8 +12,9 @@ import {
   deleteDataInFirebase,
   checkListIfFavoriteOrBeenTo,
 } from "../../helpers/CountryDetail";
-import FavoriteIcon from "../../components/Icons/FavoriteIcon";
-import CheckIcon from "../../components/Icons/CheckIcon";
+import CountryDataSection from "./CountryDataSection";
+import IconsSection from "./IconsSection";
+import FlagImgSection from "./FlagImgSection";
 
 const countryDataInitialState: CountryViewObj = {
   name: "",
@@ -150,143 +151,23 @@ const CountryDetailContainer: React.FC = () => {
     countriesData.length === 0 ? requestCountryData() : utilizeCountriesData();
   }, [window.location.pathname]);
 
-  console.log(Object.values(countryData?.languages));
-
   return (
     <div className="flex justify-center items-center z-10 pt-4 pb-12 lg:pt-16">
       <div className="card w-full glass mx-auto max-w-374 md:max-h-680 lg:max-w-960 lg:flex lg:flex-row lg:items-start max-h-780 overflow-scroll bg-transparent rounded-3xl">
-        <figure className="pb-3 lg:min-w-374 lg:mr-2">
-          <img
-            src={`${countryData.flagImg}`}
-            alt=""
-            className="w-full max-w-374 h-248 rounded-3xl"
-          />
-        </figure>
+        <FlagImgSection flagImgUrl={countryData?.flagImg} />
         <div className="card-body bg-white dark:bg-slate-700 opacity-80 rounded-3xl">
-          <div className="">
+          <div>
             <h2 className="stat-value overflow-x-auto overflow-y-hidden dark:text-slate-100">{`${countryData.name}`}</h2>
-            <div className="icons max-h-32 my-2">
-              <div
-                className="tooltip tooltip-left"
-                data-tip={
-                  !isFavorite ? "Add BucketList" : "Remove from BucketList"
-                }
-              >
-                {!isFavorite && (
-                  <FavoriteIcon
-                    onClick={handleAddFavorite}
-                    stroke={"#f92fca"}
-                    strokeWidth={2}
-                    fill={"none"}
-                  />
-                )}
-                {isFavorite && (
-                  <FavoriteIcon
-                    onClick={handleRemoveFavorite}
-                    fill={"#f92fca"}
-                  />
-                )}
-              </div>
-              <div
-                className="tooltip tooltip-right"
-                data-tip={!isBeenTo ? "Add Record" : "Remove from Record"}
-              >
-                {!isBeenTo && (
-                  <CheckIcon
-                    onClick={handleAddBeenTo}
-                    stroke={"#f92fca"}
-                    strokeWidth={2}
-                    fill={"none"}
-                  />
-                )}
-                {isBeenTo && (
-                  <CheckIcon onClick={handleRemoveBeenTo} fill={"#f92fca"} />
-                )}
-              </div>
-            </div>
+            <IconsSection
+              isFavorite={isFavorite}
+              isBeenTo={isBeenTo}
+              handleAddBeenTo={handleAddBeenTo}
+              handleRemoveBeenTo={handleRemoveBeenTo}
+              handleAddFavorite={handleAddFavorite}
+              handleRemoveFavorite={handleRemoveFavorite}
+            />
           </div>
-          <div className="flex flex-wrap flex-row justify-start items-start pb-3">
-            <div className="country-data basis-1/2 min-h-56 pr-2 ">
-              <div className="stat-title">Capital City</div>
-              {Object.values(countryData?.capital).map((city) => {
-                return (
-                  <div
-                    key={city}
-                    className="font-bold text-2xl tracking-tight dark:text-slate-100"
-                  >
-                    {city}
-                  </div>
-                );
-              })}
-            </div>
-            <div className="country-data basis-1/2 min-h-56 pr-2">
-              <div className="stat-title dark:text-slate-100">Population</div>
-              <div className="font-bold text-2xl tracking-tight dark:text-slate-100">
-                {countryData.population.toLocaleString()}
-              </div>
-            </div>
-            <div className="country-data basis-1/2 min-h-56 pr-2">
-              <div className="stat-title">Region</div>
-              <div className="font-bold text-2xl tracking-tight dark:text-slate-100">
-                {countryData.continents}
-              </div>
-            </div>
-            <div className="country-data basis-1/2 min-h-56 pr-2">
-              <div className="stat-title">Language</div>
-              {Object.values(countryData?.languages).map((lang) => {
-                return (
-                  <div
-                    key={lang}
-                    className="font-bold text-2xl tracking-tight break-words dark:text-slate-100"
-                  >
-                    {lang}
-                  </div>
-                );
-              })}
-            </div>
-            <div className="country-data basis-1/2 min-h-56 pr-2">
-              <div className="stat-title">Currency</div>
-              {Object.keys(countryData?.currencies).map((curr) => {
-                return (
-                  <div
-                    key={curr}
-                    className="font-bold text-2xl tracking-tight dark:text-slate-100"
-                  >
-                    {curr}
-                  </div>
-                );
-              })}
-            </div>
-            <div className="country-data basis-1/2 min-h-56 pr-2">
-              <div className="stat-title">More Info</div>
-              <div className="font-normal text-2xl tracking-tight dark:text-slate-100">
-                <a
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  href={`https://en.wikipedia.org/wiki/${
-                    countryData.name[0]
-                  }${countryData.name.slice(1)}`}
-                  className="flex flex-row items-center"
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6 inline-block mr-1 cursor-pointer"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
-                    />
-                  </svg>
-                  <span className="cursor-pointer">Wikipedia</span>
-                </a>
-              </div>
-            </div>
-          </div>
+          <CountryDataSection countryData={countryData} />
           <div className="card-actions justify-end">
             <span onClick={handleGoBack}>
               <button className="btn btn-secondary btn-outline">BACK</button>
