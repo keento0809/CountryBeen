@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { CountryViewObj } from "../../types/country";
+import { Countries, CountryViewObj } from "../../types/country";
 import { getAuth, signOut } from "firebase/auth";
 import { AlertActions } from "../../store/alert-slice";
 import { AuthActions } from "../../store/auth-slice";
@@ -16,19 +16,19 @@ const Header = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const { countries } = useSelector(
+  const { countries }: Countries = useSelector(
     (state: RootState) => state.countriesReducer
   );
   const dispatch = useDispatch<AppDispatch>();
 
   const setCountriesForSearch = () => {
-    const resData: any = countries;
-    const loadedData = [];
+    const resData = countries;
+    const loadedData: CountryViewObj[] = [];
 
     for (const key in resData) {
       loadedData.push({
         name: resData[key].name.common,
-        population: resData[key].population,
+        population: resData[key].population.toString(),
         continents: resData[key].continents,
         capital: resData[key].capital,
         currencies: resData[key].currencies,

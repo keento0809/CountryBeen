@@ -46,3 +46,21 @@ export const checkListIfFavoriteOrBeenTo = (
     country.cca3 === cca3Val && dispatch(true);
   });
 };
+
+export const createCountryDataObj = (key: string, resData: any) => {
+  return {
+    name: resData[key].name.common ? resData[key].name.common : "No data",
+    capital: resData[key].capital ? resData[key].capital : "No data",
+    population: resData[key].population ? resData[key].population : "No data",
+    continents: resData[key].continents ? resData[key].continents : "No data",
+    currencies: resData[key].currencies ? resData[key].currencies : "No data",
+    languages: resData[key].languages ? resData[key].languages : "No data",
+    coatOfArms: resData[key].coatOfArms.png
+      ? resData[key].coatOfArms.png
+      : "No data",
+    flagImg: resData[key].flags.png ? resData[key].flags.png : "No data",
+    flagIcon: resData[key].flag ? resData[key].flag : "No data",
+    cca3: resData[key].cca3 ? resData[key].cca3 : "No data",
+    borders: resData[key].borders ? resData[key].borders : "No data",
+  };
+};
