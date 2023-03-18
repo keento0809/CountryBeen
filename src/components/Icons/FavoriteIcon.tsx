@@ -1,15 +1,25 @@
 type Props = {
   onClick: () => Promise<void>;
+  fill: string;
+  stroke?: string;
+  strokeWidth?: number;
 };
 
-const ContainedFavoriteIcon = ({ onClick }: Props) => {
+const FavoriteIcon = ({
+  onClick,
+  fill,
+  stroke = "",
+  strokeWidth = 0,
+}: Props) => {
   return (
     <svg
       onClick={onClick}
       xmlns="http://www.w3.org/2000/svg"
       className="h-8 w-8 mr-4 inline-block cursor-pointer"
       viewBox="0 0 20 20"
-      fill="#f92fca"
+      fill={fill}
+      stroke={stroke}
+      strokeWidth={strokeWidth}
     >
       <path
         fillRule="evenodd"
@@ -20,4 +30,4 @@ const ContainedFavoriteIcon = ({ onClick }: Props) => {
   );
 };
 
-export default ContainedFavoriteIcon;
+export default FavoriteIcon;
