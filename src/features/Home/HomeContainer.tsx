@@ -7,7 +7,7 @@ import WorldMap from "../../components/WorldMap/WorldMap";
 import { beenActions } from "../../store/been-slice";
 import UserDashboard from "../../features/Home/UserDashborad";
 import BasicButton from "../../components/Button/BasicButton";
-import { fetchDataFromDB } from "../../helpers/Home/fetchDataFromDB";
+import { fetchDataFromDB } from "../../helpers/Home";
 
 const HomeContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
