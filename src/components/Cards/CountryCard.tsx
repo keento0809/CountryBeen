@@ -14,38 +14,40 @@ const CountryCard = ({ flagImg, countryName, cca3 }: CountryCardProps) => {
         onTouchStart={() => setHover(true)}
         onTouchEnd={() => setHover(false)}
       >
-        <div className="card w-full max-w-374 md:max-w-340 lg:max-w-310 xl:max-w-320 md:basis-1/2 h-248 max-h-264 shadow-xl image-full transition-transform rounded-2xl hover:scale-105">
-          <figure className="rounded-2xl">
-            <img
-              className="w-full z-10 rounded-2xl"
-              src={flagImg}
-              alt="country-card"
-            />
-          </figure>
-          <div
-            className={`${
-              hover ? "block" : "hidden"
-            } card-body rounded-2xl transition-all overflow-hidden bg-black opacity-40`}
-          >
-            <h2 className="font-extrabold text-3xl drop-shadow-xl dark:text-slate-50 opacity-1">
-              {countryName}
-            </h2>
-            <div className="flex flex-row items-center">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-6 w-6 inline-block"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-              <span className="text-lg font-bold text-white">Detail</span>
+        <div className="overflow-hidden">
+          <div className="card w-full max-w-374 md:max-w-340 lg:max-w-310 xl:max-w-320 md:basis-1/2 h-248 max-h-264 shadow-xl image-full transition-transform rounded-2xl hover:scale-105 hover:rounded-2xl">
+            <figure className="rounded-2xl">
+              <img
+                className="w-full z-10 rounded-2xl"
+                src={flagImg}
+                alt="country-card"
+              />
+            </figure>
+            <div
+              className={`${
+                hover ? "block" : "hidden"
+              } card-body rounded-2xl transition-all overflow-hidden bg-black opacity-40`}
+            >
+              <h2 className="font-extrabold text-3xl drop-shadow-xl dark:text-slate-50 opacity-1">
+                {countryName}
+              </h2>
+              <div className="flex flex-row items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6 inline-block"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 5l7 7-7 7"
+                  />
+                </svg>
+                <span className="text-lg font-bold text-white">Detail</span>
+              </div>
             </div>
           </div>
         </div>
