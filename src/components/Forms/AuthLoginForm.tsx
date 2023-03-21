@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { AlertActions } from "../../store/alert-slice";
 import { AuthActions } from "../../store/auth-slice";
 import { AuthFormProps } from "../../types/index";
+import ButtonWithoutLink from "../Button/ButtonWithoutLink";
 
 const AuthForm = ({ setIsError }: AuthFormProps) => {
   const [userInfo, setUserInfo] = useState({
@@ -100,10 +101,8 @@ const AuthForm = ({ setIsError }: AuthFormProps) => {
             </div>
           </div>
 
-          <div className="flex justify-end md:justify-center mt-6 md:mt-12">
-            <button className="btn btn-secondary btn-outline">
-              Get Started
-            </button>
+          <div className="flex justify-center mt-6 md:mt-12">
+            <ButtonWithoutLink text={"Get Started"} />
           </div>
         </form>
         <div className="">

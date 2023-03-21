@@ -16,6 +16,7 @@ import {
 import CountryDataSection from "./CountryDataSection";
 import IconsSection from "./IconsSection";
 import FlagImgSection from "./FlagImgSection";
+import ButtonWithoutLink from "../../components/Button/ButtonWithoutLink";
 
 const countryDataInitialState: CountryViewObj = {
   name: "",
@@ -150,7 +151,7 @@ const CountryDetailContainer: React.FC = () => {
           <CountryDataSection countryData={countryData} />
           <div className="card-actions justify-end">
             <span onClick={handleGoBack}>
-              <button className="btn btn-secondary btn-outline">BACK</button>
+              <ButtonWithoutLink text={"BACK"} />
             </span>
           </div>
         </div>
