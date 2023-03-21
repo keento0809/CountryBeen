@@ -15,7 +15,7 @@ const CountryCard = ({ flagImg, countryName, cca3 }: CountryCardProps) => {
         onTouchEnd={() => setHover(false)}
       >
         <div className="card w-full max-w-374 md:max-w-340 lg:max-w-310 xl:max-w-320 md:basis-1/2 h-248 max-h-264 shadow-xl image-full transition-transform rounded-2xl hover:scale-105">
-          <figure>
+          <figure className="rounded-2xl bg-transparent">
             <img
               className="object-cover w-ful z-10"
               src={flagImg}
