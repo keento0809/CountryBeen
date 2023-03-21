@@ -11,6 +11,8 @@ const CountryCard = ({ flagImg, countryName, cca3 }: CountryCardProps) => {
         className="cursor-pointer"
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
+        onTouchStart={() => setHover(true)}
+        onTouchEnd={() => setHover(false)}
       >
         <div className="card w-full max-w-374 md:max-w-340 lg:max-w-310 xl:max-w-320 md:basis-1/2 h-248 max-h-264 shadow-xl image-full transition-transform rounded-2xl hover:scale-105">
           <figure>
