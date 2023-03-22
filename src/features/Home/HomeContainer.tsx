@@ -8,6 +8,7 @@ import { beenActions } from "../../store/been-slice";
 import UserDashboard from "../../features/Home/UserDashborad";
 import BasicButton from "../../components/Button/BasicButton";
 import { fetchDataFromDB } from "../../helpers/Home";
+import Title from "../../components/Title/Title";
 
 const HomeContainer = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -49,9 +50,7 @@ const HomeContainer = () => {
   return (
     <>
       <div className="lg:mx-auto">
-        <section className="title text-center text-white">
-          <h2 className="py-6 font-bold text-2xl">Dashboard</h2>
-        </section>
+        <Title title={"Dashboard"} />
         <div className="pb-12 xl:flex xl:space-x-8 xl:justify-evenly overflow-scroll xl:overflow-clip">
           <section className="mapping bg-slate-700 rounded-2xl lg:mx-0 xl:min-w-800 xl:basis-1">
             <WorldMap />
