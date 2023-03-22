@@ -1,16 +1,13 @@
 import { Link } from "react-router-dom";
 import { regionArrFixed } from "../../data/data";
 import RegionCard from "../../components/Cards/RegionCard";
+import Title from "../../components/Title/Title";
 
 const SearchContainer = () => {
   const regionData = regionArrFixed;
   return (
     <>
-      <div className="title text-center text-white">
-        <h2 className="py-6 font-bold text-2xl dark:text-gray-200">
-          Select Region
-        </h2>
-      </div>
+      <Title title={"Select Region"} />
       <section className="countries lg:pb-6">
         <div className="countries-container max-h-680 overflow-scroll lg:flex lg:flex-wrap lg:justify-between xl:justify-evenly">
           {regionData.length === 0 && (

@@ -6,6 +6,7 @@ import { favoriteActions } from "../../store/favorite-slice";
 import { beenActions } from "../../store/been-slice";
 import { fetchCurrentUserDataFromDB } from "../../helpers/Listing";
 import { useLocation } from "react-router-dom";
+import Title from "../../components/Title/Title";
 
 interface ListingName {
   name: string;
@@ -21,12 +22,19 @@ const CountriesList = ({ name }: ListingName) => {
   const { beenToList } = useSelector((state: RootState) => state.beenReducer);
 
   useEffect(() => {
-    name === "Record" &&
-      beenToList.length === 0 &&
-      getCurrentUserCountryData("record");
-    name === "Bucket List" &&
-      favoriteList.length === 0 &&
-      getCurrentUserCountryData("bucketList");
+    switch (name) {
+      case "Record": {
+        beenToList.length === 0 && getCurrentUserCountryData("record");
+        break;
+      }
+      case "Bucket List": {
+        favoriteList.length === 0 && getCurrentUserCountryData("bucketList");
+        break;
+      }
+      default: {
+        break;
+      }
+    }
   }, [location.pathname]);
 
   const getCurrentUserCountryData = async (name: string) => {
@@ -45,9 +53,7 @@ const CountriesList = ({ name }: ListingName) => {
 
   return (
     <div>
-      <div className="title text-center text-white">
-        <h2 className="py-6 font-bold text-2xl">{name}</h2>
-      </div>
+      <Title title={`${name}`} />
       <div className="text-center">
         {((!isLoading && name === "Record" && beenToList.length === 0) ||
           (!isLoading && name !== "Record" && favoriteList.length === 0)) && (
