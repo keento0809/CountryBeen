@@ -47,6 +47,15 @@ const Header = () => {
   const navigate = useNavigate();
   const auth = getAuth();
 
+  useEffect(() => {
+    countries.length === 0 && dispatch(fetchCountries());
+    setIsMenuOpen(false);
+  }, [window.location.pathname]);
+
+  useEffect(() => {
+    setCountriesForSearch();
+  }, [countries.length]);
+
   const handleCheckValue = () => {
     const currValue = searchInputRef.current!.value;
     if (currValue === "") {
@@ -93,15 +102,6 @@ const Header = () => {
       })
       .catch((error) => console.log(error));
   };
-
-  useEffect(() => {
-    countries.length === 0 && dispatch(fetchCountries());
-    setIsMenuOpen(false);
-  }, [window.location.pathname]);
-
-  useEffect(() => {
-    setCountriesForSearch();
-  }, [countries.length]);
 
   return (
     <>
