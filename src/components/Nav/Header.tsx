@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../../store";
 import { fetchCountries } from "../../store/countries-slice";
 import Menu from "../Backdrop/Menu";
+import { createCountryObj } from "../../helpers/Listing";
 
 const Header = () => {
   const [isSearchMode, setIsSearchMode] = useState(false);
@@ -23,23 +24,7 @@ const Header = () => {
 
   const setCountriesForSearch = () => {
     const resData = countries;
-    const loadedData: CountryViewObj[] = [];
-
-    for (const key in resData) {
-      loadedData.push({
-        name: resData[key].name.common,
-        population: resData[key].population.toString(),
-        continents: resData[key].continents,
-        capital: resData[key].capital,
-        currencies: resData[key].currencies,
-        languages: resData[key].languages,
-        coatOfArms: resData[key].coatOfArms.png,
-        flagImg: resData[key].flags.png,
-        flagIcon: resData[key].flag,
-        cca3: resData[key].cca3,
-        borders: resData[key].borders,
-      });
-    }
+    const loadedData: CountryViewObj[] = createCountryObj(resData);
     setDefaultData(loadedData);
   };
 
