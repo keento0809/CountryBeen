@@ -1,6 +1,6 @@
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../services/firebase";
-import { CountryViewObj } from "../../types/country";
+import { CountryViewObj, ResCountryData } from "../../types/country";
 
 const currUserId = localStorage.getItem("currUser")
   ? localStorage.getItem("currUser")
@@ -37,4 +37,25 @@ export const fetchCurrentUserDataFromDB = async () => {
     snapShotData!.record
   );
   return { favoriteListDataFromDb, beenListDataFromDb };
+};
+
+export const createCountryObj = (data: ResCountryData[]) => {
+  const loadedData: CountryViewObj[] = [];
+
+  for (const key in data) {
+    loadedData.push({
+      name: data[key].name.common,
+      population: data[key].population.toString(),
+      continents: data[key].continents,
+      capital: data[key].capital,
+      currencies: data[key].currencies,
+      languages: data[key].languages,
+      coatOfArms: data[key].coatOfArms.png,
+      flagImg: data[key].flags.png,
+      flagIcon: data[key].flag,
+      cca3: data[key].cca3,
+      borders: data[key].borders,
+    });
+  }
+  return loadedData;
 };
