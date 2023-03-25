@@ -7,7 +7,7 @@ const RegionCard = ({ region }: RegionCardProps) => {
       <div className="card w-full bg-base-100 shadow-xl image-full cursor-pointer hover:scale-105 transition-transform">
         <figure>
           <img
-            className="opacity-40 z-10 rounded-2xl"
+            className="z-10 rounded-2xl"
             src={imgPath}
             alt=""
             width={374}
@@ -16,7 +16,7 @@ const RegionCard = ({ region }: RegionCardProps) => {
         </figure>
         <div className="card-body flex justify-center items-center">
           <div className="card-body__container">
-            <h2 className="grow text-center font-extrabold text-3xl text-white dark:text-gray-300">
+            <h2 className="grow text-center font-extrabold text-3xl text-gray-800">
               {region}
             </h2>
           </div>
