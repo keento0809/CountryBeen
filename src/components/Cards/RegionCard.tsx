@@ -3,8 +3,8 @@ import imgPath from "../../assets/img-for-regionCard-1ver2.jpg";
 
 const RegionCard = ({ region }: RegionCardProps) => {
   return (
-    <div className="overflow-hidden rounded-2xl mb-2">
-      <div className="card w-full bg-base-100 shadow-xl image-full cursor-pointer hover:scale-105 transition-transform">
+    <div className="overflow-hidden rounded-2xl mb-2 max-w-240 mx-auto">
+      <div className="card w-full bg-base-100 shadow-xl image-full cursor-pointer touch-none hover:scale-105 transition-transform">
         <figure>
           <img
             className="z-10 rounded-2xl"

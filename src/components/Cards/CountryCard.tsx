@@ -21,6 +21,7 @@ const CountryCard = ({ flagImg, countryName, cca3 }: CountryCardProps) => {
                 className="w-full z-10 rounded-2xl"
                 src={flagImg}
                 alt="country-card"
+                style={{ objectFit: "fill" }}
               />
             </figure>
             <div

@@ -20,7 +20,7 @@ const RegionWrapper = ({ children, customStyle }: Props) => {
       <div className="px-5 sm:px-8">
         <Header />
         <div
-          className={`pt-16 w-8/12 md:w-5/12 lg:w-full mx-auto ${
+          className={`pt-16 md:max-w-500 xl:max-w-1216 mx-auto ${
             customStyle && customStyle
           }`}
         >
