@@ -9,7 +9,7 @@ const SearchContainer = () => {
     <>
       <Title title={"Select Region"} />
       <section className="countries lg:pb-6">
-        <div className="countries-container max-h-680 overflow-scroll lg:flex lg:flex-wrap lg:justify-between xl:justify-evenly">
+        <div className="countries-container max-h-680 overflow-scroll md:grid md:grid-cols-2 lg:grid-cols-3 lg:gap-12 xl:max-w-1024 xl:mx-auto">
           {regionData.length === 0 && (
             <p className="text-slate-800">Loading...</p>
           )}
