@@ -1,4 +1,5 @@
 import LinkIcon from "../../components/Icons/LinkIcon";
+import WikipediaLink from "../../components/Link/WikipediaLink";
 import { CountryViewObj } from "../../types/country";
 
 type Props = {
@@ -62,17 +63,7 @@ const CountryDataSection = ({ countryData }: Props) => {
       <div className="country-data basis-1/2 min-h-56 pr-2">
         <div className="stat-title">More Info</div>
         <div className="font-normal text-2xl tracking-tight dark:text-slate-100">
-          <a
-            target="_blank"
-            rel="noopener noreferrer"
-            href={`https://en.wikipedia.org/wiki/${
-              countryData.name[0]
-            }${countryData.name.slice(1)}`}
-            className="flex flex-row items-center"
-          >
-            <LinkIcon />
-            <span className="cursor-pointer">Wikipedia</span>
-          </a>
+          <WikipediaLink countryData={countryData} />
         </div>
       </div>
     </div>

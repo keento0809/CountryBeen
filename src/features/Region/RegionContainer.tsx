@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import CountryCard from "../../components/Cards/CountryCard";
 import { AppDispatch, RootState } from "../../store";
 import { fetchCountries } from "../../store/countries-slice";
-import { createLoadedDataArray } from "../../helpers/Region";
+import { createCountryObjInRegion } from "../../helpers/Region";
 
 const RegionContainer = () => {
   let pathRegion = window.location.pathname.split("/")[3];
@@ -37,7 +37,7 @@ const RegionContainer = () => {
   const utilizeCountriesData = () => {
     if (countries.length === 0) return;
     const resData = countries;
-    const loadedData = createLoadedDataArray(
+    const loadedData = createCountryObjInRegion(
       resData,
       currRegion,
       selectedRegion && selectedRegion

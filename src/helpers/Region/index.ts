@@ -1,9 +1,11 @@
-export const createLoadedDataArray = (
+import { CountryViewObj } from "../../types/country";
+
+export const createCountryObjInRegion = (
   resData: any,
   currRegion: string,
   selectedRegion?: string
 ) => {
-  const loadedData = [];
+  const loadedData: CountryViewObj[] = [];
   for (const key in resData) {
     if (
       resData[key].continents[0] ===
