@@ -4,7 +4,7 @@ import { RootState } from "../../store";
 import { useEffect, useState } from "react";
 
 const geoUrl =
-  "https://raw.githubusercontent.com/deldersveld/topojson/master/world-countries.json";
+  "https://raw.githubusercontent.com/holtzy/D3-graph-gallery/master/DATA/world.geojson";
 
 const WorldMap = () => {
   const [cca3List, setCca3List] = useState<string[]>([]);
